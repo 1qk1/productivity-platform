@@ -1,0 +1,21 @@
+body {
+  background-color: #34495e;
+}
+
+#root {
+  border: 1px solid transparent;
+}
+
+* {
+  color: #ecf0f1;
+  box-sizing: border-box;
+}
+
+// Utility Classes
+
+.Container {
+  width: 80%;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,0 +1,13 @@
+.Sidebar-Link {
+  margin-bottom: 0.5rem;
+  &:hover {
+    i {
+      color: #ecf0f1;
+    }
+  }
+
+  i {
+    color: #bdc3c7;
+    transition: color 0.1s ease-in;
+  }
+}
