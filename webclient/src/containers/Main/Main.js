@@ -3,6 +3,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Sidebar from "../../components/Navigation/Sidebar/Sidebar";
 import Pomodoro from "../../components/Pomodoro/Pomodoro";
 import { connect } from "react-redux";
+import * as actions from "../../store/actions/auth";
+import * as actionTypes from "../../store/actions/actionTypes";
 
 class Main extends Component {
   startPomodoro = () => {
@@ -16,7 +18,7 @@ class Main extends Component {
       <BrowserRouter>
         <Fragment>
           {/* Sidebar */}
-          <Sidebar />
+          <Sidebar logout={this.props.logout} />
           {/* Routes */}
           <div className="Container">
             <Switch>
@@ -48,9 +50,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  startTimer: intervalId => dispatch({ type: "START_TIMER", intervalId }),
-  stopTimer: () => dispatch({ type: "STOP_TIMER" }),
-  decTimer: () => dispatch({ type: "DEC_TIMER" })
+  startTimer: intervalId =>
+    dispatch({ type: actionTypes.START_TIMER, intervalId }),
+  stopTimer: () => dispatch({ type: actionTypes.STOP_TIMER }),
+  decTimer: () => dispatch({ type: actionTypes.DEC_TIMER }),
+  logout: () => dispatch(actions.logoutHandler())
 });
 
 export default connect(

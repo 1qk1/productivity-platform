@@ -2,35 +2,49 @@ import React, { Component } from "react";
 import "./App.scss";
 import Main from "./containers/Main/Main";
 import Loader from "./components/UI/Loader/Loader";
+import Unauthorized from "./containers/Unauthorized/Unauthorized";
+import { connect } from "react-redux";
+import * as actions from "./store/actions/auth";
+import { Switch, Redirect, Route, BrowserRouter } from "react-router-dom";
 
 class App extends Component {
-  state = {
-    // logged in value for when the backend is built
-    loggedIn: null
-  };
-
   componentDidMount() {
-    // simulate auth load
-    setTimeout(() => {
-      this.setState({ loggedIn: true });
-    }, 2000);
+    this.props.checkToken();
   }
 
   render() {
     let content = <Loader />;
-    const { loggedIn } = this.state;
+    const token = this.props.token;
 
-    if (loggedIn === true) {
+    if (token !== null) {
       // show main app when you are logged in
       content = <Main />;
-    } else if (loggedIn === false) {
+    } else {
       // check if not logged in then
       // show the website
-      content = <h1>you are not logged in</h1>;
+      content = (
+        <BrowserRouter>
+          <Switch>
+            <Route path="/" exact component={Unauthorized} />
+            <Redirect to="/" />
+          </Switch>
+        </BrowserRouter>
+      );
     }
 
     return content;
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  token: state.auth.token
+});
+
+const mapDispatchToProps = dispatch => ({
+  checkToken: () => dispatch(actions.checkAuth())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

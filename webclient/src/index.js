@@ -5,14 +5,17 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "normalize.css";
 import { Provider } from "react-redux";
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import pomodoroReducer from "./store/reducers/pomodoro";
+import authReducer from "./store/reducers/auth";
 
 const rootReducer = combineReducers({
-  pomodoro: pomodoroReducer
+  pomodoro: pomodoroReducer,
+  auth: authReducer
 });
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const app = (
   <Provider store={store}>
