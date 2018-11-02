@@ -1,11 +1,15 @@
-import React, { Component } from "react";
+import React, { Component, lazy, Suspense } from "react";
 import "./App.scss";
-import Main from "./containers/Main/Main";
 import Loader from "./components/UI/Loader/Loader";
-import Unauthorized from "./containers/Unauthorized/Unauthorized";
 import { connect } from "react-redux";
 import * as actions from "./store/actions/auth";
 import { Switch, Redirect, Route, BrowserRouter } from "react-router-dom";
+
+const AsyncUnauthorized = lazy(() =>
+  import("./containers/Unauthorized/Unauthorized")
+);
+
+const AsyncMain = lazy(() => import("./containers/Main/Main"));
 
 class App extends Component {
   componentDidMount() {
@@ -14,21 +18,30 @@ class App extends Component {
 
   render() {
     let content = <Loader />;
+
     const token = this.props.token;
 
-    if (token !== null) {
-      // show main app when you are logged in
-      content = <Main />;
-    } else {
+    if (token === null) {
       // check if not logged in then
       // show the website
       content = (
         <BrowserRouter>
-          <Switch>
-            <Route path="/" exact component={Unauthorized} />
-            <Redirect to="/" />
-          </Switch>
+          <Suspense fallback={<Loader />}>
+            <Switch>
+              <Route path="/" exact component={AsyncUnauthorized} />
+              <Redirect to="/" />
+            </Switch>
+          </Suspense>
         </BrowserRouter>
+      );
+    } else if (token !== undefined) {
+      // show main app when token is cheched (not undefined)
+      // undefined = not checked (first pass), anything else than
+      // undefined = token, this can't be null because it has been already checked
+      content = (
+        <Suspense fallback={<Loader />}>
+          <AsyncMain />
+        </Suspense>
       );
     }
 
