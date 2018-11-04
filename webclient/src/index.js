@@ -9,6 +9,8 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import pomodoroReducer from "./store/reducers/pomodoro";
 import authReducer from "./store/reducers/auth";
+import "./vendors/materialize/sass/materialize.scss";
+import "./scss/_index.scss";
 
 const rootReducer = combineReducers({
   pomodoro: pomodoroReducer,
