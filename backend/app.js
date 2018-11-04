@@ -12,8 +12,12 @@ require("dotenv").config();
 mongoose.connect(
   process.env.MONGODB_URI,
   { useNewUrlParser: true },
-  () => {
-    console.log("database connected");
+  error => {
+    if (!error) {
+      console.log("database connected");
+    } else {
+      console.log("database connection error:", error);
+    }
   }
 );
 
