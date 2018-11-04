@@ -1,13 +1,15 @@
+@import "./scss/variables";
+
 body {
-  background-color: #34495e;
+  background-color: $color-tertiary;
+  color: $color-white;
 }
 
 #root {
-  border: 1px solid transparent;
+  overflow: auto;
 }
 
 * {
-  color: #ecf0f1;
   box-sizing: border-box;
 }
 
