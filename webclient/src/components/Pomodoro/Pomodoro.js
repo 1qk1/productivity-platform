@@ -18,15 +18,10 @@ const pomodoro = ({ timer, startPomodoro, stopPomodoro, intervalId }) => {
         {/* controls */}
         <div className="Pomodoro-Controls">
           <h2 className="Pomodoro-Time">{secondsToTime(timer)}</h2>
-          <a onClick={!running ? startPomodoro : stopPomodoro}>
-            <i
-              className={
-                running
-                  ? "fas fa-stop Pomodoro-Icon"
-                  : "fas fa-play Pomodoro-Icon"
-              }
-            />
-          </a>
+          <i
+            onClick={!running ? startPomodoro : stopPomodoro}
+            className={`Pomodoro-Icon fas fa-${running ? "stop" : "play"}`}
+          />
         </div>
       </div>
     </div>
