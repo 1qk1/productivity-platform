@@ -1,0 +1,45 @@
+@import "../../../scss/variables";
+
+.Unauthorized-Navbar {
+  box-shadow: none;
+  background-color: transparent;
+  ul {
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    a {
+      transition: $color-transition;
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: 16px;
+      &:hover {
+        background-color: transparent;
+        color: #2ecc71;
+      }
+    }
+  }
+  .AuthButton {
+    background-color: #27ae60;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: $color-transition;
+    margin-left: 1rem;
+    white-space: nowrap;
+    &:hover {
+      background-color: #24b661;
+    }
+  }
+}
+// colors:
+// bg #34495e,
+// green #2ecc71,
+// dark green #27ae60,
+// white #ecf0f1,
+// mid gray #bdc3c7,
+// dark gray #95a5a6
