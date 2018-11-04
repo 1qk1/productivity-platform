@@ -1,36 +1,61 @@
-import React, { Component } from "react";
+import React, { Component, lazy, Suspense } from "react";
 import "./App.scss";
-import Main from "./containers/Main/Main";
 import Loader from "./components/UI/Loader/Loader";
+import { connect } from "react-redux";
+import * as actions from "./store/actions/auth";
+import { Switch, Redirect, Route, BrowserRouter } from "react-router-dom";
+
+const AsyncUnauthorized = lazy(() =>
+  import("./containers/Unauthorized/Unauthorized")
+);
+
+const AsyncMain = lazy(() => import("./containers/Main/Main"));
 
 class App extends Component {
-  state = {
-    // logged in value for when the backend is built
-    loggedIn: null
-  };
-
   componentDidMount() {
-    // simulate auth load
-    setTimeout(() => {
-      this.setState({ loggedIn: true });
-    }, 2000);
+    this.props.checkToken();
   }
 
   render() {
     let content = <Loader />;
-    const { loggedIn } = this.state;
 
-    if (loggedIn === true) {
-      // show main app when you are logged in
-      content = <Main />;
-    } else if (loggedIn === false) {
+    const token = this.props.token;
+
+    if (token === null) {
       // check if not logged in then
       // show the website
-      content = <h1>you are not logged in</h1>;
+      content = (
+        <Suspense fallback={<Loader />}>
+          <Switch>
+            <Route path="/" exact component={() => <AsyncUnauthorized />} />
+            <Redirect to="/" />
+          </Switch>
+        </Suspense>
+      );
+    } else if (token !== undefined) {
+      // show main app when token is cheched (not undefined)
+      // undefined = not checked (first pass), anything else than
+      // undefined = token, this can't be null because it has been already checked
+      content = (
+        <Suspense fallback={<Loader />}>
+          <AsyncMain />
+        </Suspense>
+      );
     }
 
-    return content;
+    return <BrowserRouter>{content}</BrowserRouter>;
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  token: state.auth.token
+});
+
+const mapDispatchToProps = dispatch => ({
+  checkToken: () => dispatch(actions.checkAuth())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

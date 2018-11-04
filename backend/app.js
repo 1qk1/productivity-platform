@@ -12,12 +12,25 @@ require("dotenv").config();
 mongoose.connect(
   process.env.MONGODB_URI,
   { useNewUrlParser: true },
-  () => {
-    console.log("database connected");
+  error => {
+    if (!error) {
+      console.log("database connected");
+    } else {
+      console.log("database connection error:", error);
+    }
   }
 );
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
+app.use(bodyParser.json());
 
 app.use(passport.initialize());
 

@@ -1,8 +1,10 @@
 import React, { Component, Fragment } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { withRouter, Switch, Route } from "react-router-dom";
 import Sidebar from "../../components/Navigation/Sidebar/Sidebar";
 import Pomodoro from "../../components/Pomodoro/Pomodoro";
 import { connect } from "react-redux";
+import * as actions from "../../store/actions/auth";
+import * as actionTypes from "../../store/actions/actionTypes";
 
 class Main extends Component {
   startPomodoro = () => {
@@ -13,31 +15,29 @@ class Main extends Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <Fragment>
-          {/* Sidebar */}
-          <Sidebar />
-          {/* Routes */}
-          <div className="Container">
-            <Switch>
-              <Route
-                path="/"
-                exact
-                component={() => (
-                  <Pomodoro
-                    timer={this.props.timer}
-                    intervalId={this.props.intervalId}
-                    startPomodoro={this.startPomodoro}
-                    stopPomodoro={this.props.stopTimer}
-                  />
-                )}
-              />
-              <Route path="/settings" component={() => <h1>settings</h1>} />
-              <Route path="/todo" component={() => <h1>todo</h1>} />
-            </Switch>
-          </div>
-        </Fragment>
-      </BrowserRouter>
+      <Fragment>
+        {/* Sidebar */}
+        <Sidebar logout={this.props.logout} />
+        {/* Routes */}
+        <div className="Container">
+          <Switch>
+            <Route
+              path="/"
+              exact
+              component={() => (
+                <Pomodoro
+                  timer={this.props.timer}
+                  intervalId={this.props.intervalId}
+                  startPomodoro={this.startPomodoro}
+                  stopPomodoro={this.props.stopTimer}
+                />
+              )}
+            />
+            <Route path="/settings" component={() => <h1>settings</h1>} />
+            <Route path="/todo" component={() => <h1>todo</h1>} />
+          </Switch>
+        </div>
+      </Fragment>
     );
   }
 }
@@ -48,12 +48,16 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  startTimer: intervalId => dispatch({ type: "START_TIMER", intervalId }),
-  stopTimer: () => dispatch({ type: "STOP_TIMER" }),
-  decTimer: () => dispatch({ type: "DEC_TIMER" })
+  startTimer: intervalId =>
+    dispatch({ type: actionTypes.START_TIMER, intervalId }),
+  stopTimer: () => dispatch({ type: actionTypes.STOP_TIMER }),
+  decTimer: () => dispatch({ type: actionTypes.DEC_TIMER }),
+  logout: () => dispatch(actions.logoutHandler())
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Main);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Main)
+);

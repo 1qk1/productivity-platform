@@ -17,7 +17,6 @@ router.post("/register", async (req, res) => {
       if (err !== null) {
         throw new Error(err);
       }
-      console.log("user created", newUser);
     });
   } catch (error) {
     res.send({ error: error.message });
@@ -26,18 +25,20 @@ router.post("/register", async (req, res) => {
 
 router.post(
   "/login",
+  // check the credentials sent by the user
   passport.authenticate("local", { session: false }),
   (req, res) => {
+    // if this function executes it means the credentials are correct
     const { username, _id } = req.user;
 
-    const token = jwt.sign(
-      {
-        username,
-        id: _id.toString()
-      },
-      process.env.JWT_SECRET
-    );
-    res.json(token);
+    const userData = {
+      username,
+      id: _id.toString()
+    };
+
+    // create new token and send it back
+    const token = jwt.sign(userData, process.env.JWT_SECRET);
+    res.json({ token, user: userData });
   }
 );
 

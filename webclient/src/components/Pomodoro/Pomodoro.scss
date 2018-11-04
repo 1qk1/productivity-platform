@@ -8,7 +8,6 @@
     border: 5px solid #f39c12;
     border-radius: 100%;
     margin: auto;
-    // background: linear-gradient(0deg, #2ecc71 50%, transparent 50%);
     box-shadow: inset 0 0 0 4px #34495e;
     position: relative;
 
@@ -23,6 +22,7 @@
     .Pomodoro-Time {
       margin: 10% 0;
       font-size: 4rem;
+      font-weight: 600;
       @media screen and (max-width: 500px) {
         font-size: 15vw;
       }
