@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { withRouter, Switch, Route } from "react-router-dom";
 import Sidebar from "../../components/Navigation/Sidebar/Sidebar";
 import Pomodoro from "../../components/Pomodoro/Pomodoro";
 import { connect } from "react-redux";
@@ -15,31 +15,29 @@ class Main extends Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <Fragment>
-          {/* Sidebar */}
-          <Sidebar logout={this.props.logout} />
-          {/* Routes */}
-          <div className="Container">
-            <Switch>
-              <Route
-                path="/"
-                exact
-                component={() => (
-                  <Pomodoro
-                    timer={this.props.timer}
-                    intervalId={this.props.intervalId}
-                    startPomodoro={this.startPomodoro}
-                    stopPomodoro={this.props.stopTimer}
-                  />
-                )}
-              />
-              <Route path="/settings" component={() => <h1>settings</h1>} />
-              <Route path="/todo" component={() => <h1>todo</h1>} />
-            </Switch>
-          </div>
-        </Fragment>
-      </BrowserRouter>
+      <Fragment>
+        {/* Sidebar */}
+        <Sidebar logout={this.props.logout} />
+        {/* Routes */}
+        <div className="Container">
+          <Switch>
+            <Route
+              path="/"
+              exact
+              component={() => (
+                <Pomodoro
+                  timer={this.props.timer}
+                  intervalId={this.props.intervalId}
+                  startPomodoro={this.startPomodoro}
+                  stopPomodoro={this.props.stopTimer}
+                />
+              )}
+            />
+            <Route path="/settings" component={() => <h1>settings</h1>} />
+            <Route path="/todo" component={() => <h1>todo</h1>} />
+          </Switch>
+        </div>
+      </Fragment>
     );
   }
 }
@@ -57,7 +55,9 @@ const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(actions.logoutHandler())
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Main);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Main)
+);

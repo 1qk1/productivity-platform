@@ -1,6 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/auth";
+import Navbar from "../../components/Navigation/UnauthorizedNavbar/UnauthorizedNavbar";
+import PomodoroSection from "../../components/UnauthorizedSections/Pomodoro/Pomodoro";
+import "./Unauthorized.scss";
 
 class Unauthorized extends Component {
   state = {
@@ -19,7 +22,7 @@ class Unauthorized extends Component {
     event.preventDefault();
     console.log(event);
     // get the type of the submitted form (register/login)
-    const type = event.target.closest("form").id;
+    const type = event.target.id;
 
     this.props.onAuth({ authType: type, data: this.state[type] });
   };
@@ -44,46 +47,23 @@ class Unauthorized extends Component {
     return (
       // This is the website for when you're not logged in
       // So far it will have a login and a signup form
-      <div>
-        <h4>Login</h4>
-        <form id="login" onSubmit={this.submitHandler}>
-          <input
-            onChange={this.onChangeHandler}
-            type="text"
-            name="username"
-            placeholder="username"
-          />
-          <input
-            onChange={this.onChangeHandler}
-            type="password"
-            name="password"
-            placeholder="password"
-          />
-          <input type="submit" />
-        </form>
-        <h4>Signup</h4>
-        <form id="register" onSubmit={this.submitHandler}>
-          <input
-            onChange={this.onChangeHandler}
-            type="text"
-            name="username"
-            placeholder="username"
-          />
-          <input
-            onChange={this.onChangeHandler}
-            type="password"
-            name="password"
-            placeholder="password"
-          />
-          <input
-            onChange={this.onChangeHandler}
-            type="email"
-            name="email"
-            placeholder="email"
-          />
-          <input type="submit" />
-        </form>
-      </div>
+      <Fragment>
+        <Navbar
+          state={this.state}
+          onSubmit={this.submitHandler}
+          onChange={this.onChangeHandler}
+        />
+        <main className="Container">
+          {/* feature sections */}
+
+          {/* hero placeholder */}
+
+          {/* pomodoro section */}
+          <PomodoroSection />
+
+          {/*  */}
+        </main>
+      </Fragment>
     );
   }
 }
