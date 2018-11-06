@@ -1,8 +1,6 @@
 import React from "react";
 import clockIcon from "../../../assets/clock.png";
 
-import "./Pomodoro.scss";
-
 const pomodoro = () => {
   return (
     <section className="Section Section-Pomodoro">
