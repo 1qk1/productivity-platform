@@ -18,7 +18,6 @@ class Board extends Component {
   newCard = index => {
     if (this.state.board.length === 0) return;
     const newBoard = [...this.state.board];
-    const randList = Math.floor(Math.random() * newBoard.length);
     newBoard[index].push({ id: uuidv4(), text: "new card" });
     this.setState({ board: newBoard });
   };
