@@ -7,12 +7,15 @@
     "node-sass": "^4.9.4",
     "normalize.css": "^8.0.0",
     "react": "^16.6.0",
+    "react-dnd": "^5.0.0",
+    "react-dnd-html5-backend": "^5.0.1",
     "react-dom": "^16.6.0",
     "react-redux": "^5.1.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "uuid": "^3.3.2"
   },
   "proxy": "http://localhost:3001/",
   "scripts": {

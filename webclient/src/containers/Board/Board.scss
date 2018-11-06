@@ -1,0 +1,32 @@
+.Board {
+  display: flex;
+  // flex-wrap: wrap;
+  overflow-x: auto;
+  // background-color: #ccc;
+  height: 100%;
+  padding: 1rem 0;
+
+  .Add-List-Btn {
+    background-color: rgba($color: #27ae60, $alpha: 0.8);
+    white-space: nowrap;
+  }
+}
+
+.scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #20924f;
+    border-radius: 20px;
+    box-shadow: inset 0 0 0 1px #bdc3c7;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #bdc3c7;
+    border-radius: 20px;
+    padding: 5px;
+  }
+}
