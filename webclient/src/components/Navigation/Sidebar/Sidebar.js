@@ -9,7 +9,8 @@ export default ({ logout }) => (
     {/* icons with nav links */}
     <ul className="Sidebar-Links">
       <SideButton path="/" iconClasses="far fa-clock" />
-      <SideButton path="settings" iconClasses="fas fa-cog" />
+      <SideButton path="/board" iconClasses="fab fa-trello" />
+      {/* <SideButton path="settings" iconClasses="fas fa-cog" /> */}
       <SideButton path="/todo" iconClasses="fas fa-tasks" />
       <li className="Sidebar-Link">
         {/* <button onClick={logout}> */}
