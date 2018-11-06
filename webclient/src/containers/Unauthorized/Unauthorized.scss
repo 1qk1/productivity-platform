@@ -2,12 +2,20 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  @media (max-width: 750px) {
-    flex: 0 0 100%;
-    font-size: 13px;
+  &.Section-Reversed {
+    flex-direction: row-reverse;
   }
   .Subsection {
-    flex: 0 0 50%;
+    &:first-child {
+      flex: 0 0 60%;
+    }
+    &:last-child {
+      flex: 0 0 40%;
+    }
+    @media (max-width: 750px) {
+      flex: 0 0 100% !important;
+      font-size: 13px;
+    }
     padding: 0 1rem;
     @media (max-width: 750px) {
       flex: 0 0 100%;
