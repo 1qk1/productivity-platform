@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { withRouter, Switch, Route } from "react-router-dom";
 import Sidebar from "../../components/Navigation/Sidebar/Sidebar";
 import Pomodoro from "../../components/Pomodoro/Pomodoro";
+import Board from "../Board/Board";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/auth";
 import * as actionTypes from "../../store/actions/actionTypes";
@@ -33,7 +34,7 @@ class Main extends Component {
                 />
               )}
             />
-            <Route path="/settings" component={() => <h1>settings</h1>} />
+            <Route path="/board" component={Board} />
             <Route path="/todo" component={() => <h1>todo</h1>} />
           </Switch>
         </div>

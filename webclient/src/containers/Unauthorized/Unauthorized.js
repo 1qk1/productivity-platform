@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../../store/actions/auth";
 import Navbar from "../../components/Navigation/UnauthorizedNavbar/UnauthorizedNavbar";
 import PomodoroSection from "../../components/UnauthorizedSections/Pomodoro/Pomodoro";
+import BoardSection from "../../components/UnauthorizedSections/Board/Board";
 import "./Unauthorized.scss";
 
 class Unauthorized extends Component {
@@ -60,6 +61,11 @@ class Unauthorized extends Component {
 
           {/* pomodoro section */}
           <PomodoroSection />
+
+          {/* Board section */}
+          <BoardSection />
+
+          {/* todo section */}
 
           {/*  */}
         </main>

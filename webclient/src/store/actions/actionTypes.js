@@ -6,3 +6,8 @@ export const AUTH_LOGOUT = "AUTH_LOGOUT";
 export const START_TIMER = "START_TIMER";
 export const DEC_TIMER = "DEC_TIMER";
 export const STOP_TIMER = "STOP_TIMER";
+
+export const ADD_LIST = "ADD_LIST";
+export const ADD_CARD = "ADD_CARD";
+export const CHANGE_LIST = "CHANGE_LIST";
+export const TOGGLE_ADDING = "TOGGLE_ADDING";
