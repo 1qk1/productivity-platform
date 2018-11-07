@@ -19,10 +19,6 @@
     &-Title {
       margin: 0;
     }
-    &-Cards {
-      // padding: 0.25rem 0.5rem;
-      // padding-top: 0rem;
-    }
   }
 
   .Add-Card-Button {
@@ -30,7 +26,7 @@
     cursor: pointer;
     background-color: transparent;
     border: none;
-    border-radius: 2px;
+    border-radius: 4px;
     padding: 0.5rem 0.75rem;
     &:hover {
       background-color: rgba($color: #000000, $alpha: 0.2);
