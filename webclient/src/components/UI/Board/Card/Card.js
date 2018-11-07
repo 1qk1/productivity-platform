@@ -5,7 +5,7 @@ import "./Card.scss";
 const cardSource = {
   beginDrag(props) {
     console.log(props, "cardsource props");
-    return { id: props.id };
+    return { id: props.id, inList: props.inList };
   }
 };
 
@@ -17,7 +17,7 @@ const collect = (connect, monitor) => ({
 const card = props => {
   console.log(props, "card props");
   return props.connectDragSource(
-    <div className="Card">
+    <div className={`Card ${props.isDragging ? "Dragging" : ""}`}>
       <p className="Card-Text">{props.text}</p>
     </div>
   );
