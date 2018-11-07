@@ -1,12 +1,17 @@
 import React from "react";
 import Card from "../Card/Card";
 import { DropTarget } from "react-dnd";
+import NewCard from "../NewCard/NewCard";
 
 import "./List.scss";
 
 const listTarget = {
   drop(props, monitor) {
-    console.log("drop", monitor);
+    // props.moveCard();
+    const id = monitor.getItem().id;
+    const inList = monitor.getItem().inList;
+    console.log(props);
+    props.changeList(inList, props.index, id);
   }
 };
 
@@ -24,16 +29,19 @@ const list = props => {
         <p className="List-Title">title</p>
         <button
           className="Add-Card-Button"
-          onClick={() => props.addCard(props.index)}
+          onClick={() => props.toggleAdding(props.index)}
         >
           <i className="fas fa-plus" />
         </button>
       </div>
-
       <div className="List-Cards">
+        {props.isAdding ? (
+          <NewCard onSubmit={props.newCardHandler} listIndex={props.index} />
+        ) : null}
         {props.list.map(card => (
-          <Card key={`card-${Math.random()}`} {...card} />
+          <Card key={`card-${card.id}`} {...card} />
         ))}
+        {props.isOver ? <div className="Card" /> : null}
       </div>
     </div>
   );
