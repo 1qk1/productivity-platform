@@ -12,9 +12,6 @@ export const itemTypes = {
 };
 
 class Board extends PureComponent {
-  changeListTitleHandler = (newTitle, index) => {
-    console.log(newTitle);
-  };
   render() {
     return (
       <Fragment>
