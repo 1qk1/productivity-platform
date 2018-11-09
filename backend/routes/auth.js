@@ -19,7 +19,7 @@ router.post("/register", async (req, res) => {
       }
     });
   } catch (error) {
-    res.send({ error: error.message });
+    res.sendStatus(400);
   }
 });
 
