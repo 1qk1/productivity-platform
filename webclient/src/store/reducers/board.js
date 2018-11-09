@@ -3,9 +3,7 @@ import uuidv4 from "uuid/v4";
 
 const initialState = {
   board: {
-    settings: {
-      adding: []
-    },
+    settings: {},
     lists: []
   }
 };
@@ -14,34 +12,29 @@ export default (state = initialState, action) => {
   let newBoard = { ...state.board };
   switch (action.type) {
     case actionTypes.ADD_LIST:
-      newBoard.lists.push([]);
-      return { board: newBoard };
+      newBoard.lists.push({ title: "New List", cards: [] });
+      return { ...state, board: newBoard };
     case actionTypes.ADD_CARD:
-      newBoard.lists[action.listId].push({
+      newBoard.lists[action.listId].cards.push({
         id: uuidv4(),
-        text: "new card",
+        text: action.text,
         inList: action.listId
       });
-      return { board: newBoard };
+      return { ...state, board: newBoard };
+    case actionTypes.CHANGE_LIST_TITLE:
+      newBoard.lists[action.listIndex].title = action.newTitle;
+      return { ...state, board: newBoard };
     case actionTypes.CHANGE_LIST:
-      const toSplice = newBoard.lists[action.prevList].findIndex(
+      const indexToSplice = newBoard.lists[action.prevList].cards.findIndex(
         el => el.id === action.cardId
       );
       const todo = {
-        ...newBoard.lists[action.prevList][toSplice],
+        ...newBoard.lists[action.prevList].cards[indexToSplice],
         inList: action.listToMoveTo
       };
-      newBoard.lists[action.prevList].splice(toSplice, 1);
-      newBoard.lists[action.listToMoveTo].push(todo);
-      return { board: newBoard };
-    case actionTypes.TOGGLE_ADDING:
-      const index = newBoard.settings.adding.indexOf(action.listId);
-      if (index !== -1) {
-        newBoard.settings.adding.splice(index, 1);
-      } else {
-        newBoard.settings.adding.push(action.listId);
-      }
-      return { board: newBoard };
+      newBoard.lists[action.prevList].cards.splice(indexToSplice, 1);
+      newBoard.lists[action.listToMoveTo].cards.push(todo);
+      return { ...state, board: newBoard };
     default:
       return state;
   }

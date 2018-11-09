@@ -50,6 +50,7 @@ class Unauthorized extends Component {
       // So far it will have a login and a signup form
       <Fragment>
         <Navbar
+          error={this.props.error}
           state={this.state}
           onSubmit={this.submitHandler}
           onChange={this.onChangeHandler}
@@ -74,11 +75,15 @@ class Unauthorized extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  error: state.auth.error
+});
+
 const mapDispatchToProps = dispatch => ({
   onAuth: ({ authType, data }) => dispatch(actions.authHandler(authType, data))
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Unauthorized);

@@ -4,8 +4,13 @@ import "./NewCard.scss";
 const newCard = props => {
   return (
     <div className="Card-New">
-      <form onSubmit={props.onSubmit}>
-        <input type="text" name="" id="" />
+      <form onSubmit={props.onSubmitHandler}>
+        <input
+          autoFocus
+          value={props.value}
+          type="text"
+          onChange={props.onChange}
+        />
         <button type="submit" className="btn btn-small">
           Add
         </button>
