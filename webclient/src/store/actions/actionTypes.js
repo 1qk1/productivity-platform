@@ -10,4 +10,5 @@ export const STOP_TIMER = "STOP_TIMER";
 export const ADD_LIST = "ADD_LIST";
 export const ADD_CARD = "ADD_CARD";
 export const CHANGE_LIST = "CHANGE_LIST";
+export const CHANGE_LIST_TITLE = "CHANGE_LIST_TITLE";
 export const TOGGLE_ADDING = "TOGGLE_ADDING";
