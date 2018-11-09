@@ -5,7 +5,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "normalize.css";
 import { Provider } from "react-redux";
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import pomodoroReducer from "./store/reducers/pomodoro";
 import authReducer from "./store/reducers/auth";
@@ -13,13 +13,18 @@ import boardReducer from "./store/reducers/board";
 import "./vendors/materialize/sass/materialize.scss";
 import "./scss/_index.scss";
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const rootReducer = combineReducers({
   pomodoro: pomodoroReducer,
   auth: authReducer,
   board: boardReducer
 });
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
 
 const app = (
   <Provider store={store}>
