@@ -47,7 +47,6 @@ class List extends PureComponent {
 
   onSubmitTitleHandler = event => {
     event.preventDefault();
-    this.props.changeListTitleHandler(this.state.newTitle, this.props.index);
     this.props.changeListTitle(this.props.index, this.state.newTitle);
     this.setState({ editingTitle: false, newTitle: "" });
   };
