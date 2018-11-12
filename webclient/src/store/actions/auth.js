@@ -22,6 +22,7 @@ export const authHandler = (authType, data) => {
       .then(res => {
         console.log(res.data);
         const { token, user } = res.data;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
         dispatch({ type: actionTypes.AUTH_SUCCESS, token, user });
@@ -34,6 +35,7 @@ export const authHandler = (authType, data) => {
 
 export const logoutHandler = () => {
   return dispatch => {
+    delete axios.defaults.headers.common["Authorization"];
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     dispatch({ type: actionTypes.AUTH_LOGOUT });
