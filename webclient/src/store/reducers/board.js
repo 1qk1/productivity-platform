@@ -12,7 +12,11 @@ export default (state = initialState, action) => {
   let newBoard = { ...state.board };
   switch (action.type) {
     case actionTypes.ADD_LIST:
-      newBoard.lists.push({ title: "New List", cards: [] });
+      newBoard.lists.push({
+        title: "New List",
+        listIndex: state.board.lists.length,
+        cards: []
+      });
       return { ...state, board: newBoard };
     case actionTypes.ADD_CARD:
       newBoard.lists[action.listId].cards.push({
