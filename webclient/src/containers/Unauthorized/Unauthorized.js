@@ -5,6 +5,7 @@ import Navbar from "../../components/Navigation/UnauthorizedNavbar/UnauthorizedN
 import PomodoroSection from "../../components/UnauthorizedSections/Pomodoro/Pomodoro";
 import BoardSection from "../../components/UnauthorizedSections/Board/Board";
 import "./Unauthorized.scss";
+import Hero from "../../components/UnauthorizedSections/Hero/Hero";
 
 class Unauthorized extends Component {
   state = {
@@ -55,21 +56,20 @@ class Unauthorized extends Component {
           onSubmit={this.submitHandler}
           onChange={this.onChangeHandler}
         />
-        <main className="Container">
-          {/* feature sections */}
+        {/* feature sections */}
 
-          {/* hero placeholder */}
+        <Hero />
+        {/* hero placeholder */}
 
-          {/* pomodoro section */}
-          <PomodoroSection />
+        {/* pomodoro section */}
+        <PomodoroSection />
 
-          {/* Board section */}
-          <BoardSection />
+        {/* Board section */}
+        <BoardSection />
 
-          {/* todo section */}
+        {/* todo section */}
 
-          {/*  */}
-        </main>
+        {/*  */}
       </Fragment>
     );
   }
