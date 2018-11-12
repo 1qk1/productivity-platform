@@ -1,6 +1,12 @@
 .Card-New {
   margin-bottom: 1rem;
-  input[type="text"] {
-    height: 2rem;
+  textarea.materialize-textarea {
+    color: #333;
+    font-size: 15px;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    resize: none;
+    width: 100%;
   }
 }

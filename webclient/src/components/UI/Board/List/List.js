@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import Card from "../Card/Card";
 import { DropTarget } from "react-dnd";
 import NewCard from "../NewCard/NewCard";
-import EditableTitle from "./EditableTitle";
+import EditableText from "../../EditableText/EditableText";
 
 import "./List.scss";
 
@@ -26,46 +26,45 @@ function collect(connect, monitor) {
 class List extends PureComponent {
   state = {
     adding: false,
-    newCardText: "",
-    editingTitle: false,
-    newTitle: ""
+    newCardText: ""
   };
 
   toggleProp = prop => {
-    this.setState(() => ({ [prop]: !this.state[prop] }));
+    this.setState({
+      [prop]: !this.state[prop]
+    });
+  };
+
+  closeProp = prop => {
+    this.setState({
+      [prop]: false
+    });
   };
 
   onCardChangeHandler = e => {
+    console.log(e.target.value);
     this.setState({ newCardText: e.target.value });
   };
 
   onSubmitCardHandler = event => {
     event.preventDefault();
+    console.log(this.state.newCardText);
     this.props.addCard(this.props.index, this.state.newCardText);
     this.setState({ adding: false, newCardText: "" });
   };
 
-  onSubmitTitleHandler = event => {
-    event.preventDefault();
-    this.props.changeListTitle(this.props.index, this.state.newTitle);
-    this.setState({ editingTitle: false, newTitle: "" });
-  };
-
-  onChangeTitleHandler = event => {
-    this.setState({ newTitle: event.target.value });
+  onSubmitTitleHandler = text => {
+    this.props.changeListTitle(this.props.index, text);
   };
 
   render() {
     return this.props.connectDropTarget(
       <div className="List scrollbar">
         <div className="List-Header">
-          <EditableTitle
-            editingTitle={this.state.editingTitle}
-            title={this.props.list.title}
-            newTitle={this.state.newTitle}
-            toggleEditing={() => this.toggleProp("editingTitle")}
-            onSubmitTitleHandler={this.onSubmitTitleHandler}
-            onChangeTitleHandler={this.onChangeTitleHandler}
+          <EditableText
+            text={this.props.list.title}
+            onSubmitHandler={this.onSubmitTitleHandler}
+            textClasses="List-Title"
           />
           <button
             className="Add-Card-Button"
@@ -81,6 +80,7 @@ class List extends PureComponent {
               onChange={this.onCardChangeHandler}
               onSubmitHandler={this.onSubmitCardHandler}
               listIndex={this.props.index}
+              handleClickOutside={() => this.closeProp("adding")}
             />
           ) : null}
           {this.props.list.cards.map(card => (

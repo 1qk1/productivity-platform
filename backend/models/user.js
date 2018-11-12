@@ -14,7 +14,8 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true
-  }
+  },
+  pomodoros: [mongoose.SchemaTypes.ObjectId]
 });
 
 userSchema.pre("save", async function(next) {
