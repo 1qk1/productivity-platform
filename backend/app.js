@@ -3,7 +3,7 @@ const express = require("express"),
   bodyParser = require("body-parser"),
   mongoose = require("mongoose"),
   authRoutes = require("./routes/auth"),
-  apiRoutes = require("./routes/api"),
+  pomodoroRoutes = require("./routes/pomodoro"),
   passport = require("passport"),
   passportConfig = require("./passport");
 
@@ -25,7 +25,7 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
   next();
 });
@@ -35,7 +35,7 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 
 app.use("/auth", authRoutes);
-app.use("/api", apiRoutes);
+app.use("/pomodoro", pomodoroRoutes);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
