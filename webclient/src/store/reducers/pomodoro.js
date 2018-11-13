@@ -2,7 +2,8 @@ import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
   timer: 1500,
-  intervalId: null
+  intervalId: null,
+  pomodoros: []
 };
 
 export default (state = initialState, action) => {
@@ -21,6 +22,10 @@ export default (state = initialState, action) => {
     case actionTypes.STOP_TIMER:
       clearInterval(state.intervalId);
       return { ...state, intervalId: null };
+    case actionTypes.POMODORO_COMPLETED:
+      return state;
+    case actionTypes.GET_POMODOROS:
+      return { ...state, pomodoros: action.pomodoros };
     default:
       return state;
   }
