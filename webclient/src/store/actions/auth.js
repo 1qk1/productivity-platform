@@ -6,6 +6,7 @@ export const checkAuth = () => {
     const token = localStorage.getItem("token");
     if (token !== null) {
       const user = JSON.parse(localStorage.getItem("user"));
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       dispatch({ type: actionTypes.AUTH_SUCCESS, token, user });
     } else {
       dispatch({ type: actionTypes.AUTH_LOGOUT });
