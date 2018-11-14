@@ -23,9 +23,11 @@ export default (state = initialState, action) => {
       clearInterval(state.intervalId);
       return { ...state, intervalId: null };
     case actionTypes.POMODORO_COMPLETED:
-      return state;
+      return { ...state, pomodoros: [...state.pomodoros, action.newPomodoro] };
     case actionTypes.GET_POMODOROS:
       return { ...state, pomodoros: action.pomodoros };
+    case "TEST":
+      return { ...state, timer: 5 };
     default:
       return state;
   }

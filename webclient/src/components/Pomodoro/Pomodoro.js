@@ -3,7 +3,16 @@ import "./Pomodoro.scss";
 
 import { secondsToTime } from "../../utilities";
 
-const pomodoro = ({ timer, startPomodoro, stopPomodoro, intervalId }) => {
+const pomodoro = ({
+  timer,
+  startPomodoro,
+  stopPomodoro,
+  intervalId,
+  pomodoroCompleted
+}) => {
+  if (timer === 0 && intervalId) {
+    pomodoroCompleted();
+  }
   const running = intervalId !== null;
   const percentageDone = ((1500 - timer) / 1500) * 100;
   const style = {

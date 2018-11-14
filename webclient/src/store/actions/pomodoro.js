@@ -1,10 +1,12 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios";
 
-export const submitPomodoro = userId => {
+export const pomodoroCompleted = () => {
   return dispatch => {
-    axios.post("/pomodoro", { userId }).then(response => {
-      console.log(response);
+    dispatch({ type: actionTypes.STOP_TIMER });
+    axios.post("/pomodoro").then(response => {
+      const newPomodoro = response.data;
+      dispatch({ type: actionTypes.POMODORO_COMPLETED, newPomodoro });
     });
   };
 };
