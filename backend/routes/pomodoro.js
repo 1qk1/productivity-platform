@@ -3,7 +3,7 @@ const router = require("express").Router(),
   middleware = require("../middleware");
 
 router.post("/", middleware.verifyToken, (req, res) => {
-  const userId = req.body.userId;
+  const userId = req.user.id;
   console.log(userId);
   try {
     Pomodoro.create({ userId }, (error, newPomodoro) => {
@@ -20,9 +20,17 @@ router.post("/", middleware.verifyToken, (req, res) => {
 
 router.get("/", middleware.verifyToken, (req, res) => {
   const userId = req.user.id;
-  Pomodoro.find({ userId }, (error, pomodoros) => {
-    res.json(pomodoros);
-  });
+  try {
+    Pomodoro.find({ userId }, (error, pomodoros) => {
+      if (error) {
+        throw new Error(error);
+      } else {
+        res.json(pomodoros);
+      }
+    });
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 module.exports = router;
