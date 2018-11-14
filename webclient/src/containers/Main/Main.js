@@ -10,16 +10,7 @@ import * as actionTypes from "../../store/actions/actionTypes";
 class Main extends Component {
   startPomodoro = () => {
     const intervalId = setInterval(this.props.decTimer, 1000);
-    console.log(intervalId);
     this.props.startTimer(intervalId);
-  };
-
-  onPomodoroCompleted = () => {
-    this.props.pomodoroCompleted(this.props.userId);
-  };
-
-  getPomodoros = () => {
-    this.props.getPomodoros(this.props.userId);
   };
 
   render() {
@@ -40,9 +31,13 @@ class Main extends Component {
                     intervalId={this.props.intervalId}
                     startPomodoro={this.startPomodoro}
                     stopPomodoro={this.props.stopTimer}
+                    pomodoroCompleted={this.props.pomodoroCompleted}
                   />
-                  <button onClick={this.onPomodoroCompleted}>Completed</button>
-                  <button onClick={this.getPomodoros}>Get</button>
+                  <button onClick={this.props.pomodoroCompleted}>
+                    Completed
+                  </button>
+                  <button onClick={this.props.getPomodoros}>Get</button>
+                  <button onClick={this.props.endPomodoro}>5 SECS</button>
                 </Fragment>
               )}
             />
@@ -67,8 +62,9 @@ const mapDispatchToProps = dispatch => ({
   stopTimer: () => dispatch({ type: actionTypes.STOP_TIMER }),
   decTimer: () => dispatch({ type: actionTypes.DEC_TIMER }),
   logout: () => dispatch(actions.logoutHandler()),
-  pomodoroCompleted: userId => dispatch(actions.submitPomodoro(userId)),
-  getPomodoros: userId => dispatch(actions.getPomodoros(userId))
+  pomodoroCompleted: () => dispatch(actions.pomodoroCompleted()),
+  getPomodoros: () => dispatch(actions.getPomodoros()),
+  endPomodoro: () => dispatch({ type: "TEST" })
 });
 
 export default withRouter(
