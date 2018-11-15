@@ -6,6 +6,8 @@ import Board from "../Board/Board";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import * as actionTypes from "../../store/actions/actionTypes";
+import "react-toastify/dist/ReactToastify.min.css";
+import { ToastContainer } from "react-toastify";
 
 class Main extends Component {
   startPomodoro = () => {
@@ -45,6 +47,7 @@ class Main extends Component {
             <Route path="/todo" component={() => <h1>todo</h1>} />
           </Switch>
         </div>
+        <ToastContainer autoClose={5000} />
       </Fragment>
     );
   }
