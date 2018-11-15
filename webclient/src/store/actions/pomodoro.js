@@ -1,13 +1,20 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios";
+import { toast } from "react-toastify";
 
 export const pomodoroCompleted = () => {
   return dispatch => {
     dispatch({ type: actionTypes.STOP_TIMER });
-    axios.post("/pomodoro").then(response => {
-      const newPomodoro = response.data;
-      dispatch({ type: actionTypes.POMODORO_COMPLETED, newPomodoro });
-    });
+    axios
+      .post("/pomodoro")
+      .then(response => {
+        toast.success("Added new pomodoro in the database!");
+        const newPomodoro = response.data;
+        dispatch({ type: actionTypes.POMODORO_COMPLETED, newPomodoro });
+      })
+      .catch(error => {
+        toast.error("We couldn't add your pomodoro to the database :(");
+      });
   };
 };
 
