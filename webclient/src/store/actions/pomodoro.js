@@ -1,9 +1,12 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios";
 import { toast } from "react-toastify";
+import SuccessSound from "../../assets/success.mp3";
 
 export const pomodoroCompleted = () => {
   return dispatch => {
+    const sound = new Audio(SuccessSound);
+    sound.play();
     dispatch({ type: actionTypes.STOP_TIMER });
     axios
       .post("/pomodoro")
