@@ -3,7 +3,8 @@ import * as actionTypes from "../actions/actionTypes";
 const initialState = {
   timer: 1500,
   intervalId: null,
-  pomodoros: []
+  pomodoros: [],
+  isPomodoro: true
 };
 
 export default (state = initialState, action) => {
@@ -12,7 +13,15 @@ export default (state = initialState, action) => {
       return {
         ...state,
         timer: 1500,
-        intervalId: action.intervalId
+        intervalId: action.intervalId ? action.intervalId : state.intervalId,
+        isPomodoro: true
+      };
+    case actionTypes.START_BREAK:
+      return {
+        ...state,
+        timer: 300,
+        // intervalId: action.intervalId,
+        isPomodoro: false
       };
     case actionTypes.DEC_TIMER:
       return {

@@ -8,17 +8,22 @@ const pomodoro = ({
   startPomodoro,
   stopPomodoro,
   intervalId,
-  pomodoroCompleted
+  pomodoroCompleted,
+  isPomodoro
 }) => {
+  console.log(isPomodoro);
   if (timer === 0 && intervalId) {
-    pomodoroCompleted();
+    pomodoroCompleted(isPomodoro);
   }
   const running = intervalId !== null;
-  const percentageDone = ((1500 - timer) / 1500) * 100;
+  const fullTime = isPomodoro ? 1500 : 300;
+  const percentageDone = ((fullTime - timer) / fullTime) * 100;
+  const innerColor = isPomodoro ? "#2ecc71" : "#3498db";
   const style = {
     background: `linear-gradient(0deg, 
-      #2ecc71 ${percentageDone}%, 
-      transparent ${percentageDone}%)`
+      ${innerColor} ${percentageDone}%, 
+      transparent ${percentageDone}%)`,
+    border: `5px solid ${isPomodoro ? "#f39c12" : "#bdc3c7"}`
   };
   return (
     <div className="Pomodoro">
