@@ -1,13 +1,19 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios";
 import { toast } from "react-toastify";
-import SuccessSound from "../../assets/success.mp3";
+import PomodoroSound from "../../assets/pomodoro.mp3";
+import BreakSound from "../../assets/break.mp3";
 
-export const pomodoroCompleted = () => {
+export const startPomodoro = () => {
   return dispatch => {
-    const sound = new Audio(SuccessSound);
-    sound.play();
-    dispatch({ type: actionTypes.STOP_TIMER });
+    const decTimer = () => dispatch({ type: actionTypes.DEC_TIMER });
+    const intervalId = setInterval(decTimer, 1000);
+    dispatch({ type: actionTypes.START_TIMER, intervalId });
+  };
+};
+
+export const submitPomodoro = () => {
+  return dispatch => {
     axios
       .post("/pomodoro")
       .then(response => {
@@ -18,6 +24,20 @@ export const pomodoroCompleted = () => {
       .catch(error => {
         toast.error("We couldn't add your pomodoro to the database :(");
       });
+  };
+};
+
+export const pomodoroCompleted = isPomodoro => {
+  return dispatch => {
+    const soundFile = isPomodoro ? PomodoroSound : BreakSound;
+    const sound = new Audio(soundFile);
+    sound.play();
+    if (isPomodoro) {
+      dispatch(submitPomodoro());
+      dispatch({ type: actionTypes.START_BREAK });
+    } else {
+      dispatch({ type: actionTypes.START_TIMER });
+    }
   };
 };
 
