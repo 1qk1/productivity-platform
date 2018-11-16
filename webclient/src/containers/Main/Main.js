@@ -10,11 +10,6 @@ import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
 
 class Main extends Component {
-  startPomodoro = () => {
-    const intervalId = setInterval(this.props.decTimer, 1000);
-    this.props.startTimer(intervalId);
-  };
-
   render() {
     return (
       <Fragment>
@@ -31,9 +26,10 @@ class Main extends Component {
                   <Pomodoro
                     timer={this.props.timer}
                     intervalId={this.props.intervalId}
-                    startPomodoro={this.startPomodoro}
+                    startPomodoro={this.props.startPomodoro}
                     stopPomodoro={this.props.stopTimer}
                     pomodoroCompleted={this.props.pomodoroCompleted}
+                    isPomodoro={this.props.isPomodoro}
                   />
                   <button onClick={this.props.pomodoroCompleted}>
                     Completed
@@ -56,6 +52,7 @@ class Main extends Component {
 const mapStateToProps = state => ({
   timer: state.pomodoro.timer,
   intervalId: state.pomodoro.intervalId,
+  isPomodoro: state.pomodoro.isPomodoro,
   userId: state.auth.user.id
 });
 
@@ -63,10 +60,11 @@ const mapDispatchToProps = dispatch => ({
   startTimer: intervalId =>
     dispatch({ type: actionTypes.START_TIMER, intervalId }),
   stopTimer: () => dispatch({ type: actionTypes.STOP_TIMER }),
-  decTimer: () => dispatch({ type: actionTypes.DEC_TIMER }),
   logout: () => dispatch(actions.logoutHandler()),
-  pomodoroCompleted: () => dispatch(actions.pomodoroCompleted()),
+  pomodoroCompleted: isPomodoro =>
+    dispatch(actions.pomodoroCompleted(isPomodoro)),
   getPomodoros: () => dispatch(actions.getPomodoros()),
+  startPomodoro: () => dispatch(actions.startPomodoro()),
   endPomodoro: () => dispatch({ type: "TEST" })
 });
 
