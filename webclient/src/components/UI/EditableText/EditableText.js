@@ -26,6 +26,7 @@ class EditableText extends Component {
 
   onSubmitHandler = event => {
     event.preventDefault();
+    this.setState({ editing: false });
     this.props.onSubmitHandler(this.state.newText);
   };
 
