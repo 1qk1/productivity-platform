@@ -1,6 +1,7 @@
 import React from "react";
 import { DragSource } from "react-dnd";
 import "./Card.scss";
+import EditableText from "../../EditableText/EditableText";
 
 const cardSource = {
   beginDrag(props) {
@@ -18,7 +19,13 @@ const card = props => {
   console.log(props, "card props");
   return props.connectDragSource(
     <div className={`Card ${props.isDragging ? "Dragging" : ""}`}>
-      <p className="Card-Text">{props.text}</p>
+      <EditableText
+        textClasses="Card-Text"
+        onSubmitHandler={text =>
+          props.changeCardText(props.inList, props.id, text)
+        }
+        text={props.text}
+      />
     </div>
   );
 };
