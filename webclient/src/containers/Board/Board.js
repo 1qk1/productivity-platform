@@ -19,10 +19,9 @@ class Board extends PureComponent {
           {/* render list */}
           {this.props.board.lists.map((list, index) => (
             <List
+              changeCardText={this.props.changeCardText}
               changeListTitle={this.props.changeListTitle}
-              changeListTitleHandler={this.changeListTitleHandler}
               newCardHandler={this.props.addCard}
-              toggleAdding={this.props.toggleAdding}
               changeList={this.props.changeList}
               addCard={this.props.addCard}
               key={`list-${Math.random()}`}
@@ -46,12 +45,18 @@ const mapStateToProps = state => ({
   board: state.board.board
 });
 const mapDispatchToProps = dispatch => ({
-  toggleAdding: listId => dispatch({ type: actionTypes.TOGGLE_ADDING, listId }),
   addCard: (listId, text) =>
     dispatch({ type: actionTypes.ADD_CARD, listId, text }),
   addList: () => dispatch({ type: actionTypes.ADD_LIST }),
   changeListTitle: (listIndex, newTitle) =>
     dispatch({ type: actionTypes.CHANGE_LIST_TITLE, listIndex, newTitle }),
+  changeCardText: (listIndex, cardId, text) =>
+    dispatch({
+      type: actionTypes.CHANGE_CARD_TEXT,
+      listIndex,
+      cardId,
+      text
+    }),
   changeList: (prevList, listToMoveTo, cardId) =>
     dispatch({ type: actionTypes.CHANGE_LIST, prevList, listToMoveTo, cardId })
 });
