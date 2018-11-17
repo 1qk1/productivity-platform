@@ -4,7 +4,8 @@ const initialState = {
   timer: 1500,
   intervalId: null,
   pomodoros: [],
-  isPomodoro: true
+  isPomodoro: true,
+  completedSessions: 0
 };
 
 export default (state = initialState, action) => {
@@ -17,9 +18,11 @@ export default (state = initialState, action) => {
         isPomodoro: true
       };
     case actionTypes.START_BREAK:
+      let breakTime = 300;
+      if ((state.completedSessions + 1) % 4 === 0) breakTime = 600;
       return {
         ...state,
-        timer: 300,
+        timer: breakTime,
         // intervalId: action.intervalId,
         isPomodoro: false
       };
@@ -32,7 +35,12 @@ export default (state = initialState, action) => {
       clearInterval(state.intervalId);
       return { ...state, intervalId: null };
     case actionTypes.POMODORO_COMPLETED:
-      return { ...state, pomodoros: [...state.pomodoros, action.newPomodoro] };
+      const newCompletedSessions = state.completedSessions + 1;
+      return {
+        ...state,
+        pomodoros: [...state.pomodoros, action.newPomodoro],
+        completedSessions: newCompletedSessions
+      };
     case actionTypes.GET_POMODOROS:
       return { ...state, pomodoros: action.pomodoros };
     case "TEST":
