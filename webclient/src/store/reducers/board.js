@@ -28,6 +28,13 @@ export default (state = initialState, action) => {
     case actionTypes.CHANGE_LIST_TITLE:
       newBoard.lists[action.listIndex].title = action.newTitle;
       return { ...state, board: newBoard };
+    case actionTypes.CHANGE_CARD_TEXT:
+      // inList, cardId, text
+      const cardIndex = state.board.lists[action.listIndex].cards.findIndex(
+        card => card.id === action.cardId
+      );
+      newBoard.lists[action.listIndex].cards[cardIndex].text = action.text;
+      return { ...state, board: newBoard };
     case actionTypes.CHANGE_LIST:
       const indexToSplice = newBoard.lists[action.prevList].cards.findIndex(
         el => el.id === action.cardId
