@@ -84,7 +84,11 @@ class List extends PureComponent {
             />
           ) : null}
           {this.props.list.cards.map(card => (
-            <Card key={`card-${card.id}`} {...card} />
+            <Card
+              changeCardText={this.props.changeCardText}
+              key={`card-${card.id}`}
+              {...card}
+            />
           ))}
           {this.props.isOver ? <div className="Card" /> : null}
         </div>
