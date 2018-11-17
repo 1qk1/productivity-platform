@@ -1,8 +1,8 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios";
 import { toast } from "react-toastify";
-import PomodoroSound from "../../assets/pomodoro.mp3";
-import BreakSound from "../../assets/break.mp3";
+import PomodoroSound from "../../assets/notifications/pomodoro.mp3";
+import BreakSound from "../../assets/notifications/break.mp3";
 
 export const startPomodoro = () => {
   return dispatch => {
