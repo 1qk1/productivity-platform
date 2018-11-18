@@ -1,4 +1,4 @@
-# Productivity platform (no name, please suggest one at [this issue](link-here)
+# Productivity platform (no name, please suggest one at [this issue](link-here))
 
 This project is aimed towards those who want help managing their time
 
@@ -62,10 +62,11 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+(Not really but we will in the future)
 
 ## Authors
 
-- **Panagiotis Skarlas** - _Initial work_ - [PurpleBooth](https://github.com/PurpleBooth)
+- **Panagiotis Skarlas** - _Initial work_ - [Github](https://github.com/1qk1)
 
 See also the list of [contributors](https://github.com/1qk1/productivity-platform/contributors) who participated in this project.
 
@@ -75,17 +76,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
+### Hat tip to anyone whose code was used
 
-<!-- Links
-https://markdownlivepreview.com/
-https://github.com/Islandora/islandora/wiki/Readme-template
-https://www.makeareadme.com/
-https://gist.githubusercontent.com/PurpleBooth/109311bb0361f32d87a2/raw/8254b53ab8dcb18afc64287aaddd9e5b6059f880/README-Template.md
-https://gist.github.com/PurpleBooth/b24679402957c63ec426
-https://github.com/dbader/readme-template
-
-
- -->
+- [PurpleBooth](https://github.com/PurpleBooth) for this [README template](https://gist.githubusercontent.com/PurpleBooth/109311bb0361f32d87a2/raw/8254b53ab8dcb18afc64287aaddd9e5b6059f880/README-Template.md)
+- (More coming soon)
