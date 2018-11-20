@@ -1,8 +1,8 @@
 const router = require("express").Router(),
   User = require("../models/user"),
-  jwt = require("jsonwebtoken"),
   bcrypt = require("bcrypt"),
-  passport = require("passport");
+  passport = require("passport"),
+  sendJSONResponse = require("../handlers/auth").sendJSONResponse;
 
 router.post("/register", async (req, res) => {
   const user = req.body;
@@ -16,6 +16,9 @@ router.post("/register", async (req, res) => {
     User.create(user, (err, newUser) => {
       if (err !== null) {
         throw new Error(err);
+      } else {
+        req.user = newUser;
+        sendJSONResponse(req, res);
       }
     });
   } catch (error) {
@@ -27,19 +30,7 @@ router.post(
   "/login",
   // check the credentials sent by the user
   passport.authenticate("local", { session: false }),
-  (req, res) => {
-    // if this function executes it means the credentials are correct
-    const { username, _id } = req.user;
-
-    const userData = {
-      username,
-      id: _id.toString()
-    };
-
-    // create new token and send it back
-    const token = jwt.sign(userData, process.env.JWT_SECRET);
-    res.json({ token, user: userData });
-  }
+  sendJSONResponse
 );
 
 module.exports = router;
