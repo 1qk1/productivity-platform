@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/auth";
-import Navbar from "../../components/Navigation/UnauthorizedNavbar/UnauthorizedNavbar";
-import PomodoroSection from "../../components/UnauthorizedSections/Pomodoro/Pomodoro";
-import BoardSection from "../../components/UnauthorizedSections/Board/Board";
+// import Navbar from "../../components/Navigation/UnauthorizedNavbar/UnauthorizedNavbar";
+// import PomodoroSection from "../../components/UnauthorizedSections/Pomodoro/Pomodoro";
+// import BoardSection from "../../components/UnauthorizedSections/Board/Board";
+import Login from "../../components/Auth/Login";
+import Register from "../../components/Auth/Register";
 import "./Unauthorized.scss";
 import Hero from "../../components/UnauthorizedSections/Hero/Hero";
 
@@ -46,30 +48,61 @@ class Unauthorized extends Component {
   };
 
   render() {
+    let error = null;
+
+    if (this.props.error) {
+      switch (this.props.error.response.status) {
+        case 400:
+          error = "User already exists";
+          break;
+        case 401:
+          error = "Wrong Username or Password";
+          break;
+        default:
+          break;
+      }
+    }
     return (
       // This is the website for when you're not logged in
       // So far it will have a login and a signup form
+
+      // Commented out the preview components because
+      // they're looking bad.
+
       <Fragment>
-        <Navbar
+        {/* <Navbar
           error={this.props.error}
           state={this.state}
           onSubmit={this.submitHandler}
-          onChange={this.onChangeHandler}
-        />
-        {/* feature sections */}
+          onChange={this.onChangeHandler} */}
+        {/* /> */}
 
-        <Hero />
-        {/* hero placeholder */}
+        {/* feature preview sections */}
+
+        {/* hero section */}
+        {/* <Hero /> */}
 
         {/* pomodoro section */}
-        <PomodoroSection />
+        {/* <PomodoroSection /> */}
 
         {/* Board section */}
-        <BoardSection />
+        {/* <BoardSection /> */}
 
         {/* todo section */}
-
         {/*  */}
+
+        <div className="Container">
+          {/* Auth forms */}
+          <Login
+            submitHandler={this.submitHandler}
+            onChangeHandler={this.onChangeHandler}
+          />
+          {error ? <p style={{ color: "red" }}>{error}</p> : null}
+          <Register
+            submitHandler={this.submitHandler}
+            onChangeHandler={this.onChangeHandler}
+          />
+        </div>
       </Fragment>
     );
   }
