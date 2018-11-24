@@ -3,7 +3,6 @@
     background-color: #ddd;
     margin: 0 1rem;
     padding: 0.75rem;
-    padding-top: 0.25rem;
     border-radius: 5px;
     flex: 0 0 300px;
     color: #333;
@@ -15,9 +14,19 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 0.5rem;
+      overflow: hidden;
+      form {
+        width: 100%;
+      }
+      input[type="text"] {
+        height: 2rem;
+        font-size: 14px;
+      }
     }
     &-Title {
       margin: 0;
+      word-wrap: break-word;
+      max-width: 80%;
     }
   }
 

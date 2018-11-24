@@ -12,10 +12,6 @@ export const itemTypes = {
 };
 
 class Board extends PureComponent {
-  newCardHandler = event => {
-    event.preventDefault();
-  };
-
   render() {
     return (
       <Fragment>
@@ -23,9 +19,9 @@ class Board extends PureComponent {
           {/* render list */}
           {this.props.board.lists.map((list, index) => (
             <List
-              newCardHandler={this.newCardHandler}
-              isAdding={this.props.board.settings.adding.includes(index)}
-              toggleAdding={this.props.toggleAdding}
+              changeCardText={this.props.changeCardText}
+              changeListTitle={this.props.changeListTitle}
+              newCardHandler={this.props.addCard}
               changeList={this.props.changeList}
               addCard={this.props.addCard}
               key={`list-${Math.random()}`}
@@ -49,9 +45,18 @@ const mapStateToProps = state => ({
   board: state.board.board
 });
 const mapDispatchToProps = dispatch => ({
-  toggleAdding: listId => dispatch({ type: actionTypes.TOGGLE_ADDING, listId }),
-  addCard: listId => dispatch({ type: actionTypes.ADD_CARD, listId }),
+  addCard: (listId, text) =>
+    dispatch({ type: actionTypes.ADD_CARD, listId, text }),
   addList: () => dispatch({ type: actionTypes.ADD_LIST }),
+  changeListTitle: (listIndex, newTitle) =>
+    dispatch({ type: actionTypes.CHANGE_LIST_TITLE, listIndex, newTitle }),
+  changeCardText: (listIndex, cardId, text) =>
+    dispatch({
+      type: actionTypes.CHANGE_CARD_TEXT,
+      listIndex,
+      cardId,
+      text
+    }),
   changeList: (prevList, listToMoveTo, cardId) =>
     dispatch({ type: actionTypes.CHANGE_LIST, prevList, listToMoveTo, cardId })
 });

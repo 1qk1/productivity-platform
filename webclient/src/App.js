@@ -5,9 +5,7 @@ import { connect } from "react-redux";
 import * as actions from "./store/actions/auth";
 import { Switch, Redirect, Route, BrowserRouter } from "react-router-dom";
 
-const AsyncUnauthorized = lazy(() =>
-  import("./containers/Unauthorized/Unauthorized")
-);
+const AsyncHome = lazy(() => import("./containers/Home/Home"));
 
 const AsyncMain = lazy(() => import("./containers/Main/Main"));
 
@@ -25,12 +23,12 @@ class App extends Component {
       // check if not logged in then
       // show the website
       content = (
-        <Suspense fallback={<Loader />}>
-          <Switch>
-            <Route path="/" exact component={() => <AsyncUnauthorized />} />
+        <Switch>
+          <Suspense fallback={<Loader />}>
+            <Route path="/" exact component={() => <AsyncHome />} />
             <Redirect to="/" />
-          </Switch>
-        </Suspense>
+          </Suspense>
+        </Switch>
       );
     } else if (token !== undefined) {
       // show main app when token is cheched (not undefined)

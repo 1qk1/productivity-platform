@@ -1,19 +1,17 @@
 import React, { Component, Fragment } from "react";
-import { withRouter, Switch, Route } from "react-router-dom";
+import { withRouter, Switch, Route, Redirect } from "react-router-dom";
 import Sidebar from "../../components/Navigation/Sidebar/Sidebar";
 import Pomodoro from "../../components/Pomodoro/Pomodoro";
 import Board from "../Board/Board";
 import { connect } from "react-redux";
-import * as actions from "../../store/actions/auth";
+import * as actions from "../../store/actions/index";
 import * as actionTypes from "../../store/actions/actionTypes";
+import "react-toastify/dist/ReactToastify.min.css";
+import { ToastContainer } from "react-toastify";
 
 class Main extends Component {
-  startPomodoro = () => {
-    const intervalId = setInterval(this.props.decTimer, 1000);
-    console.log(intervalId);
-    this.props.startTimer(intervalId);
-  };
-
+  // This is the main component
+  // It contains the routes for each page
   render() {
     return (
       <Fragment>
@@ -22,22 +20,42 @@ class Main extends Component {
         {/* Routes */}
         <div className="Container">
           <Switch>
+            {/* Pomodoro route */}
             <Route
               path="/"
               exact
               component={() => (
-                <Pomodoro
-                  timer={this.props.timer}
-                  intervalId={this.props.intervalId}
-                  startPomodoro={this.startPomodoro}
-                  stopPomodoro={this.props.stopTimer}
-                />
+                <Fragment>
+                  <Pomodoro
+                    timer={this.props.timer}
+                    intervalId={this.props.intervalId}
+                    startPomodoro={this.props.startPomodoro}
+                    stopPomodoro={this.props.stopTimer}
+                    pomodoroCompleted={this.props.pomodoroCompleted}
+                    isPomodoro={this.props.isPomodoro}
+                  />
+                  {/* helper buttons to test the pomodoro */}
+                  {/* uncomment it if you need to test stuff */}
+                  {/* {process.env.NODE_ENV === "development" && (
+                    <Fragment>
+                      <button onClick={this.props.pomodoroCompleted}>
+                        Completed
+                      </button>
+                      <button onClick={this.props.getPomodoros}>Get</button>
+                      <button onClick={this.props.endPomodoro}>5 SECS</button>
+                    </Fragment>
+                  )} */}
+                </Fragment>
               )}
             />
             <Route path="/board" component={Board} />
-            <Route path="/todo" component={() => <h1>todo</h1>} />
+            {/* placeholders for future features */}
+            {/* <Route path="/todo" component={() => <h1>todo</h1>} /> */}
+            {/* <Route path="/notes" component={() => <h1>notes</h1>} /> */}
+            <Redirect to="/" />
           </Switch>
         </div>
+        <ToastContainer autoClose={5000} />
       </Fragment>
     );
   }
@@ -45,15 +63,24 @@ class Main extends Component {
 
 const mapStateToProps = state => ({
   timer: state.pomodoro.timer,
-  intervalId: state.pomodoro.intervalId
+  intervalId: state.pomodoro.intervalId,
+  isPomodoro: state.pomodoro.isPomodoro,
+  userId: state.auth.user.id
 });
 
 const mapDispatchToProps = dispatch => ({
-  startTimer: intervalId =>
-    dispatch({ type: actionTypes.START_TIMER, intervalId }),
   stopTimer: () => dispatch({ type: actionTypes.STOP_TIMER }),
-  decTimer: () => dispatch({ type: actionTypes.DEC_TIMER }),
-  logout: () => dispatch(actions.logoutHandler())
+  logout: () => dispatch(actions.logoutHandler()),
+  // function to run when a pomodoro got completed
+  // takes if the clock was a pomodoro or a break as
+  // an argument
+  pomodoroCompleted: isPomodoro =>
+    dispatch(actions.pomodoroCompleted(isPomodoro)),
+  // get all the user's pomodoros from the server
+  getPomodoros: () => dispatch(actions.getPomodoros()),
+  startPomodoro: () => dispatch(actions.startPomodoro()),
+  // helper function to put the timer to 5 seconds left
+  endPomodoro: () => dispatch({ type: actionTypes.END_POMODORO_5_SECONDS })
 });
 
 export default withRouter(

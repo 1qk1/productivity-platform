@@ -1,8 +1,12 @@
 .Card-New {
-  input[type="text"] {
-    height: 2rem;
-  }
-  button {
-    float: right;
+  margin-bottom: 1rem;
+  textarea.materialize-textarea {
+    color: #333;
+    font-size: 15px;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    resize: none;
+    width: 100%;
   }
 }

@@ -1,14 +1,13 @@
 import React from "react";
-import "./UnauthorizedNavbar.scss";
+import "./HomeNavbar.scss";
 import { NavLink } from "react-router-dom";
 import Modal from "../../UI/Modal/Toggler";
 import Login from "../../Auth/Login";
 import Register from "../../Auth/Register";
 
-const unauthorizedNavbar = props => {
-  console.log(props, "navbar props");
+const homeNavbar = props => {
   return (
-    <nav className="Unauthorized-Navbar">
+    <nav className="Home-Navbar">
       <div className="nav-wrapper Container">
         {/* <a href="#" class="brand-logo">
           Logo
@@ -45,4 +44,4 @@ const unauthorizedNavbar = props => {
   );
 };
 
-export default unauthorizedNavbar;
+export default homeNavbar;

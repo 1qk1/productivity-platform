@@ -1,7 +1,9 @@
 .Section {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  &-Wrapper {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
   &.Section-Reversed {
     flex-direction: row-reverse;
   }
