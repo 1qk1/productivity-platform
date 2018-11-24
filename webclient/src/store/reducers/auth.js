@@ -6,13 +6,13 @@ const initialState = {
   token: undefined,
   user: null,
   loading: false,
+  // read error message on error.response.data
   error: null
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
-      console.log("auth started");
       return { ...state, loading: true, error: null };
     case actionTypes.AUTH_SUCCESS:
       return {

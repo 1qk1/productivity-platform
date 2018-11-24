@@ -4,12 +4,12 @@ import * as actions from "../../store/actions/auth";
 // import Navbar from "../../components/Navigation/UnauthorizedNavbar/UnauthorizedNavbar";
 // import PomodoroSection from "../../components/UnauthorizedSections/Pomodoro/Pomodoro";
 // import BoardSection from "../../components/UnauthorizedSections/Board/Board";
+// import Hero from "../../components/UnauthorizedSections/Hero/Hero";
 import Login from "../../components/Auth/Login";
 import Register from "../../components/Auth/Register";
-import "./Unauthorized.scss";
-import Hero from "../../components/UnauthorizedSections/Hero/Hero";
+import "./Home.scss";
 
-class Unauthorized extends Component {
+class Home extends Component {
   state = {
     login: {
       username: "",
@@ -27,7 +27,7 @@ class Unauthorized extends Component {
     console.log(event);
     // get the type of the submitted form (register/login)
     const type = event.target.id;
-
+    // start authentication with the login data
     this.props.onAuth({ authType: type, data: this.state[type] });
   };
 
@@ -42,34 +42,27 @@ class Unauthorized extends Component {
     const newState = { ...this.state[actionType] };
     // change the value
     newState[elType] = value;
-    console.log(newState);
     // change the state
     this.setState(() => ({ [actionType]: newState }));
   };
 
   render() {
-    let error = null;
+    // check for error
+    const { error } = this.props;
+    let errorMessage = null;
 
-    if (this.props.error) {
-      switch (this.props.error.response.status) {
-        case 400:
-          error = "User already exists";
-          break;
-        case 401:
-          error = "Wrong Username or Password";
-          break;
-        default:
-          break;
-      }
+    if (error) {
+      errorMessage = error.response.data;
     }
     return (
       // This is the website for when you're not logged in
       // So far it will have a login and a signup form
 
       // Commented out the preview components because
-      // they're looking bad.
+      // they're looking bad at the moment.
 
       <Fragment>
+        {/* this is the navbar with the auth forms modal */}
         {/* <Navbar
           error={this.props.error}
           state={this.state}
@@ -97,7 +90,8 @@ class Unauthorized extends Component {
             submitHandler={this.submitHandler}
             onChangeHandler={this.onChangeHandler}
           />
-          {error ? <p style={{ color: "red" }}>{error}</p> : null}
+          {/* show error if there is an error with the authentication process */}
+          {errorMessage ? <p style={{ color: "red" }}>{errorMessage}</p> : null}
           <Register
             submitHandler={this.submitHandler}
             onChangeHandler={this.onChangeHandler}
@@ -113,10 +107,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  // executes when authentication starts
   onAuth: ({ authType, data }) => dispatch(actions.authHandler(authType, data))
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Unauthorized);
+)(Home);

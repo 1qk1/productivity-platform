@@ -3,34 +3,33 @@ const router = require("express").Router(),
   middleware = require("../middleware");
 
 router.post("/", middleware.verifyToken, (req, res) => {
+  // get the user's id
   const userId = req.user.id;
-  console.log(userId);
-  try {
-    Pomodoro.create({ userId }, (error, newPomodoro) => {
-      if (error) {
-        throw new Error(error);
-      } else {
-        res.json(newPomodoro);
-      }
-    });
-  } catch (error) {
-    res.send(error);
-  }
+  // create a new pomodoro for the user
+  Pomodoro.create({ userId }, (error, newPomodoro) => {
+    if (error) {
+      // if there is an error, send it back
+      res.send(error);
+    } else {
+      // else send back the new pomodoro
+      res.json(newPomodoro);
+    }
+  });
 });
 
 router.get("/", middleware.verifyToken, (req, res) => {
+  // get the user's id
   const userId = req.user.id;
-  try {
-    Pomodoro.find({ userId }, (error, pomodoros) => {
-      if (error) {
-        throw new Error(error);
-      } else {
-        res.json(pomodoros);
-      }
-    });
-  } catch (error) {
-    res.send(error);
-  }
+  // find all pomodoros for that user
+  Pomodoro.find({ userId }, (error, pomodoros) => {
+    if (error) {
+      // if there is an error, send it back
+      res.send(error);
+    } else {
+      // else send back all the user's pomodoros
+      res.json(pomodoros);
+    }
+  });
 });
 
 module.exports = router;

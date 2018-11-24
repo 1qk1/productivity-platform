@@ -1,29 +1,13 @@
 import React from "react";
-import "./UnauthorizedNavbar.scss";
+import "./HomeNavbar.scss";
 import { NavLink } from "react-router-dom";
 import Modal from "../../UI/Modal/Toggler";
 import Login from "../../Auth/Login";
 import Register from "../../Auth/Register";
 
-const unauthorizedNavbar = props => {
-  let error = null;
-
-  if (props.error) {
-    switch (props.error.response.status) {
-      case 400:
-        error = "User already exists";
-        break;
-      case 401:
-        error = "Wrong Username or Password";
-        break;
-      default:
-        break;
-    }
-  }
-
-  console.log(props, "navbar props");
+const homeNavbar = props => {
   return (
-    <nav className="Unauthorized-Navbar">
+    <nav className="Home-Navbar">
       <div className="nav-wrapper Container">
         {/* <a href="#" class="brand-logo">
           Logo
@@ -48,8 +32,6 @@ const unauthorizedNavbar = props => {
                 submitHandler={props.onSubmit}
                 onChangeHandler={props.onChange}
               />
-              {/* {console.log(props.error.message)} */}
-              {error ? <p style={{ color: "red" }}>{error}</p> : null}
               <Register
                 submitHandler={props.onSubmit}
                 onChangeHandler={props.onChange}
@@ -62,4 +44,4 @@ const unauthorizedNavbar = props => {
   );
 };
 
-export default unauthorizedNavbar;
+export default homeNavbar;

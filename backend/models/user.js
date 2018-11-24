@@ -18,12 +18,15 @@ const userSchema = new mongoose.Schema({
   pomodoros: [mongoose.SchemaTypes.ObjectId]
 });
 
+// encode the password before saving
 userSchema.pre("save", async function(next) {
   const user = this;
   user.password = await bcrypt.hash(user.password, 10);
   next();
 });
 
+// check if the password the user gave us matches the
+// user's password from the database
 userSchema.methods.validPassword = (localPassword, userPassword) =>
   bcrypt.compareSync(localPassword, userPassword);
 
