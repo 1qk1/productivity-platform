@@ -5,9 +5,7 @@ import { connect } from "react-redux";
 import * as actions from "./store/actions/auth";
 import { Switch, Redirect, Route, BrowserRouter } from "react-router-dom";
 
-const AsyncUnauthorized = lazy(() =>
-  import("./containers/Unauthorized/Unauthorized")
-);
+const AsyncHome = lazy(() => import("./containers/Home/Home"));
 
 const AsyncMain = lazy(() => import("./containers/Main/Main"));
 
@@ -27,7 +25,7 @@ class App extends Component {
       content = (
         <Switch>
           <Suspense fallback={<Loader />}>
-            <Route path="/" exact component={() => <AsyncUnauthorized />} />
+            <Route path="/" exact component={() => <AsyncHome />} />
             <Redirect to="/" />
           </Suspense>
         </Switch>
