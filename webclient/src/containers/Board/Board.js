@@ -3,7 +3,6 @@ import List from "../../components/UI/Board/List/List";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 import { connect } from "react-redux";
-import * as actionTypes from "../../store/actions/actionTypes";
 import * as actions from "../../store/actions/index";
 
 import "./Board.scss";

@@ -5,7 +5,6 @@ import Pomodoro from "../../components/Pomodoro/Pomodoro";
 import Board from "../Board/Board";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
-import * as actionTypes from "../../store/actions/actionTypes";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
 
