@@ -3,7 +3,7 @@ import List from "../../components/UI/Board/List/List";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 import { connect } from "react-redux";
-import * as actionTypes from "../../store/actions/actionTypes";
+import * as actions from "../../store/actions/index";
 
 import "./Board.scss";
 
@@ -22,7 +22,7 @@ class Board extends PureComponent {
               changeCardText={this.props.changeCardText}
               changeListTitle={this.props.changeListTitle}
               newCardHandler={this.props.addCard}
-              changeList={this.props.changeList}
+              changeCardList={this.props.changeCardList}
               addCard={this.props.addCard}
               key={`list-${Math.random()}`}
               list={list}
@@ -45,20 +45,14 @@ const mapStateToProps = state => ({
   board: state.board.board
 });
 const mapDispatchToProps = dispatch => ({
-  addCard: (listId, text) =>
-    dispatch({ type: actionTypes.ADD_CARD, listId, text }),
-  addList: () => dispatch({ type: actionTypes.ADD_LIST }),
+  addCard: (listId, text) => dispatch(actions.addCard(listId, text)),
+  addList: () => dispatch(actions.addList()),
   changeListTitle: (listIndex, newTitle) =>
-    dispatch({ type: actionTypes.CHANGE_LIST_TITLE, listIndex, newTitle }),
+    dispatch(actions.changeListTitle(listIndex, newTitle)),
   changeCardText: (listIndex, cardId, text) =>
-    dispatch({
-      type: actionTypes.CHANGE_CARD_TEXT,
-      listIndex,
-      cardId,
-      text
-    }),
-  changeList: (prevList, listToMoveTo, cardId) =>
-    dispatch({ type: actionTypes.CHANGE_LIST, prevList, listToMoveTo, cardId })
+    dispatch(actions.changeCardText(listIndex, cardId, text)),
+  changeCardList: (prevList, listToMoveTo, cardId) =>
+    dispatch(actions.changeCardList(prevList, listToMoveTo, cardId))
 });
 
 export default DragDropContext(HTML5Backend)(

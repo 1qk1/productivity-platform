@@ -1,6 +1,6 @@
 {
   "name": "productivity-platform",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "scripts": {
     "start": "concurrently \" cd webclient && npm start\" \" cd backend && npm start \""
@@ -10,7 +10,7 @@
     "url": "git+https://github.com/1qk1/productivity-platform.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/1qk1/productivity-platform/issues"
   },

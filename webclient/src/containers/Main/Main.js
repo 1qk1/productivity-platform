@@ -5,7 +5,6 @@ import Pomodoro from "../../components/Pomodoro/Pomodoro";
 import Board from "../Board/Board";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
-import * as actionTypes from "../../store/actions/actionTypes";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
 
@@ -69,7 +68,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  stopTimer: () => dispatch({ type: actionTypes.STOP_TIMER }),
+  stopTimer: () => dispatch(actions.stopTimer()),
   logout: () => dispatch(actions.logoutHandler()),
   // function to run when a pomodoro got completed
   // takes if the clock was a pomodoro or a break as
@@ -80,7 +79,7 @@ const mapDispatchToProps = dispatch => ({
   getPomodoros: () => dispatch(actions.getPomodoros()),
   startPomodoro: () => dispatch(actions.startPomodoro()),
   // helper function to put the timer to 5 seconds left
-  endPomodoro: () => dispatch({ type: actionTypes.END_POMODORO_5_SECONDS })
+  endPomodoro: () => dispatch(actions.end5Seconds())
 });
 
 export default withRouter(
