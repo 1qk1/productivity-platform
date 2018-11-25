@@ -60,8 +60,8 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## 🔢 Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/1qk1/productivity-platform/tags).
-(Not really but we will in the future)
+We use [SemVer](http://semver.org/) for versioning. When you submit a pull request, increment the appropriate part of the version.
+For example in version 1.3.4, the first number is the major release, second the minor release (minor features and stuff), and the third is for small stuff and bugfixes.
 
 ## Authors
 
