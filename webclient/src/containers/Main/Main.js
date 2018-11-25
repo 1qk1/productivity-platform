@@ -69,7 +69,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  stopTimer: () => dispatch({ type: actionTypes.STOP_TIMER }),
+  stopTimer: () => dispatch(actions.stopTimer()),
   logout: () => dispatch(actions.logoutHandler()),
   // function to run when a pomodoro got completed
   // takes if the clock was a pomodoro or a break as
@@ -80,7 +80,7 @@ const mapDispatchToProps = dispatch => ({
   getPomodoros: () => dispatch(actions.getPomodoros()),
   startPomodoro: () => dispatch(actions.startPomodoro()),
   // helper function to put the timer to 5 seconds left
-  endPomodoro: () => dispatch({ type: actionTypes.END_POMODORO_5_SECONDS })
+  endPomodoro: () => dispatch(actions.end5Seconds())
 });
 
 export default withRouter(
