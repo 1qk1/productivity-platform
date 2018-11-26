@@ -1,7 +1,6 @@
 {
   "name": "webclient",
   "version": "1.0.2",
-  "private": true,
   "dependencies": {
     "axios": "^0.18.0",
     "node-sass": "^4.9.4",
