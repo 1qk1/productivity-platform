@@ -12,7 +12,7 @@ const listTarget = {
     const id = monitor.getItem().id;
     const inList = monitor.getItem().inList;
     console.log(props);
-    props.changeList(inList, props.index, id);
+    props.changeCardList(inList, props.index, id);
   }
 };
 

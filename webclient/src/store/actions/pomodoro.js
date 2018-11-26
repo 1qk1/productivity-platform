@@ -12,6 +12,18 @@ export const startPomodoro = () => {
   };
 };
 
+export const stopTimer = () => {
+  return dispatch => {
+    dispatch({ type: actionTypes.STOP_TIMER });
+  };
+};
+
+export const end5Seconds = () => {
+  return dispatch => {
+    dispatch({ type: actionTypes.END_POMODORO_5_SECONDS });
+  };
+};
+
 export const submitPomodoro = () => {
   return dispatch => {
     axios

@@ -35,7 +35,13 @@ export default (state = initialState, action) => {
       };
     case actionTypes.STOP_TIMER:
       clearInterval(state.intervalId);
-      return { ...state, intervalId: null, completedSessions: 0 };
+      return {
+        ...state,
+        intervalId: null,
+        completedSessions: 0,
+        isPomodoro: true,
+        timer: 1500
+      };
     case actionTypes.POMODORO_COMPLETED:
       const newCompletedSessions = state.completedSessions + 1;
       return {

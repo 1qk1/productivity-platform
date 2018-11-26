@@ -1,7 +1,19 @@
 {
   "name": "productivity-platform",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.2",
+  "description": "A productivity platform to help you be more focused, productive and manage your time better.",
+  "keywords": [
+    "productivity",
+    "pomodoro",
+    "time",
+    "management",
+    "tracker",
+    "focus",
+    "open",
+    "source",
+    "oss"
+  ],
+  "homepage": "https://github.com/1qk1/productivity-platform",
   "scripts": {
     "start": "concurrently \" cd webclient && npm start\" \" cd backend && npm start \""
   },
@@ -10,7 +22,7 @@
     "url": "git+https://github.com/1qk1/productivity-platform.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/1qk1/productivity-platform/issues"
   },
