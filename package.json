@@ -13,7 +13,6 @@
     "source",
     "oss"
   ],
-  "homepage": "https://github.com/1qk1/productivity-platform",
   "scripts": {
     "start": "concurrently \" cd webclient && npm start\" \" cd backend && npm start \""
   },

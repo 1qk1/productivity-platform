@@ -49,12 +49,12 @@ class List extends PureComponent {
   onSubmitCardHandler = event => {
     event.preventDefault();
     console.log(this.state.newCardText);
-    this.props.addCard(this.props.index, this.state.newCardText);
+    this.props.addCard(this.props.list.index, this.state.newCardText);
     this.setState({ adding: false, newCardText: "" });
   };
 
   onSubmitTitleHandler = text => {
-    this.props.changeListTitle(this.props.index, text);
+    this.props.changeListTitle(this.props.list._id, text);
   };
 
   render() {

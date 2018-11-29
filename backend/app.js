@@ -4,6 +4,7 @@ const express = require("express"),
   mongoose = require("mongoose"),
   authRoutes = require("./routes/auth"),
   pomodoroRoutes = require("./routes/pomodoro"),
+  boardRoutes = require("./routes/board"),
   passport = require("passport"),
   passportConfig = require("./passport");
 
@@ -23,6 +24,7 @@ mongoose.connect(
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "*");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
@@ -36,6 +38,7 @@ app.use(passport.initialize());
 
 app.use("/auth", authRoutes);
 app.use("/pomodoro", pomodoroRoutes);
+app.use("/board", boardRoutes);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
