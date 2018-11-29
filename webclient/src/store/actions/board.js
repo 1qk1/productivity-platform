@@ -1,20 +1,49 @@
 import * as actionTypes from "./actionTypes";
+import axios from "../../axios";
+import { toast } from "react-toastify";
+
+export const addList = () => {
+  return dispatch => {
+    axios
+      .post("/board/list")
+      .then(res => {
+        dispatch({ type: actionTypes.ADD_LIST, list: res.data.newList });
+      })
+      .catch(error => {
+        toast.error("Unknown error when adding list");
+      });
+  };
+};
+
+export const getLists = () => {
+  return dispatch => {
+    axios
+      .get("/board/list")
+      .then(res => {
+        dispatch({ type: actionTypes.SET_LISTS, lists: res.data.lists });
+      })
+      .catch(error => {
+        toast.error("Unknown error when getting the lists");
+      });
+  };
+};
+
+export const changeListTitle = (listId, newTitle) => {
+  return dispatch => {
+    axios
+      .put("/board/list", { id: listId, edit: { title: newTitle } })
+      .then(res => {
+        dispatch({ type: actionTypes.UPDATE_LIST, list: res.data.updatedList });
+      })
+      .catch(error => {
+        toast.error("Unknown error when changing title");
+      });
+  };
+};
 
 export const addCard = (listId, text) => {
   return dispatch => {
     dispatch({ type: actionTypes.ADD_CARD, listId, text });
-  };
-};
-
-export const addList = () => {
-  return dispatch => {
-    dispatch({ type: actionTypes.ADD_LIST });
-  };
-};
-
-export const changeListTitle = (listIndex, newTitle) => {
-  return dispatch => {
-    dispatch({ type: actionTypes.CHANGE_LIST_TITLE, listIndex, newTitle });
   };
 };
 
