@@ -11,8 +11,10 @@ export const POMODORO_COMPLETED = "POMODORO_COMPLETED";
 export const GET_POMODOROS = "GET_POMODOROS";
 export const END_POMODORO_5_SECONDS = "END_POMODORO_5_SECONDS";
 
+export const SET_LISTS = "SET_LISTS";
 export const ADD_LIST = "ADD_LIST";
 export const ADD_CARD = "ADD_CARD";
 export const CHANGE_LIST = "CHANGE_LIST";
 export const CHANGE_LIST_TITLE = "CHANGE_LIST_TITLE";
+export const UPDATE_LIST = "UPDATE_LIST";
 export const CHANGE_CARD_TEXT = "CHANGE_CARD_TEXT";
