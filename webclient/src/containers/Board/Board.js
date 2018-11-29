@@ -4,6 +4,7 @@ import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
+import Loader from "../../components/UI/Loader/Loader";
 
 import "./Board.scss";
 
@@ -12,7 +13,14 @@ export const itemTypes = {
 };
 
 class Board extends PureComponent {
+  componentDidMount() {
+    this.props.getLists();
+  }
+
   render() {
+    if (this.props.board.lists === null) {
+      return <Loader />;
+    }
     return (
       <Fragment>
         <div className="Board scrollbar">
@@ -24,9 +32,8 @@ class Board extends PureComponent {
               newCardHandler={this.props.addCard}
               changeCardList={this.props.changeCardList}
               addCard={this.props.addCard}
-              key={`list-${Math.random()}`}
+              key={"list-" + list._id}
               list={list}
-              index={index}
             />
           ))}
           <button
@@ -47,12 +54,13 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addCard: (listId, text) => dispatch(actions.addCard(listId, text)),
   addList: () => dispatch(actions.addList()),
-  changeListTitle: (listIndex, newTitle) =>
-    dispatch(actions.changeListTitle(listIndex, newTitle)),
+  changeListTitle: (listId, newTitle) =>
+    dispatch(actions.changeListTitle(listId, newTitle)),
   changeCardText: (listIndex, cardId, text) =>
     dispatch(actions.changeCardText(listIndex, cardId, text)),
   changeCardList: (prevList, listToMoveTo, cardId) =>
-    dispatch(actions.changeCardList(prevList, listToMoveTo, cardId))
+    dispatch(actions.changeCardList(prevList, listToMoveTo, cardId)),
+  getLists: () => dispatch(actions.getLists())
 });
 
 export default DragDropContext(HTML5Backend)(
