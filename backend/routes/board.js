@@ -1,6 +1,7 @@
 const router = require("express").Router(),
   middleware = require("../middleware"),
-  BoardList = require("../models/boardList");
+  BoardList = require("../models/boardList"),
+  User = require("../models/user");
 
 router.get("/list", middleware.verifyToken, (req, res) => {
   // find all lists for current logged in user
@@ -20,7 +21,7 @@ router.get("/list", middleware.verifyToken, (req, res) => {
 
 router.post("/list", middleware.verifyToken, (req, res) => {
   // get the number of lists for the logged in user
-  BoardList.count({ userId: req.user.id }, (error, listCount) => {
+  BoardList.countDocuments({ userId: req.user.id }, (error, listCount) => {
     if (error) {
       return res.status(400).send("Something went wrong");
     }
@@ -36,8 +37,19 @@ router.post("/list", middleware.verifyToken, (req, res) => {
       if (error) {
         return res.status(400).send("Something went wrong");
       }
-      // send it back to the user
-      res.json({ newList });
+      // get the logged in user to save the list to his account
+      User.findById(req.user.id, (error, user) => {
+        if (error) {
+          return res.status(400).send("Something went wrong");
+        } else {
+          // push it in the boardlist field
+          user.boardLists.push(newList);
+          // save updated user
+          user.save();
+          // send the list back to the user
+          res.json({ newList });
+        }
+      });
     });
   });
 });
