@@ -17,7 +17,7 @@ class Main extends Component {
         {/* Sidebar */}
         <Sidebar logout={this.props.logout} />
         {/* Routes */}
-        <div className="Container">
+        <div className="Container--Wide">
           <Switch>
             {/* Pomodoro route */}
             <Route
