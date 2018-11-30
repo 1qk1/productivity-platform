@@ -4,29 +4,29 @@ import uuidv4 from "uuid/v4";
 const initialState = {
   board: {
     settings: {},
-    lists: []
+    lists: null
   }
 };
 
 export default (state = initialState, action) => {
   let newBoard = { ...state.board };
   switch (action.type) {
-    case actionTypes.ADD_LIST:
-      newBoard.lists.push({
-        title: "New List",
-        listIndex: state.board.lists.length,
-        cards: []
-      });
+    case actionTypes.SET_LISTS:
+      newBoard.lists = [...action.lists];
       return { ...state, board: newBoard };
+    case actionTypes.ADD_LIST:
+      newBoard.lists.push(action.list);
+      return { ...state, board: newBoard };
+    case actionTypes.UPDATE_LIST:
+      newBoard.lists[action.list.index] = action.list;
+      return { ...state, board: newBoard };
+
     case actionTypes.ADD_CARD:
       newBoard.lists[action.listId].cards.push({
         id: uuidv4(),
         text: action.text,
         inList: action.listId
       });
-      return { ...state, board: newBoard };
-    case actionTypes.CHANGE_LIST_TITLE:
-      newBoard.lists[action.listIndex].title = action.newTitle;
       return { ...state, board: newBoard };
     case actionTypes.CHANGE_CARD_TEXT:
       // inList, cardId, text
