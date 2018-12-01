@@ -54,7 +54,7 @@ router.post("/list", middleware.verifyToken, (req, res) => {
   });
 });
 
-router.put("/list", (req, res) => {
+router.put("/list", middleware.verifyToken, (req, res) => {
   // find by id and update
   BoardList.findByIdAndUpdate(
     // id
