@@ -43,7 +43,11 @@ export const changeListTitle = (listId, newTitle) => {
 
 export const addCard = (listId, text) => {
   return dispatch => {
-    dispatch({ type: actionTypes.ADD_CARD, listId, text });
+    axios.post("/board/card", { listId, text }).then(res => {
+      const { newCard } = res.data;
+      console.log(newCard, "newcard");
+      dispatch({ type: actionTypes.ADD_CARD, newCard });
+    });
   };
 };
 
