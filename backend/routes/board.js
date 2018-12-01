@@ -1,6 +1,7 @@
 const router = require("express").Router(),
   middleware = require("../middleware"),
   BoardList = require("../models/boardList"),
+  BoardCard = require("../models/boardCard"),
   User = require("../models/user");
 
 router.get("/list", middleware.verifyToken, (req, res) => {
@@ -9,7 +10,7 @@ router.get("/list", middleware.verifyToken, (req, res) => {
     // populate cards (if any)
     // commenting out the code because it breaks the app
     // maybe it's because there is no boardCard collection
-    // .populate("cards")
+    .populate("cards")
     .exec((error, lists) => {
       if (error) {
         return res.status(400).send("Something went wrong");
@@ -76,6 +77,33 @@ router.put("/list", middleware.verifyToken, (req, res) => {
       res.json({ updatedList: updated });
     }
   );
+});
+
+router.post("/card", middleware.verifyToken, (req, res) => {
+  // deconstruct the data we need to make a card
+  const { text, listId } = req.body;
+  // create the card data
+  const cardData = {
+    text,
+    listId,
+    userId: req.user.id
+  };
+  // create card
+  BoardCard.create(cardData, (error, newCard) => {
+    if (error) {
+      return res.status(400).send("Something went wrong");
+    } else {
+      BoardList.findById(listId, (error, list) => {
+        if (error) {
+          return res.status(400).send("Something went wrong");
+        } else {
+          list.cards.push(newCard);
+          list.save();
+          res.json({ newCard });
+        }
+      });
+    }
+  });
 });
 
 module.exports = router;
