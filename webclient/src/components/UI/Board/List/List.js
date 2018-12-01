@@ -48,8 +48,7 @@ class List extends PureComponent {
 
   onSubmitCardHandler = event => {
     event.preventDefault();
-    console.log(this.state.newCardText);
-    this.props.addCard(this.props.list.index, this.state.newCardText);
+    this.props.addCard(this.props.list._id, this.state.newCardText);
     this.setState({ adding: false, newCardText: "" });
   };
 
@@ -86,7 +85,7 @@ class List extends PureComponent {
           {this.props.list.cards.map(card => (
             <Card
               changeCardText={this.props.changeCardText}
-              key={`card-${card.id}`}
+              key={`card-${card._id}`}
               {...card}
             />
           ))}
