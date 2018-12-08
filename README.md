@@ -56,12 +56,15 @@ Coming soon
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/1qk1/productivity-platform/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## 🔢 Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
-(Not really but we will in the future)
+We use [SemVer](http://semver.org/) for versioning. When you submit a pull request, increment the appropriate part of the version in the `package.json` file.
+
+For example in version 1.3.4, the first number is the major release, second the minor release (minor features and stuff), and the third is for small stuff and bugfixes.
+
+For every part of the version you increase, the parts after that, will be 0, for example 1.3.4 => 1.4.0, not 1.4.4
 
 ## Authors
 
