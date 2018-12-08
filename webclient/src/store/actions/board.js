@@ -43,11 +43,15 @@ export const changeListTitle = (listId, newTitle) => {
 
 export const addCard = (listId, text) => {
   return dispatch => {
-    axios.post("/board/card", { listId, text }).then(res => {
-      const { newCard } = res.data;
-      console.log(newCard, "newcard");
-      dispatch({ type: actionTypes.ADD_CARD, newCard });
-    });
+    axios
+      .post("/board/card", { listId, text })
+      .then(res => {
+        const { newCard } = res.data;
+        dispatch({ type: actionTypes.ADD_CARD, newCard });
+      })
+      .catch(error => {
+        toast.error("Unknown error when getting the lists");
+      });
   };
 };
 
