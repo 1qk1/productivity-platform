@@ -1,15 +1,15 @@
 import * as actionTypes from "../actions/actionTypes";
-import uuidv4 from "uuid/v4";
+import _ from "lodash";
 
 const initialState = {
   board: {
     settings: {},
-    lists: null
+    lists: []
   }
 };
 
 export default (state = initialState, action) => {
-  let newBoard = { ...state.board };
+  let newBoard = _.cloneDeep(state.board);
   switch (action.type) {
     case actionTypes.SET_LISTS:
       newBoard.lists = [...action.lists];
@@ -20,14 +20,13 @@ export default (state = initialState, action) => {
     case actionTypes.UPDATE_LIST:
       newBoard.lists[action.list.index] = action.list;
       return { ...state, board: newBoard };
-
     case actionTypes.ADD_CARD:
-      newBoard.lists[action.listId].cards.push({
-        id: uuidv4(),
-        text: action.text,
-        inList: action.listId
-      });
+      const listIndex = newBoard.lists.findIndex(
+        list => list._id === action.newCard.listId
+      );
+      newBoard.lists[listIndex].cards.push(action.newCard);
       return { ...state, board: newBoard };
+
     case actionTypes.CHANGE_CARD_TEXT:
       // inList, cardId, text
       const cardIndex = state.board.lists[action.listIndex].cards.findIndex(
