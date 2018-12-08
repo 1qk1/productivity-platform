@@ -1,14 +1,15 @@
 import * as actionTypes from "../actions/actionTypes";
+import _ from "lodash";
 
 const initialState = {
   board: {
     settings: {},
-    lists: null
+    lists: []
   }
 };
 
 export default (state = initialState, action) => {
-  let newBoard = { ...state.board };
+  let newBoard = _.cloneDeep(state.board);
   switch (action.type) {
     case actionTypes.SET_LISTS:
       newBoard.lists = [...action.lists];
