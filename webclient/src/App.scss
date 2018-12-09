@@ -21,11 +21,23 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+
 .Container--Wide {
   width: 90%;
   max-width: 1500px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.btn-invisible,
+.btn-invisible:focus,
+.btn-invisible:active,
+.btn-invisible {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  &:hover {
+  }
 }
 
 // colors:
