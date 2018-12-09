@@ -1,6 +1,7 @@
 export { checkAuth, authHandler, logoutHandler } from "./auth";
 export {
   addCard,
+  deleteCard,
   addList,
   changeListTitle,
   changeCardText,
