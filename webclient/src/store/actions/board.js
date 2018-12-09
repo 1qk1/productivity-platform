@@ -31,7 +31,12 @@ export const getLists = () => {
 export const changeListTitle = (listId, newTitle) => {
   return dispatch => {
     axios
-      .put("/board/list", { id: listId, edit: { title: newTitle } })
+      .put("/board/list", {
+        // id of the list
+        id: listId,
+        // fields to edit
+        edit: { title: newTitle }
+      })
       .then(res => {
         dispatch({ type: actionTypes.UPDATE_LIST, list: res.data.updatedList });
       })
@@ -51,6 +56,19 @@ export const addCard = (listId, text) => {
       })
       .catch(error => {
         toast.error("Unknown error when getting the lists");
+      });
+  };
+};
+
+export const deleteCard = (listId, cardId) => {
+  return dispatch => {
+    axios
+      .delete(`/board/card/${listId}/${cardId}`)
+      .then(res => {
+        dispatch({ type: actionTypes.DELETE_CARD, listId, cardId });
+      })
+      .catch(error => {
+        toast.error("Unknown error when deleting the card");
       });
   };
 };

@@ -1,0 +1,10 @@
+.Dropdown {
+  position: relative;
+  &-Body {
+    position: absolute;
+    border: 1px solid #ccc;
+    right: 0;
+    top: 100%;
+    z-index: 10;
+  }
+}

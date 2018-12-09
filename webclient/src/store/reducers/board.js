@@ -4,7 +4,7 @@ import _ from "lodash";
 const initialState = {
   board: {
     settings: {},
-    lists: []
+    lists: null
   }
 };
 
@@ -20,13 +20,25 @@ export default (state = initialState, action) => {
     case actionTypes.UPDATE_LIST:
       newBoard.lists[action.list.index] = action.list;
       return { ...state, board: newBoard };
-    case actionTypes.ADD_CARD:
+    case actionTypes.ADD_CARD: {
       const listIndex = newBoard.lists.findIndex(
         list => list._id === action.newCard.listId
       );
       newBoard.lists[listIndex].cards.push(action.newCard);
       return { ...state, board: newBoard };
+    }
+    case actionTypes.DELETE_CARD: {
+      const listIndex = newBoard.lists.findIndex(
+        list => list._id === action.listId
+      );
+      const cardIndex = newBoard.lists[listIndex].cards.findIndex(
+        card => card._id === action.cardId
+      );
+      newBoard.lists[listIndex].cards.splice(cardIndex, 1);
+      return { ...state, board: newBoard };
+    }
 
+    // uncompleted
     case actionTypes.CHANGE_CARD_TEXT:
       // inList, cardId, text
       const cardIndex = state.board.lists[action.listIndex].cards.findIndex(

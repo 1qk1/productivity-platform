@@ -86,6 +86,7 @@ class List extends PureComponent {
             <Card
               changeCardText={this.props.changeCardText}
               key={`card-${card._id}`}
+              deleteCard={this.props.deleteCard}
               {...card}
             />
           ))}

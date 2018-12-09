@@ -106,4 +106,32 @@ router.post("/card", middleware.verifyToken, (req, res) => {
   });
 });
 
+router.delete("/card/:listId/:cardId", middleware.verifyToken, (req, res) => {
+  // deconstruct the data we need to delete a card
+  const { listId, cardId } = req.params;
+  // delete card
+  BoardCard.deleteOne({ _id: cardId }, error => {
+    if (error) {
+      return res.status(400).send("Something went wrong");
+    } else {
+      // delete card reference from list entry
+      BoardList.findById(listId, (error, list) => {
+        if (error) {
+          return res.status(400).send("Something went wrong");
+        } else {
+          // find index
+          const cardIndex = list.cards.findIndex(
+            card => card._id.toString() === cardId
+          );
+          // delete card
+          list.cards.splice(cardIndex, 1);
+          // save
+          list.save();
+          res.json({ done: true });
+        }
+      });
+    }
+  });
+});
+
 module.exports = router;
