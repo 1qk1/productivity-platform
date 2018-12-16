@@ -44,14 +44,23 @@ export default (state = initialState, action) => {
       newBoard.lists.splice(listIndex, 1);
       return { ...state, board: newBoard };
 
-    // uncompleted
-    case actionTypes.CHANGE_CARD_TEXT:
-      // inList, cardId, text
-      const cardIndex = state.board.lists[action.listIndex].cards.findIndex(
-        card => card.id === action.cardId
+    case actionTypes.CHANGE_CARD_TEXT: {
+      // props = listIndex, cardId, updatedCard
+      // find list index
+      const listIndex = state.board.lists.findIndex(
+        list => list._id.toString() === action.listId
       );
-      newBoard.lists[action.listIndex].cards[cardIndex].text = action.text;
+      // find card index
+      const cardIndex = state.board.lists[listIndex].cards.findIndex(
+        card => card._id.toString() === action.cardId
+      );
+      // replace card with the updated card
+      newBoard.lists[listIndex].cards[cardIndex] = {
+        ...action.updatedCard
+      };
       return { ...state, board: newBoard };
+    }
+    // incomplete
     case actionTypes.CHANGE_LIST:
       const indexToSplice = newBoard.lists[action.prevList].cards.findIndex(
         el => el.id === action.cardId
