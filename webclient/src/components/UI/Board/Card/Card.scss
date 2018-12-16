@@ -5,8 +5,24 @@
     border-radius: 4px;
     margin-bottom: 0.5rem;
     background-color: #eee;
-    cursor: pointer;
-    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    &:hover {
+      .Card-Controls {
+        opacity: 1;
+      }
+      background-color: #e9e9e9;
+    }
+
+    &-Controls {
+      opacity: 0;
+      &:hover {
+        opacity: 1;
+      }
+      &--Button {
+        color: #aaa;
+      }
+    }
     form {
       width: 100%;
       padding: 0 0.25rem;

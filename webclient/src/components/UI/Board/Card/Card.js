@@ -2,6 +2,7 @@ import React from "react";
 import { DragSource } from "react-dnd";
 import "./Card.scss";
 import EditableText from "../../EditableText/EditableText";
+import Dropdown from "../../Dropdown/Dropdown";
 
 const cardSource = {
   beginDrag(props) {
@@ -16,7 +17,6 @@ const collect = (connect, monitor) => ({
 });
 
 const card = props => {
-  console.log(props, "card props");
   return props.connectDragSource(
     <div className={`Card ${props.isDragging ? "Dragging" : ""}`}>
       <EditableText
@@ -26,6 +26,22 @@ const card = props => {
         }
         text={props.text}
       />
+      <Dropdown
+        classes="Card-Controls Board-Controls"
+        buttonClasses="btn-invisible Card-Controls--Button"
+        iconClasses="fas fa-ellipsis-h"
+      >
+        <ul className="Card-Controls--Menu">
+          <li className="Board-Controls--Item">
+            <button
+              className="Board-Controls--Action btn-invisible"
+              onClick={() => props.deleteCard(props.listId, props._id)}
+            >
+              Delete Card
+            </button>
+          </li>
+        </ul>
+      </Dropdown>
     </div>
   );
 };
