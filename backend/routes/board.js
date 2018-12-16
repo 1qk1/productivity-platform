@@ -79,6 +79,30 @@ router.put("/list", middleware.verifyToken, (req, res) => {
   );
 });
 
+router.put("/card", middleware.verifyToken, (req, res) => {
+  // find by id and update
+  BoardCard.findByIdAndUpdate(
+    // id
+    req.body.id,
+    //   // properties to change
+    { ...req.body.edit },
+    // don't use deprecated function
+    { useFindAndModify: false },
+    (error, found) => {
+      // if error send error
+      if (error) {
+        return res.status(400).send("Something went wrong");
+      }
+      // update the object to send it back to the user
+      // found has the old text although it has been
+      // updated in the database
+      const updated = { ...found.toObject(), ...req.body.edit };
+      // send it back to the user
+      res.json({ updatedCard: updated });
+    }
+  );
+});
+
 router.post("/card", middleware.verifyToken, (req, res) => {
   // deconstruct the data we need to make a card
   const { text, listId } = req.body;
