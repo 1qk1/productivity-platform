@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Functionality to delete lists from the Board
+- Readded the changelog file
 
 ### Changed
 
