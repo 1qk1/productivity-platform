@@ -5,11 +5,22 @@ import "./Dropdown.scss";
 
 class Dropdown extends Component {
   state = {
-    show: false
+    show: false,
+    buttonCoords: {
+      x: 0,
+      y: 0
+    }
   };
 
-  toggleHandler = () => {
-    this.setState(() => ({ show: !this.state.show }));
+  toggleHandler = event => {
+    const { x, y, height } = event.currentTarget.getBoundingClientRect();
+    this.setState(() => ({
+      show: !this.state.show,
+      buttonCoords: {
+        x,
+        y: y + height + 4
+      }
+    }));
   };
 
   closeHandler = () => {
@@ -30,7 +41,7 @@ class Dropdown extends Component {
       >
         <button
           onClick={this.toggleHandler}
-          className={this.props.buttonClasses || ""}
+          className={"Dropdown--Button " + (this.props.buttonClasses || "")}
         >
           {this.props.title}
           {this.props.iconClasses ? (
@@ -38,7 +49,16 @@ class Dropdown extends Component {
           ) : null}
         </button>
         {this.state.show ? (
-          <div className="Dropdown-Body">{this.props.children}</div>
+          <div
+            className="Dropdown-Body"
+            onClick={this.closeHandler}
+            style={{
+              left: this.state.buttonCoords.x,
+              top: this.state.buttonCoords.y
+            }}
+          >
+            {this.props.children}
+          </div>
         ) : null}
       </div>
     );

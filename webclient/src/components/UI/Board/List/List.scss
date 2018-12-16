@@ -15,6 +15,15 @@
       align-items: center;
       margin-bottom: 0.5rem;
       overflow: hidden;
+      .List-Controls--Button {
+        color: #777;
+      }
+
+      .List-Controls--Button:hover,
+      .List-Controls--Button:focus {
+        background-color: #ccc;
+        border-radius: 2px;
+      }
       form {
         width: 100%;
       }

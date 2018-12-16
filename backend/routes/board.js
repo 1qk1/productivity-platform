@@ -134,4 +134,35 @@ router.delete("/card/:listId/:cardId", middleware.verifyToken, (req, res) => {
   });
 });
 
+router.delete("/list/:listId", middleware.verifyToken, (req, res) => {
+  // deconstruct the data we need to delete a list
+  const { listId } = req.params;
+  // delete all cards under a list
+  BoardCard.deleteMany({ listId }, error => {
+    if (error) {
+      return res.status(400).send("Something went wrong");
+    } else {
+      // delete card itself
+      BoardList.deleteOne({ _id: listId }, error => {
+        if (error) {
+          return res.status(400).send("Something went wrong");
+        } else {
+          User.findById(req.user.id, (error, user) => {
+            if (error) {
+              return res.status(400).send("Something went wrong");
+            } else {
+              const listIndex = user.boardLists.findIndex(
+                list => list.toString() === listId
+              );
+              user.boardLists.splice(listIndex, 1);
+              user.save();
+              res.json({ done: true });
+            }
+          });
+        }
+      });
+    }
+  });
+});
+
 module.exports = router;

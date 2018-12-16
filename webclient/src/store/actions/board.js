@@ -73,6 +73,19 @@ export const deleteCard = (listId, cardId) => {
   };
 };
 
+export const deleteList = listId => {
+  return dispatch => {
+    axios
+      .delete(`/board/list/${listId}`)
+      .then(res => {
+        dispatch({ type: actionTypes.DELETE_LIST, listId });
+      })
+      .catch(error => {
+        toast.error("Unknown error when deleting the list");
+      });
+  };
+};
+
 export const changeCardText = (listIndex, cardId, text) => {
   return dispatch => {
     dispatch({

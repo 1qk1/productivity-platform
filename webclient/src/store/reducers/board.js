@@ -37,6 +37,12 @@ export default (state = initialState, action) => {
       newBoard.lists[listIndex].cards.splice(cardIndex, 1);
       return { ...state, board: newBoard };
     }
+    case actionTypes.DELETE_LIST:
+      const listIndex = newBoard.lists.findIndex(
+        list => list._id === action.listId
+      );
+      newBoard.lists.splice(listIndex, 1);
+      return { ...state, board: newBoard };
 
     // uncompleted
     case actionTypes.CHANGE_CARD_TEXT:

@@ -10,6 +10,45 @@
     background-color: rgba($color: #27ae60, $alpha: 0.8);
     white-space: nowrap;
   }
+  &-Controls {
+    border-radius: 3px;
+    height: 100%;
+
+    .Dropdown--Button {
+      padding: 0.25rem 0.75rem;
+      transition: background-color 0.05s ease-out;
+
+      &:hover,
+      &:focus {
+        background-color: #ddd;
+      }
+    }
+    .Dropdown-Body {
+      ul {
+        margin: 0;
+      }
+      white-space: nowrap;
+      cursor: default;
+      background-color: #eee;
+      border-radius: 2px;
+      cursor: pointer;
+      font-size: 14px;
+      .Board-Controls--Action {
+        color: #555;
+        cursor: pointer;
+        font-size: 0.9rem;
+        padding: 0.8rem 1.75rem;
+        height: 100%;
+        width: 100%;
+      }
+      .Board-Controls--Item {
+        padding: 0;
+      }
+      .Board-Controls--Item:hover {
+        background-color: #ddd;
+      }
+    }
+  }
 }
 
 .scrollbar {

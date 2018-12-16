@@ -27,14 +27,14 @@ const card = props => {
         text={props.text}
       />
       <Dropdown
-        classes="Card-Controls"
+        classes="Card-Controls Board-Controls"
         buttonClasses="btn-invisible Card-Controls--Button"
         iconClasses="fas fa-ellipsis-h"
       >
         <ul className="Card-Controls--Menu">
-          <li>
+          <li className="Board-Controls--Item">
             <button
-              className="Card-Controls--Action btn-invisible"
+              className="Board-Controls--Action btn-invisible"
               onClick={() => props.deleteCard(props.listId, props._id)}
             >
               Delete Card

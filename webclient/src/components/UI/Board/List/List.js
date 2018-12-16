@@ -3,6 +3,7 @@ import Card from "../Card/Card";
 import { DropTarget } from "react-dnd";
 import NewCard from "../NewCard/NewCard";
 import EditableText from "../../EditableText/EditableText";
+import Dropdown from "../../Dropdown/Dropdown";
 
 import "./List.scss";
 
@@ -65,12 +66,31 @@ class List extends PureComponent {
             onSubmitHandler={this.onSubmitTitleHandler}
             textClasses="List-Title"
           />
-          <button
-            className="Add-Card-Button"
-            onClick={() => this.toggleProp("adding")}
+          <Dropdown
+            classes="List-Controls Board-Controls"
+            buttonClasses="btn-invisible List-Controls--Button"
+            iconClasses="fas fa-ellipsis-h"
           >
-            <i className="fas fa-plus" />
-          </button>
+            <ul className="List-Controls--Menu">
+              <li className="Board-Controls--Item">
+                <button
+                  className="Board-Controls--Action btn-invisible"
+                  onClick={() => this.toggleProp("adding")}
+                >
+                  Add Card
+                </button>
+              </li>
+              <li className="Board-Controls--Item">
+                <button
+                  className="Board-Controls--Action btn-invisible"
+                  onClick={() => this.props.deleteList(this.props.list._id)}
+                >
+                  Delete List
+                </button>
+              </li>
+            </ul>
+          </Dropdown>
+          {/*  */}
         </div>
         <div className="List-Cards">
           {this.state.adding ? (
