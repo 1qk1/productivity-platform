@@ -147,7 +147,18 @@ router.delete("/list/:listId", middleware.verifyToken, (req, res) => {
         if (error) {
           return res.status(400).send("Something went wrong");
         } else {
-          res.json({ done: true });
+          User.findById(req.user.id, (error, user) => {
+            if (error) {
+              return res.status(400).send("Something went wrong");
+            } else {
+              const listIndex = user.boardLists.findIndex(
+                list => list.toString() === listId
+              );
+              user.boardLists.splice(listIndex, 1);
+              user.save();
+              res.json({ done: true });
+            }
+          });
         }
       });
     }
