@@ -21,8 +21,8 @@ const card = props => {
     <div className={`Card ${props.isDragging ? "Dragging" : ""}`}>
       <EditableText
         textClasses="Card-Text"
-        onSubmitHandler={text =>
-          props.changeCardText(props.inList, props.id, text)
+        onSubmitHandler={newText =>
+          props.changeCardText(props.listId, props._id.toString(), newText)
         }
         text={props.text}
       />

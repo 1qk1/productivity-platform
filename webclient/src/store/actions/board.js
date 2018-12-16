@@ -46,6 +46,28 @@ export const changeListTitle = (listId, newTitle) => {
   };
 };
 
+export const changeCardText = (listId, cardId, newText) => {
+  return dispatch => {
+    axios
+      .put("/board/card", {
+        id: cardId,
+        edit: { text: newText }
+      })
+      .then(res => {
+        console.log(res.data.updatedCard);
+        dispatch({
+          type: actionTypes.CHANGE_CARD_TEXT,
+          listId,
+          cardId,
+          updatedCard: res.data.updatedCard
+        });
+      })
+      .catch(error => {
+        toast.error("Unknown error when changing the card's text");
+      });
+  };
+};
+
 export const addCard = (listId, text) => {
   return dispatch => {
     axios
@@ -83,17 +105,6 @@ export const deleteList = listId => {
       .catch(error => {
         toast.error("Unknown error when deleting the list");
       });
-  };
-};
-
-export const changeCardText = (listIndex, cardId, text) => {
-  return dispatch => {
-    dispatch({
-      type: actionTypes.CHANGE_CARD_TEXT,
-      listIndex,
-      cardId,
-      text
-    });
   };
 };
 
