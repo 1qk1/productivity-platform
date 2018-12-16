@@ -33,6 +33,7 @@ class Board extends PureComponent {
               changeCardList={this.props.changeCardList}
               addCard={this.props.addCard}
               deleteCard={this.props.deleteCard}
+              deleteList={this.props.deleteList}
               key={"list-" + list._id}
               list={list}
             />
@@ -55,6 +56,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addCard: (listId, text) => dispatch(actions.addCard(listId, text)),
   deleteCard: (listId, cardId) => dispatch(actions.deleteCard(listId, cardId)),
+  deleteList: listId => dispatch(actions.deleteList(listId)),
   addList: () => dispatch(actions.addList()),
   changeListTitle: (listId, newTitle) =>
     dispatch(actions.changeListTitle(listId, newTitle)),
