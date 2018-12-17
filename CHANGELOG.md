@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Cleaned up the backend routes by moving each route callback into their own function in a different file.
-  Now each part of the board routes (cards and lists) have their own handlers file.
+  Now each part of the board routes (cards and lists), as well as the pomodoro routes have their own handlers files.
 
 ## [1.3.3] - 2018-12-16
 
