@@ -4,7 +4,8 @@ const express = require("express"),
   mongoose = require("mongoose"),
   authRoutes = require("./routes/auth"),
   pomodoroRoutes = require("./routes/pomodoro"),
-  boardRoutes = require("./routes/board"),
+  boardListRoutes = require("./routes/boardList"),
+  boardCardRoutes = require("./routes/boardCard"),
   passport = require("passport"),
   passportConfig = require("./passport");
 
@@ -39,7 +40,8 @@ app.use(passport.initialize());
 
 app.use("/auth", authRoutes);
 app.use("/pomodoro", pomodoroRoutes);
-app.use("/board", boardRoutes);
+app.use("/board/list", boardListRoutes);
+app.use("/board/card", boardCardRoutes);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
