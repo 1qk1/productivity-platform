@@ -1,6 +1,6 @@
 const router = require("express").Router(),
   authHandlers = require("../handlers/auth"),
-  verifyPassword = require("../middleware").verifyPassword;
+  verifyPassword = require("../middleware/auth").verifyPassword;
 
 router.post("/register", authHandlers.registerHandler);
 
