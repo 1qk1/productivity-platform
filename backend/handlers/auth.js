@@ -16,7 +16,6 @@ const sendJSONResponse = (req, res, next) => {
   // create new token and send it back to the user
   const token = jwt.sign(userData, process.env.JWT_SECRET);
   res.json({ token, user: userData });
-
   // if there is a next function run it
   // so we don't need to specify the
   // next function when we don't need it
