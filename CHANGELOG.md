@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.5] - 2018-12-20
+
+### Added
+
+- New middleware folder for all future middlewares
+
+### Changed
+
+- Moved the middleware.js file in the middlware folder and split it to seperate files (I would if it didn't had auth middleware functions only!)
+- Made the verifyToken middleware router-level in all routes except the auth routes (because of register route)
+- Made the bcrypt compare function asynchronous
+
 ## [1.3.4] - 2018-12-17
 
 ### Changed

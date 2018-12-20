@@ -7,11 +7,10 @@ const verifyToken = (req, res, next) => {
     // split the token from the Bearer
     const token = req.headers.authorization.split(" ")[1];
     // verify the token
-    jwt.verify(token, process.env.JWT_SECRET);
-    // if token is verified put the user's username and id
-    // (which are the jwt's contents) in req.user so
-    // the next function can use it
-    req.user = JSON.parse(base64.decode(token.split(".")[1]));
+    // if token will get verified, the jwt's content
+    // will be req.user so the next function can use it
+    // if jwt is invalid, it will throw an error
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
     // continue
     next();
   } catch (err) {

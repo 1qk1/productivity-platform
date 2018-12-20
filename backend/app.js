@@ -7,6 +7,7 @@ const express = require("express"),
   boardListRoutes = require("./routes/boardList"),
   boardCardRoutes = require("./routes/boardCard"),
   passport = require("passport"),
+  cors = require("cors"),
   passportConfig = require("./passport");
 
 require("dotenv").config();
@@ -24,15 +25,7 @@ mongoose.connect(
 );
 mongoose.set("useCreateIndex", true);
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  next();
-});
+app.use(cors());
 
 app.use(bodyParser.json());
 

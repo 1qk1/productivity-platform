@@ -1,9 +1,11 @@
 const router = require("express").Router(),
-  middleware = require("../middleware"),
+  verifyToken = require("../middleware/auth").verifyToken,
   pomodoroHandlers = require("../handlers/pomodoro");
 
-router.get("/", middleware.verifyToken, pomodoroHandlers.getAllPomodoros);
+router.use(verifyToken);
 
-router.post("/", middleware.verifyToken, pomodoroHandlers.newPomodoro);
+router.get("/", pomodoroHandlers.getAllPomodoros);
+
+router.post("/", pomodoroHandlers.newPomodoro);
 
 module.exports = router;
