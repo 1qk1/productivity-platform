@@ -1,15 +1,13 @@
 const router = require("express").Router(),
-  middleware = require("../middleware"),
+  verifyToken = require("../middleware/auth").verifyToken,
   boardCardHandlers = require("../handlers/boardCard");
 
-router.post("/", middleware.verifyToken, boardCardHandlers.newCardHandler);
+router.use(verifyToken);
 
-router.put("/", middleware.verifyToken, boardCardHandlers.editCardHandler);
+router.post("/", boardCardHandlers.newCardHandler);
 
-router.delete(
-  "/:listId/:cardId",
-  middleware.verifyToken,
-  boardCardHandlers.deleteCardHandler
-);
+router.put("/", boardCardHandlers.editCardHandler);
+
+router.delete("/:listId/:cardId", boardCardHandlers.deleteCardHandler);
 
 module.exports = router;

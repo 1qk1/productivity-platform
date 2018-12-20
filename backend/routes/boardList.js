@@ -1,17 +1,15 @@
 const router = require("express").Router(),
-  middleware = require("../middleware"),
+  verifyToken = require("../middleware/auth").verifyToken,
   boardListHandlers = require("../handlers/boardList");
 
-router.get("/", middleware.verifyToken, boardListHandlers.getAllListsHandler);
+router.use(verifyToken);
 
-router.post("/", middleware.verifyToken, boardListHandlers.newListHandler);
+router.get("/", boardListHandlers.getAllListsHandler);
 
-router.put("/", middleware.verifyToken, boardListHandlers.editListHandler);
+router.post("/", boardListHandlers.newListHandler);
 
-router.delete(
-  "/:listId",
-  middleware.verifyToken,
-  boardListHandlers.deleteListHandler
-);
+router.put("/", boardListHandlers.editListHandler);
+
+router.delete("/:listId", boardListHandlers.deleteListHandler);
 
 module.exports = router;
