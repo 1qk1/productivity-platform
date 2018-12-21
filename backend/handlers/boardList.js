@@ -33,14 +33,16 @@ const newListHandler = (req, res) => {
       BoardList.create(boardListData)
         .then(newList => {
           // get the logged in user to save the list to his account
-          User.findById(req.user.id, (error, user) => {
-            // push it in the boardlist field
-            user.boardLists.push(newList);
-            // save updated user
-            user.save();
-            // send the list back to the user
-            res.json({ newList });
-          }).catch(error => res.handleError(error));
+          User.findById(req.user.id)
+            .then(user => {
+              // push it in the boardlist field
+              user.boardLists.push(newList);
+              // save updated user
+              user.save();
+              // send the list back to the user
+              res.json({ newList });
+            })
+            .catch(error => res.handleError(error));
         })
         .catch(error => res.handleError(error));
     })
