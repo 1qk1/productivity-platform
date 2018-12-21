@@ -52,7 +52,7 @@ class Home extends Component {
     let errorMessage = null;
 
     if (error) {
-      errorMessage = error.response.data;
+      errorMessage = error.response.data.error.message;
     }
     return (
       // This is the website for when you're not logged in
