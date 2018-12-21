@@ -1,27 +1,35 @@
 const passport = require("passport"),
   LocalStrategy = require("passport-local").Strategy,
-  User = require("./models/user");
+  User = require("./models/user"),
+  CustomError = require("./middleware/error").CustomError;
 
 passport.use(
   new LocalStrategy((username, password, done) => {
     // find the user
-    User.findOne({ username }, function(err, user) {
-      // if there is an error, pass it to done()
-      if (err) {
-        return done(err);
-      }
-      // if there isn't a user with that username or
-      // the password is wrong
-      // pass it to done() and continue
-      if (!user || !user.validPassword(password, user.password)) {
-        return done(null, false, {
-          message: "Incorrect username or password."
-        });
-      }
-
-      // if the password is correct
-      // continue and pass the user to done()
-      return done(null, user);
-    });
+    User.findOne({ username })
+      .then(user => {
+        // if there isn't a user with the given username
+        // or the password is wrong, throw a
+        // new CustomError with the statuscode and the message;
+        if (!user)
+          throw new CustomError(401, "Incorrect username or password.");
+        // if the user exists
+        user
+          // check if password is valid
+          .validPassword(password, user.password)
+          .then(passwordIsValid => {
+            // if it's not throw an error
+            if (!passwordIsValid) {
+              throw new CustomError(401, "Incorrect username or password.");
+            }
+            // if the password was correct
+            // continue and pass the user to done()
+            return done(null, user);
+          })
+          // pass the error to done() and continue
+          .catch(error => done(error));
+      })
+      // pass the error to done() and continue
+      .catch(error => done(error));
   })
 );
