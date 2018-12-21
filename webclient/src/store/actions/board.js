@@ -10,7 +10,7 @@ export const addList = () => {
         dispatch({ type: actionTypes.ADD_LIST, list: res.data.newList });
       })
       .catch(error => {
-        toast.error("Unknown error when adding list");
+        toast.error(error.response.data.error.message);
       });
   };
 };
@@ -23,7 +23,7 @@ export const getLists = () => {
         dispatch({ type: actionTypes.SET_LISTS, lists: res.data.lists });
       })
       .catch(error => {
-        toast.error("Unknown error when getting the lists");
+        toast.error(error.response.data.error.message);
       });
   };
 };
@@ -41,7 +41,7 @@ export const changeListTitle = (listId, newTitle) => {
         dispatch({ type: actionTypes.UPDATE_LIST, list: res.data.updatedList });
       })
       .catch(error => {
-        toast.error("Unknown error when changing title");
+        toast.error(error.response.data.error.message);
       });
   };
 };
