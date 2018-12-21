@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken"),
   base64 = require("js-base64").Base64,
-  passport = require("passport");
+  passport = require("passport"),
+  errorMiddleware = require("./error");
 
 const verifyToken = (req, res, next) => {
   try {
@@ -15,7 +16,7 @@ const verifyToken = (req, res, next) => {
     next();
   } catch (err) {
     // if error send response
-    res.sendStatus(401);
+    res.handleError(err);
   }
 };
 
@@ -24,13 +25,11 @@ const verifyPassword = (req, res, next) => {
   passport.authenticate(
     "local",
     // function starts here
-    (err, user, info) => {
-      // if there is an error send a response
-      if (err || info) {
-        return res.status(401).send(info.message);
-      }
+    (error, user, info) => {
+      // if there is an error send an error response
+      if (error) return res.handleError(error);
       // if there is no error
-      // add user to req.user
+      // add the user to req.user
       req.user = { username: user.username, id: user._id.toString() };
       // continue with the next function
       next();

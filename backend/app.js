@@ -8,6 +8,7 @@ const express = require("express"),
   boardCardRoutes = require("./routes/boardCard"),
   passport = require("passport"),
   cors = require("cors"),
+  errorMiddleware = require("./middleware/error").errorMiddleware,
   passportConfig = require("./passport");
 
 require("dotenv").config();
@@ -30,6 +31,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use(passport.initialize());
+
+app.use(errorMiddleware);
 
 app.use("/auth", authRoutes);
 app.use("/pomodoro", pomodoroRoutes);
