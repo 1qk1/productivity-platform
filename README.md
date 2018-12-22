@@ -44,6 +44,16 @@ Coming soon
 Coming soon
 ```
 
+## 📷 Screenshots
+
+![Pomodoro running](https://i.imgur.com/VGY0cxP.gif)
+
+![Pomodoro ending](https://i.imgur.com/yLFZREc.gif)
+
+![Pomodoro break](https://i.imgur.com/90BTOon.png)
+
+![Board image](https://i.imgur.com/tJRBTRD.png)
+
 ## 🔨 Built With
 
 - [React](https://github.com/facebook/react/)
