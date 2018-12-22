@@ -76,7 +76,7 @@ const deleteListHandler = (req, res) => {
             // all values(lists) that equal listId.
             // the list we want to remove will so it will
             // match with listId
-            { $pull: { boardList: listId } },
+            { $pull: { boardLists: listId } },
             { useFindAndModify: false }
           )
             .then(() => {
