@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.7] - 2018-12-22
+
+### Changed
+
+- Replaced all findByid-edit-save() logic on the models with findByIdAndUpdate().
+  This cleans up the code and fixes another bug that hashes the user's password everytime you do User.find execute some logic,
+  edit some data and then user.save() for example, because of the User.pre('save') middleware on the user's model which is
+  used to hash the user's password before saving the user in the database.
+
 ## [1.3.6] - 2018-12-21
 
 ### Added
