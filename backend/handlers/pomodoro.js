@@ -19,15 +19,17 @@ const newPomodoro = (req, res) => {
   // create a new pomodoro for the user
   Pomodoro.create({ userId })
     .then(newPomodoro => {
-      // get the logged in user to save the pomodoro to his account
-      User.findById(userId)
-        .then(user => {
-          // push it in the boardlist field
-          user.pomodoros.push(newPomodoro);
-          // save updated user
-          user.save();
+      // get the logged in user
+      User.findByIdAndUpdate(
+        userId,
+        // push the new pomodoro in the array of
+        // pomodoros in the user's account
+        { $push: { pomodoros: newPomodoro } },
+        { useFindAndModify: false }
+      )
+        .then(() => {
           //  send back the new pomodoro
-          res.json(newPomodoro);
+          res.json({ newPomodoro });
         })
         .catch(error => res.handleError(error));
     })

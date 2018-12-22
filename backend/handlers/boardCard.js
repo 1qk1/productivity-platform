@@ -13,10 +13,15 @@ const newCardHandler = (req, res) => {
   // create card
   BoardCard.create(cardData)
     .then(newCard => {
-      BoardList.findById(listId)
-        .then(list => {
-          list.cards.push(newCard);
-          list.save();
+      // get the list to save the card
+      BoardList.findByIdAndUpdate(
+        listId,
+        // push the new card in the list's array of cards
+        { $push: { cards: newCard } },
+        { useFindAndModify: false }
+      )
+        .then(() => {
+          // send the card back to the user
           res.json({ newCard });
         })
         .catch(error => res.handleError(error));
@@ -52,17 +57,19 @@ const deleteCardHandler = (req, res) => {
   BoardCard.deleteOne({ _id: cardId })
     .then(() => {
       // delete card reference from list entry
-      BoardList.findById(listId)
-        .then(list => {
-          // find index
-          const cardIndex = list.cards.findIndex(
-            card => card._id.toString() === cardId
-          );
-          // delete card
-          list.cards.splice(cardIndex, 1);
-          // save
-          list.save();
-          res.json({ done: true });
+      BoardList.findByIdAndUpdate(
+        listId,
+        // pull from the list of cards, all values
+        // that equal cardId
+        // the card we want to remove will
+        // be an ObjectId reference so it will
+        // match with cardId
+        { $pull: { cards: cardId } },
+        { useFindAndModify: false }
+      )
+        .then(() => {
+          // send reponse that everything was done
+          res.sendStatus(200);
         })
         .catch(error => res.handleError(error));
     })

@@ -6,43 +6,33 @@ const getAllListsHandler = (req, res) => {
   // find all lists for current logged in user
   BoardList.find({ userId: req.user.id })
     // populate cards (if any)
-    // commenting out the code because it breaks the app
-    // maybe it's because there is no boardCard collection
     .populate("cards")
-    .exec((error, lists) => {
-      if (error) {
-        return res.status(400).send("Something went wrong");
-      }
+    .then(lists => {
       // send it back to the user
       res.json({ lists });
-    });
+    })
+    .catch(error => res.handleError(error));
 };
 
 const newListHandler = (req, res) => {
-  // get the number of lists for the logged in user
-  BoardList.countDocuments({ userId: req.user.id })
-    .then(listCount => {
-      // extract the data it needs to create a new list
-      const boardListData = {
-        userId: req.user.id,
-        title: "New List",
-        // add the new list as the last one
-        index: listCount
-      };
-      // create new list
-      BoardList.create(boardListData)
-        .then(newList => {
-          // get the logged in user to save the list to his account
-          User.findById(req.user.id)
-            .then(user => {
-              // push it in the boardlist field
-              user.boardLists.push(newList);
-              // save updated user
-              user.save();
-              // send the list back to the user
-              res.json({ newList });
-            })
-            .catch(error => res.handleError(error));
+  // extract the data we need to create a new list
+  const boardListData = {
+    userId: req.user.id,
+    title: "New List"
+  };
+  // create new list
+  BoardList.create(boardListData)
+    .then(newList => {
+      // get the logged in user to save the list to his account
+      User.findByIdAndUpdate(
+        req.user.id,
+        // push the list in user's lists array
+        { $push: { boardLists: newList } },
+        { useFindAndModify: false }
+      )
+        .then(() => {
+          // send the list back to the user
+          res.json({ newList });
         })
         .catch(error => res.handleError(error));
     })
@@ -76,17 +66,22 @@ const deleteListHandler = (req, res) => {
   // delete all cards under a list
   BoardCard.deleteMany({ listId })
     .then(() => {
-      // delete card itself
+      // delete the list itself
       BoardList.deleteOne({ _id: listId })
         .then(() => {
-          User.findById(req.user.id)
-            .then(user => {
-              const listIndex = user.boardLists.findIndex(
-                list => list.toString() === listId
-              );
-              user.boardLists.splice(listIndex, 1);
-              user.save();
-              res.json({ done: true });
+          // find the user
+          User.findByIdAndUpdate(
+            req.user.id,
+            // pull from the boardList array
+            // all values(lists) that equal listId.
+            // the list we want to remove will so it will
+            // match with listId
+            { $pull: { boardList: listId } },
+            { useFindAndModify: false }
+          )
+            .then(() => {
+              // send reponse that everything was done
+              res.sendStatus(200);
             })
             .catch(error => res.handleError(error));
         })
