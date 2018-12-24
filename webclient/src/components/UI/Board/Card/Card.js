@@ -6,8 +6,9 @@ import Dropdown from "../../Dropdown/Dropdown";
 
 const cardSource = {
   beginDrag(props) {
-    console.log(props, "cardsource props");
-    return { id: props.id, inList: props.inList };
+    // return the dragged card "description" upon start dragging
+    // this data will go to the list's drop() dnd function
+    return { fromList: props.listId, cardId: props._id };
   }
 };
 
