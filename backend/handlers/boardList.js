@@ -53,9 +53,12 @@ const editListHandler = (req, res) => {
       // update the object to send it back to the user
       // foundList has the old title although it has been
       // updated in the database
-      const updated = { ...foundList.toObject(), ...req.body.edit };
-      // send it back to the user
-      res.json({ updatedList: updated });
+      const updatedList = { ...foundList.toObject(), ...req.body.edit };
+      // delete the cards because there is no change in cards
+      // and they are just references and not the actual cards
+      delete updatedList.cards;
+      // send the list back to the user
+      res.json({ updatedList });
     })
     .catch(error => res.handleError(error));
 };
