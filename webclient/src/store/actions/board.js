@@ -10,7 +10,7 @@ export const addList = () => {
         dispatch({ type: actionTypes.ADD_LIST, list: res.data.newList });
       })
       .catch(error => {
-        toast.error("Unknown error when adding list");
+        toast.error(error.response.data.error.message);
       });
   };
 };
@@ -23,7 +23,7 @@ export const getLists = () => {
         dispatch({ type: actionTypes.SET_LISTS, lists: res.data.lists });
       })
       .catch(error => {
-        toast.error("Unknown error when getting the lists");
+        toast.error(error.response.data.error.message);
       });
   };
 };
@@ -38,10 +38,33 @@ export const changeListTitle = (listId, newTitle) => {
         edit: { title: newTitle }
       })
       .then(res => {
+        console.log(res.data.updatedList);
         dispatch({ type: actionTypes.UPDATE_LIST, list: res.data.updatedList });
       })
       .catch(error => {
-        toast.error("Unknown error when changing title");
+        toast.error(error.response.data.error.message);
+      });
+  };
+};
+
+export const changeCardText = (listId, cardId, newText) => {
+  return dispatch => {
+    axios
+      .put("/board/card", {
+        id: cardId,
+        edit: { text: newText }
+      })
+      .then(res => {
+        console.log(res.data.updatedCard);
+        dispatch({
+          type: actionTypes.CHANGE_CARD_TEXT,
+          listId,
+          cardId,
+          updatedCard: res.data.updatedCard
+        });
+      })
+      .catch(error => {
+        toast.error(error.response.data.error.message);
       });
   };
 };
@@ -55,7 +78,7 @@ export const addCard = (listId, text) => {
         dispatch({ type: actionTypes.ADD_CARD, newCard });
       })
       .catch(error => {
-        toast.error("Unknown error when getting the lists");
+        toast.error(error.response.data.error.message);
       });
   };
 };
@@ -68,7 +91,7 @@ export const deleteCard = (listId, cardId) => {
         dispatch({ type: actionTypes.DELETE_CARD, listId, cardId });
       })
       .catch(error => {
-        toast.error("Unknown error when deleting the card");
+        toast.error(error.response.data.error.message);
       });
   };
 };
@@ -81,24 +104,18 @@ export const deleteList = listId => {
         dispatch({ type: actionTypes.DELETE_LIST, listId });
       })
       .catch(error => {
-        toast.error("Unknown error when deleting the list");
+        toast.error(error.response.data.error.message);
       });
   };
 };
 
-export const changeCardText = (listIndex, cardId, text) => {
+export const changeCardList = (fromList, toList, cardId) => {
   return dispatch => {
-    dispatch({
-      type: actionTypes.CHANGE_CARD_TEXT,
-      listIndex,
-      cardId,
-      text
-    });
-  };
-};
-
-export const changeCardList = (prevList, listToMoveTo, cardId) => {
-  return dispatch => {
-    dispatch({ type: actionTypes.CHANGE_LIST, prevList, listToMoveTo, cardId });
+    axios
+      .put("/board/card/changeList", { fromList, toList, cardId })
+      .then(() => {
+        dispatch({ type: actionTypes.CHANGE_LIST, fromList, toList, cardId });
+      })
+      .catch(error => toast.error(error.response.data.error.message));
   };
 };

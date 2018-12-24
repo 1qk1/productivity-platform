@@ -34,7 +34,7 @@ export const submitPomodoro = () => {
         dispatch({ type: actionTypes.POMODORO_COMPLETED, newPomodoro });
       })
       .catch(error => {
-        toast.error("We couldn't add your pomodoro to the database :(");
+        toast.error(error.response.data.error.message);
       });
   };
 };
