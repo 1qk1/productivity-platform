@@ -38,6 +38,7 @@ export const changeListTitle = (listId, newTitle) => {
         edit: { title: newTitle }
       })
       .then(res => {
+        console.log(res.data.updatedList);
         dispatch({ type: actionTypes.UPDATE_LIST, list: res.data.updatedList });
       })
       .catch(error => {
@@ -108,8 +109,13 @@ export const deleteList = listId => {
   };
 };
 
-export const changeCardList = (prevList, listToMoveTo, cardId) => {
+export const changeCardList = (fromList, toList, cardId) => {
   return dispatch => {
-    dispatch({ type: actionTypes.CHANGE_LIST, prevList, listToMoveTo, cardId });
+    axios
+      .put("/board/card/changeList", { fromList, toList, cardId })
+      .then(() => {
+        dispatch({ type: actionTypes.CHANGE_LIST, fromList, toList, cardId });
+      })
+      .catch(error => toast.error(error.response.data.error.message));
   };
 };
