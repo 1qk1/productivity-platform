@@ -9,11 +9,12 @@ import "./List.scss";
 
 const listTarget = {
   drop(props, monitor) {
-    // props.moveCard();
-    const id = monitor.getItem().id;
-    const inList = monitor.getItem().inList;
-    console.log(props);
-    props.changeCardList(inList, props.index, id);
+    // get the card item
+    const card = monitor.getItem();
+    // if the source and destination lists are the same return
+    if (card.fromList === props.list._id) return;
+    // execute the changeCardList function with the necessary data
+    props.changeCardList(card.fromList, props.list._id, card.cardId);
   }
 };
 
