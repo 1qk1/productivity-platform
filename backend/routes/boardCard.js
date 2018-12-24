@@ -8,6 +8,8 @@ router.post("/", boardCardHandlers.newCardHandler);
 
 router.put("/", boardCardHandlers.editCardHandler);
 
+router.put("/changeList", boardCardHandlers.changeCardList);
+
 router.delete("/:listId/:cardId", boardCardHandlers.deleteCardHandler);
 
 module.exports = router;

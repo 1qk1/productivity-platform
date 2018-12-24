@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.8] - 2018-12-24
+
+### Added
+
+- Screenshots and gifs in README
+- Functionality to move cards between lists and connected it to the backend
+
+### Changed
+
+- Fixed a bug that didn't allow the to text didn't wrap in cards
+- Fixed a bug that the list's name wasn't updating after renaming it
+
 ## [1.3.7] - 2018-12-22
 
 ### Changed
