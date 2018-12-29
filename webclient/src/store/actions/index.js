@@ -7,7 +7,9 @@ export {
   changeListTitle,
   changeCardText,
   changeCardList,
-  getLists
+  getLists,
+  moveCard,
+  dropCard
 } from "./board";
 export {
   pomodoroCompleted,
