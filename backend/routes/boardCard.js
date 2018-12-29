@@ -8,7 +8,7 @@ router.post("/", boardCardHandlers.newCardHandler);
 
 router.put("/", boardCardHandlers.editCardHandler);
 
-router.put("/changeList", boardCardHandlers.changeCardList);
+router.put("/moveCard", boardCardHandlers.moveCardHandler);
 
 router.delete("/:listId/:cardId", boardCardHandlers.deleteCardHandler);
 
