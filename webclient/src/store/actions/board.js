@@ -15,6 +15,40 @@ export const addList = () => {
   };
 };
 
+export const moveCard = (
+  dragIndex,
+  hoverIndex,
+  dragListIndex,
+  hoverListIndex
+) => {
+  return dispatch => {
+    dispatch({
+      type: "MOVE_CARD",
+      dragIndex,
+      hoverIndex,
+      dragListIndex,
+      hoverListIndex
+    });
+  };
+};
+
+export const dropCard = (cardId, toIndex, fromList, toList) => {
+  return dispatch => {
+    console.log(cardId, toIndex, fromList, toList);
+    axios
+      .put("/board/card/moveCard", {
+        fromList,
+        toList,
+        cardId,
+        toIndex
+      })
+      .then(() => console.log("done moving"))
+      .catch(error => {
+        toast.error(error.response.data.error.message);
+      });
+  };
+};
+
 export const getLists = () => {
   return dispatch => {
     axios
