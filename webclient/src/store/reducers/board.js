@@ -90,6 +90,20 @@ export default (state = initialState, action) => {
       // return new board
       return { ...state, board: newBoard };
     }
+    case actionTypes.MOVE_CARD: {
+      // dragIndex, hoverIndex, dragListIndex, hoverListIndex
+      let card = {
+        ...newBoard.lists[action.dragListIndex].cards[action.dragIndex]
+      };
+      card.listId = newBoard.lists[action.hoverListIndex]._id;
+      newBoard.lists[action.dragListIndex].cards.splice(action.dragIndex, 1);
+      newBoard.lists[action.hoverListIndex].cards.splice(
+        action.hoverIndex,
+        0,
+        card
+      );
+      return { ...state, board: newBoard };
+    }
     default:
       return state;
   }
