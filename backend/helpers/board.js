@@ -34,7 +34,6 @@ const moveToAnotherList = (req, res) => {
         card => card._id.toString() === cardId
       );
       console.log(cardIndex, "cardIndex");
-      const card = from.cards[cardIndex];
       console.log(card, "card");
       from.cards.splice(cardIndex, 1);
       to.cards.splice(toIndex, 0, card);
