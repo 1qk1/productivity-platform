@@ -23,7 +23,7 @@ class Board extends PureComponent {
     }
     return (
       <Fragment>
-        <div className="Board scrollbar">
+        <div className="Board scrollbar-horizontal">
           {/* render list */}
           {this.props.board.lists.map((list, index) => (
             <List

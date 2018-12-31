@@ -2,21 +2,22 @@
   .List {
     background-color: #ddd;
     margin: 0 0.5rem;
-    padding: 0.75rem;
-    border-radius: 5px;
+    // padding: 0.75rem;
+    border-radius: 3px;
     flex: 0 0 300px;
     color: #333;
     height: fit-content;
     max-height: 80vh;
-    overflow-y: auto;
+    // overflow-y: hidden;
     &-Header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.5rem;
       overflow: hidden;
+      padding: 0.25rem;
       .List-Controls--Button {
         color: #777;
+        padding: 0.7rem 0.75rem;
       }
 
       .List-Controls--Button:hover,
@@ -36,6 +37,15 @@
       margin: 0;
       word-wrap: break-word;
       max-width: 80%;
+      padding-left: 0.5rem;
+      font-weight: 500;
+      color: rgb(46, 49, 68);
+    }
+    &-Cards {
+      padding: 0 0.5rem;
+      height: 100%;
+      max-height: 70vh;
+      overflow-y: auto;
     }
   }
 

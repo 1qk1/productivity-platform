@@ -1,12 +1,13 @@
 .Board {
   .Card {
     width: 100%;
-    padding: 0.5rem;
-    border-radius: 4px;
+    padding: 0.25rem;
+    border-radius: 3px;
     margin-bottom: 0.5rem;
     background-color: #eee;
     display: flex;
     justify-content: space-between;
+    box-shadow: 1px 1px 1px #ccc;
     &:hover {
       .Card-Controls {
         opacity: 1;
@@ -39,7 +40,6 @@
     word-break: break-word;
   }
   .Dragging {
-    // display: none;
     opacity: 0.2;
   }
 }

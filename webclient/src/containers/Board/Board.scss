@@ -51,14 +51,31 @@
   }
 }
 
-.scrollbar {
+.scrollbar-horizontal {
   &::-webkit-scrollbar {
     width: 8px;
-    height: 8px;
+    height: 9px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #20924f;
+    background: #2d805f;
+    border-radius: 20px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #bdc3c7;
+    border-radius: 20px;
+    padding: 5px;
+  }
+}
+.scrollbar-vertical {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 9px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #8a9495;
     border-radius: 20px;
   }
 

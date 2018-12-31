@@ -60,13 +60,15 @@ class List extends PureComponent {
 
   toggleProp = prop => {
     this.setState({
-      [prop]: !this.state[prop]
+      [prop]: !this.state[prop],
+      newCardText: ""
     });
   };
 
   closeProp = prop => {
     this.setState({
-      [prop]: false
+      [prop]: false,
+      newCardText: ""
     });
   };
 
@@ -87,7 +89,7 @@ class List extends PureComponent {
 
   render() {
     return this.props.connectDropTarget(
-      <div className="List scrollbar">
+      <div className="List">
         <div className="List-Header">
           <EditableText
             text={this.props.list.title}
@@ -120,7 +122,7 @@ class List extends PureComponent {
           </Dropdown>
           {/*  */}
         </div>
-        <div className="List-Cards">
+        <div className="List-Cards scrollbar-vertical">
           {this.state.adding ? (
             <NewCard
               value={this.state.newCardText}
@@ -147,7 +149,6 @@ class List extends PureComponent {
               {...card}
             />
           ))}
-          {/* {this.props.isOver ? <div className="Card" /> : null} */}
         </div>
       </div>
     );
