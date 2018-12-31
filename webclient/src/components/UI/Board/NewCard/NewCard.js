@@ -6,12 +6,12 @@ const newCard = props => {
   return (
     <div className="Card-New">
       <form onSubmit={props.onSubmitHandler}>
-        <textarea
+        <input
           autoFocus
           value={props.value}
           type="text"
           rows={2}
-          className="materialize-textarea"
+          className="New-Card-Input"
           onChange={props.onChange}
         />
         <button type="submit" className="btn btn-small">
