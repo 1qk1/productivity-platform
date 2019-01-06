@@ -23,7 +23,7 @@ export const moveCard = (
 ) => {
   return dispatch => {
     dispatch({
-      type: "MOVE_CARD",
+      type: actionTypes.MOVE_CARD,
       dragIndex,
       hoverIndex,
       dragListIndex,
@@ -33,19 +33,32 @@ export const moveCard = (
 };
 
 export const dropCard = (cardId, toIndex, fromList, toList) => {
-  return dispatch => {
-    console.log(cardId, toIndex, fromList, toList);
-    axios
-      .put("/board/card/moveCard", {
-        fromList,
-        toList,
-        cardId,
-        toIndex
-      })
-      .then(() => console.log("done moving"))
-      .catch(error => {
-        toast.error(error.response.data.error.message);
-      });
+  return {
+    queue: actionTypes.MOVE_CARD,
+    callback: (next, dispatch, getState) => {
+      console.log("sent request");
+      axios
+        .put("/board/card/moveCard", {
+          fromList,
+          toList,
+          cardId,
+          toIndex
+        })
+        .then(() => {
+          console.log("done moving");
+          next();
+        })
+        .catch(error => {
+          dispatch({
+            type: actionTypes.DROP_FAIL,
+            cardId,
+            toIndex,
+            fromList,
+            toList
+          });
+          toast.error(error.response.data.error.message);
+        });
+    }
   };
 };
 
