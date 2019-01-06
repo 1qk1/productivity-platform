@@ -5,7 +5,9 @@ import { connect } from "react-redux";
 import * as actions from "./store/actions/auth";
 import { Switch, Redirect, Route, BrowserRouter } from "react-router-dom";
 
-const AsyncHome = lazy(() => import("./containers/Home/Home"));
+const AsyncLandingPage = lazy(() =>
+  import("./containers/LandingPage/LandingPage")
+);
 
 const AsyncMain = lazy(() => import("./containers/Main/Main"));
 
@@ -25,7 +27,7 @@ class App extends Component {
       content = (
         <Switch>
           <Suspense fallback={<Loader />}>
-            <Route path="/" exact component={() => <AsyncHome />} />
+            <Route path="/" exact component={() => <AsyncLandingPage />} />
             <Redirect to="/" />
           </Suspense>
         </Switch>

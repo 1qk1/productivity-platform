@@ -1,15 +1,15 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/auth";
-// import Navbar from "../../components/Navigation/UnauthorizedNavbar/UnauthorizedNavbar";
-// import PomodoroSection from "../../components/UnauthorizedSections/Pomodoro/Pomodoro";
-// import BoardSection from "../../components/UnauthorizedSections/Board/Board";
-// import Hero from "../../components/UnauthorizedSections/Hero/Hero";
+import Navbar from "../../components/Navigation/LandingPageNavbar/LandingPageNavbar";
+import PomodoroSection from "../../components/LandingPageSections/Pomodoro/Pomodoro";
+import BoardSection from "../../components/LandingPageSections/Board/Board";
+import Hero from "../../components/LandingPageSections/Hero/Hero";
 import Login from "../../components/Auth/Login";
 import Register from "../../components/Auth/Register";
-import "./Home.scss";
+import "./LandingPage.scss";
 
-class Home extends Component {
+class LandingPage extends Component {
   state = {
     login: {
       username: "",
@@ -114,4 +114,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home);
+)(LandingPage);
