@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/auth";
-import Navbar from "../../components/Navigation/LandingPageNavbar/LandingPageNavbar";
-import PomodoroSection from "../../components/LandingPageSections/Pomodoro/Pomodoro";
-import BoardSection from "../../components/LandingPageSections/Board/Board";
-import Hero from "../../components/LandingPageSections/Hero/Hero";
+// import Navbar from "../../components/Navigation/LandingPageNavbar/LandingPageNavbar";
+// import PomodoroSection from "../../components/LandingPageSections/Pomodoro/Pomodoro";
+// import BoardSection from "../../components/LandingPageSections/Board/Board";
+// import Hero from "../../components/LandingPageSections/Hero/Hero";
 import Login from "../../components/Auth/Login";
 import Register from "../../components/Auth/Register";
 import "./LandingPage.scss";
