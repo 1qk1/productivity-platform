@@ -90,6 +90,39 @@ export default (state = initialState, action) => {
       // return new board
       return { ...state, board: newBoard };
     }
+    case actionTypes.MOVE_CARD: {
+      // dragIndex, hoverIndex, dragListIndex, hoverListIndex
+      let card = {
+        ...newBoard.lists[action.dragListIndex].cards[action.dragIndex]
+      };
+      card.listId = newBoard.lists[action.hoverListIndex]._id;
+      newBoard.lists[action.dragListIndex].cards.splice(action.dragIndex, 1);
+      newBoard.lists[action.hoverListIndex].cards.splice(
+        action.hoverIndex,
+        0,
+        card
+      );
+      return { ...state, board: newBoard };
+    }
+    case actionTypes.DROP_FAIL: {
+      // cardId, toIndex, fromList, toList
+      const from = newBoard.lists.findIndex(
+        list => list._id.toString() === action.fromList
+      );
+      const to = newBoard.lists.findIndex(
+        list => list._id.toString() === action.toList
+      );
+      const oldCardIndex = newBoard.lists[from].cards.findIndex(
+        card => card._id.toString() === action.cardId
+      );
+      let card = {
+        ...newBoard.lists[from].cards[action.toIndex]
+      };
+      card.listId = action.fromList;
+      newBoard.lists[to].cards.splice(action.toIndex, 1);
+      newBoard.lists[from].cards.splice(oldCardIndex, 0, card);
+      return { ...state, board: newBoard };
+    }
     default:
       return state;
   }

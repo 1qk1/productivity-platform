@@ -5,6 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2019-01-06
+
+### Added
+
+- Added action queuing when dropping cards in the board. This also fixes some errors regarding
+  moving cards when the backend moves a second card before it finishes moving the first one
+
+### Changed
+
+- Renamed the Home and Unauthorized components to Landing and LandingPage
+- Minor improvements
+
+## [1.3.11] - 2018-12-31
+
+### Changed
+
+- Improved the styling of the cards, lists and scrollbars in the kanban board
+
+## [1.3.10] - 2018-12-30
+
+### Changed
+
+- Fixed a bug that broke the moving of the cards caused by not updating the card's listId on the database.
+- Fixed patch's 1.3.9 date.
+
+## [1.3.9] - 2018-12-29
+
+### Added
+
+- Functionality to move cards between lists AND sorting them at the same time, and also connected it to the backend
+
 ## [1.3.8] - 2018-12-24
 
 ### Added

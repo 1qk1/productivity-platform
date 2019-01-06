@@ -23,7 +23,7 @@ class Board extends PureComponent {
     }
     return (
       <Fragment>
-        <div className="Board scrollbar">
+        <div className="Board scrollbar-horizontal">
           {/* render list */}
           {this.props.board.lists.map((list, index) => (
             <List
@@ -34,8 +34,11 @@ class Board extends PureComponent {
               addCard={this.props.addCard}
               deleteCard={this.props.deleteCard}
               deleteList={this.props.deleteList}
+              moveCard={this.props.moveCard}
+              dropCard={this.props.dropCard}
               key={"list-" + list._id}
               list={list}
+              index={index}
             />
           ))}
           <button
@@ -58,6 +61,12 @@ const mapDispatchToProps = dispatch => ({
   deleteCard: (listId, cardId) => dispatch(actions.deleteCard(listId, cardId)),
   deleteList: listId => dispatch(actions.deleteList(listId)),
   addList: () => dispatch(actions.addList()),
+  moveCard: (dragIndex, hoverIndex, dragListIndex, hoverListIndex) =>
+    dispatch(
+      actions.moveCard(dragIndex, hoverIndex, dragListIndex, hoverListIndex)
+    ),
+  dropCard: (cardId, index, listId, newListId) =>
+    dispatch(actions.dropCard(cardId, index, listId, newListId)),
   changeListTitle: (listId, newTitle) =>
     dispatch(actions.changeListTitle(listId, newTitle)),
   changeCardText: (listIndex, cardId, text) =>

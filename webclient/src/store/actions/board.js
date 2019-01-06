@@ -15,6 +15,53 @@ export const addList = () => {
   };
 };
 
+export const moveCard = (
+  dragIndex,
+  hoverIndex,
+  dragListIndex,
+  hoverListIndex
+) => {
+  return dispatch => {
+    dispatch({
+      type: actionTypes.MOVE_CARD,
+      dragIndex,
+      hoverIndex,
+      dragListIndex,
+      hoverListIndex
+    });
+  };
+};
+
+export const dropCard = (cardId, toIndex, fromList, toList) => {
+  return {
+    queue: actionTypes.MOVE_CARD,
+    callback: (next, dispatch, getState) => {
+      console.log("sent request");
+      axios
+        .put("/board/card/moveCard", {
+          fromList,
+          toList,
+          cardId,
+          toIndex
+        })
+        .then(() => {
+          console.log("done moving");
+          next();
+        })
+        .catch(error => {
+          dispatch({
+            type: actionTypes.DROP_FAIL,
+            cardId,
+            toIndex,
+            fromList,
+            toList
+          });
+          toast.error(error.response.data.error.message);
+        });
+    }
+  };
+};
+
 export const getLists = () => {
   return dispatch => {
     axios

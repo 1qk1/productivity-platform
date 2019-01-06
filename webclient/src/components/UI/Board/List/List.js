@@ -8,20 +8,47 @@ import Dropdown from "../../Dropdown/Dropdown";
 import "./List.scss";
 
 const listTarget = {
-  drop(props, monitor) {
-    // get the card item
-    const card = monitor.getItem();
-    // if the source and destination lists are the same return
-    if (card.fromList === props.list._id) return;
-    // execute the changeCardList function with the necessary data
-    props.changeCardList(card.fromList, props.list._id, card.cardId);
+  hover(props, monitor, component) {
+    const item = monitor.getItem();
+
+    const dragIndex = item.index;
+
+    const dragListIndex = item.listIndex;
+    const hoverListIndex = props.index;
+
+    if (dragListIndex === hoverListIndex) return;
+
+    props.moveCard(dragIndex, dragIndex, dragListIndex, hoverListIndex);
+
+    monitor.getItem().listIndex = hoverListIndex;
+    monitor.getItem().listId = props.list._id;
+    monitor.getItem().index =
+      props.list.cards.length < dragIndex ? props.list.cards.length : dragIndex;
+  },
+  drop(props, monitor, component) {
+    const {
+      index,
+      listIndex,
+      initialListIndex,
+      initialIndex,
+      cardId,
+      listId,
+      initialListId
+    } = monitor.getItem();
+
+    if (initialIndex === index && listIndex === initialListIndex) return;
+    console.log("inside drop", cardId, index, initialListId, listId);
+
+    // console.log(props, monitor.getItem());
+    props.dropCard(cardId, index, initialListId, listId);
   }
 };
 
 function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver()
+    isOver: monitor.isOver(),
+    draggingItem: monitor.getItem()
   };
 }
 
@@ -33,13 +60,15 @@ class List extends PureComponent {
 
   toggleProp = prop => {
     this.setState({
-      [prop]: !this.state[prop]
+      [prop]: !this.state[prop],
+      newCardText: ""
     });
   };
 
   closeProp = prop => {
     this.setState({
-      [prop]: false
+      [prop]: false,
+      newCardText: ""
     });
   };
 
@@ -51,7 +80,7 @@ class List extends PureComponent {
   onSubmitCardHandler = event => {
     event.preventDefault();
     this.props.addCard(this.props.list._id, this.state.newCardText);
-    this.setState({ adding: false, newCardText: "" });
+    this.setState({ newCardText: "" });
   };
 
   onSubmitTitleHandler = text => {
@@ -60,7 +89,7 @@ class List extends PureComponent {
 
   render() {
     return this.props.connectDropTarget(
-      <div className="List scrollbar">
+      <div className="List">
         <div className="List-Header">
           <EditableText
             text={this.props.list.title}
@@ -93,7 +122,7 @@ class List extends PureComponent {
           </Dropdown>
           {/*  */}
         </div>
-        <div className="List-Cards">
+        <div className="List-Cards scrollbar-vertical">
           {this.state.adding ? (
             <NewCard
               value={this.state.newCardText}
@@ -103,15 +132,23 @@ class List extends PureComponent {
               handleClickOutside={() => this.closeProp("adding")}
             />
           ) : null}
-          {this.props.list.cards.map(card => (
+          {this.props.list.cards.map((card, i) => (
             <Card
+              dragging={
+                this.props.draggingItem !== null
+                  ? this.props.draggingItem.cardId === card._id
+                  : false
+              }
               changeCardText={this.props.changeCardText}
               key={`card-${card._id}`}
+              index={i}
+              moveCard={this.props.moveCard}
+              dropCard={this.props.dropCard}
+              listIndex={this.props.index}
               deleteCard={this.props.deleteCard}
               {...card}
             />
           ))}
-          {this.props.isOver ? <div className="Card" /> : null}
         </div>
       </div>
     );

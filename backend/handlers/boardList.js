@@ -11,7 +11,7 @@ const getAllListsHandler = (req, res) => {
       // send it back to the user
       res.json({ lists });
     })
-    .catch(error => res.handleError(error));
+    .catch(res.handleError);
 };
 
 const newListHandler = (req, res) => {
@@ -34,9 +34,9 @@ const newListHandler = (req, res) => {
           // send the list back to the user
           res.json({ newList });
         })
-        .catch(error => res.handleError(error));
+        .catch(res.handleError);
     })
-    .catch(error => res.handleError(error));
+    .catch(res.handleError);
 };
 
 const editListHandler = (req, res) => {
@@ -60,7 +60,7 @@ const editListHandler = (req, res) => {
       // send the list back to the user
       res.json({ updatedList });
     })
-    .catch(error => res.handleError(error));
+    .catch(res.handleError);
 };
 
 const deleteListHandler = (req, res) => {
@@ -86,11 +86,11 @@ const deleteListHandler = (req, res) => {
               // send reponse that everything was done
               res.sendStatus(200);
             })
-            .catch(error => res.handleError(error));
+            .catch(res.handleError);
         })
-        .catch(error => res.handleError(error));
+        .catch(res.handleError);
     })
-    .catch(error => res.handleError(error));
+    .catch(res.handleError);
 };
 
 module.exports = {
