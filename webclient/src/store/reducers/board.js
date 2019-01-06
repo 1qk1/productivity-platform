@@ -104,6 +104,25 @@ export default (state = initialState, action) => {
       );
       return { ...state, board: newBoard };
     }
+    case actionTypes.DROP_FAIL: {
+      // cardId, toIndex, fromList, toList
+      const from = newBoard.lists.findIndex(
+        list => list._id.toString() === action.fromList
+      );
+      const to = newBoard.lists.findIndex(
+        list => list._id.toString() === action.toList
+      );
+      const oldCardIndex = newBoard.lists[from].cards.findIndex(
+        card => card._id.toString() === action.cardId
+      );
+      let card = {
+        ...newBoard.lists[from].cards[action.toIndex]
+      };
+      card.listId = action.fromList;
+      newBoard.lists[to].cards.splice(action.toIndex, 1);
+      newBoard.lists[from].cards.splice(oldCardIndex, 0, card);
+      return { ...state, board: newBoard };
+    }
     default:
       return state;
   }
