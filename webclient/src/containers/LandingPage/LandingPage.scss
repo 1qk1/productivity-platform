@@ -4,7 +4,7 @@
     align-items: center;
     flex-wrap: wrap;
   }
-  &.Section-Reversed {
+  &.Section-Reversed .Section-Wrapper {
     flex-direction: row-reverse;
   }
   .Subsection {
@@ -38,5 +38,9 @@
         max-width: 320px;
       }
     }
+  }
+  h2 {
+    font-size: 4.5em;
+    font-weight: 500;
   }
 }

@@ -1,11 +1,17 @@
 import React from "react";
-import "./HomeNavbar.scss";
+import "./LandingPageNavbar.scss";
 import { NavLink } from "react-router-dom";
 import Modal from "../../UI/Modal/Toggler";
 import Login from "../../Auth/Login";
 import Register from "../../Auth/Register";
 
-const homeNavbar = props => {
+const landingPageNavbar = props => {
+  const { error } = props;
+  let errorMessage = null;
+
+  if (error) {
+    errorMessage = error.response.data.error.message;
+  }
   return (
     <nav className="Home-Navbar">
       <div className="nav-wrapper Container">
@@ -32,6 +38,9 @@ const homeNavbar = props => {
                 submitHandler={props.onSubmit}
                 onChangeHandler={props.onChange}
               />
+              {errorMessage ? (
+                <p style={{ color: "red" }}>{errorMessage}</p>
+              ) : null}
               <Register
                 submitHandler={props.onSubmit}
                 onChangeHandler={props.onChange}
@@ -44,4 +53,4 @@ const homeNavbar = props => {
   );
 };
 
-export default homeNavbar;
+export default landingPageNavbar;

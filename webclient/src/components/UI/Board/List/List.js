@@ -80,7 +80,7 @@ class List extends PureComponent {
   onSubmitCardHandler = event => {
     event.preventDefault();
     this.props.addCard(this.props.list._id, this.state.newCardText);
-    this.setState({ adding: false, newCardText: "" });
+    this.setState({ newCardText: "" });
   };
 
   onSubmitTitleHandler = text => {
