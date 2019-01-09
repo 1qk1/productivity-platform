@@ -6,6 +6,7 @@ export const AUTH_LOGOUT = "AUTH_LOGOUT";
 export const START_TIMER = "START_TIMER";
 export const START_BREAK = "START_BREAK";
 export const DEC_TIMER = "DEC_TIMER";
+export const UPDATE_TIMER = "UPDATE_TIMER";
 export const STOP_TIMER = "STOP_TIMER";
 export const POMODORO_COMPLETED = "POMODORO_COMPLETED";
 export const GET_POMODOROS = "GET_POMODOROS";
