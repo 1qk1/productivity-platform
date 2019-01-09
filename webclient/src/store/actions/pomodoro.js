@@ -12,6 +12,12 @@ export const startPomodoro = () => {
   };
 };
 
+export const updateTimer = () => {
+  return dispatch => {
+    dispatch({ type: actionTypes.UPDATE_TIMER });
+  };
+};
+
 export const stopTimer = () => {
   return dispatch => {
     dispatch({ type: actionTypes.STOP_TIMER });
