@@ -11,6 +11,11 @@ import { ToastContainer } from "react-toastify";
 class Main extends Component {
   // This is the main component
   // It contains the routes for each page
+  componentDidMount() {
+    if (this.props.intervalId !== null) {
+      window.addEventListener("focus", this.props.updateTimer);
+    }
+  }
   render() {
     return (
       <Fragment>
@@ -32,6 +37,7 @@ class Main extends Component {
                     stopPomodoro={this.props.stopTimer}
                     pomodoroCompleted={this.props.pomodoroCompleted}
                     isPomodoro={this.props.isPomodoro}
+                    completedSessions={this.props.completedSessions}
                   />
                   {/* helper buttons to test the pomodoro */}
                   {/* uncomment it if you need to test stuff */}
@@ -62,6 +68,7 @@ class Main extends Component {
 
 const mapStateToProps = state => ({
   timer: state.pomodoro.timer,
+  completedSessions: state.pomodoro.completedSessions,
   intervalId: state.pomodoro.intervalId,
   isPomodoro: state.pomodoro.isPomodoro,
   userId: state.auth.user.id
@@ -73,6 +80,7 @@ const mapDispatchToProps = dispatch => ({
   // function to run when a pomodoro got completed
   // takes if the clock was a pomodoro or a break as
   // an argument
+  updateTimer: () => dispatch(actions.updateTimer()),
   pomodoroCompleted: isPomodoro =>
     dispatch(actions.pomodoroCompleted(isPomodoro)),
   // get all the user's pomodoros from the server
