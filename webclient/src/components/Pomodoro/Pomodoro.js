@@ -9,7 +9,8 @@ const pomodoro = ({
   stopPomodoro,
   intervalId,
   pomodoroCompleted,
-  isPomodoro
+  isPomodoro,
+  completedSessions
 }) => {
   // if timer finished and the timer was running
   // execute the function
@@ -19,7 +20,9 @@ const pomodoro = ({
 
   const running = intervalId !== null;
 
-  const fullTime = isPomodoro ? 1500 : 300;
+  const breakTime = completedSessions % 4 !== 0 ? 300 : 600;
+
+  const fullTime = isPomodoro ? 1500 : breakTime;
 
   const percentageDone = ((fullTime - timer) / fullTime) * 100;
 
