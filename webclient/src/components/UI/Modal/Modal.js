@@ -19,6 +19,7 @@ const modal = props => {
 };
 
 modal.propTypes = {
+  children: PropTypes.element.isRequired,
   show: PropTypes.bool.isRequired,
   backdropClasses: PropTypes.string,
   modalClasses: PropTypes.string,

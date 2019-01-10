@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import SideButton from "./SideButton/SideButton";
 
 import "./Sidebar.scss";
 
-export default ({ logout }) => (
+const sidebar = ({ logout }) => (
   <div className="Sidebar">
     {/* icons with nav links */}
     <ul className="Sidebar-Links">
@@ -20,3 +21,8 @@ export default ({ logout }) => (
     </ul>
   </div>
 );
+sidebar.PropTypes = {
+  logout: PropTypes.func.isRequired
+};
+
+export default sidebar;

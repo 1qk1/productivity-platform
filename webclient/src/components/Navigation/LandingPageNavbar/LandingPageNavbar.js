@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./LandingPageNavbar.scss";
 import { NavLink } from "react-router-dom";
 import Modal from "../../UI/Modal/Toggler";
@@ -51,6 +52,13 @@ const landingPageNavbar = props => {
       </div>
     </nav>
   );
+};
+
+landingPageNavbar.PropTypes = {
+  state: PropTypes.object.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  error: PropTypes.object
 };
 
 export default landingPageNavbar;

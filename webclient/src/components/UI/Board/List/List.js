@@ -128,7 +128,6 @@ class List extends PureComponent {
               value={this.state.newCardText}
               onChange={this.onCardChangeHandler}
               onSubmitHandler={this.onSubmitCardHandler}
-              listIndex={this.props.index}
               handleClickOutside={() => this.closeProp("adding")}
             />
           ) : null}
