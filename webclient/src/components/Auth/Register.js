@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import "./Auth.scss";
 
-const login = props => {
+const register = props => {
   return (
     <div className="SignupForm AuthForm">
       <h5>Signup</h5>
@@ -31,4 +32,9 @@ const login = props => {
   );
 };
 
-export default login;
+register.PropTypes = {
+  submitHandler: PropTypes.func.isRequired,
+  onChangeHandler: PropTypes.func.isRequired
+};
+
+export default register;

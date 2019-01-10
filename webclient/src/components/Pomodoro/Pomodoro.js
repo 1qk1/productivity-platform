@@ -1,13 +1,15 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import "./Pomodoro.scss";
 
 import { secondsToTime } from "../../utilities";
 
 const pomodoro = ({
   timer,
+  intervalId,
   startPomodoro,
   stopPomodoro,
-  intervalId,
   pomodoroCompleted,
   isPomodoro,
   completedSessions
@@ -52,6 +54,16 @@ const pomodoro = ({
       </div>
     </div>
   );
+};
+
+pomodoro.PropTypes = {
+  timer: PropTypes.number.isRequired,
+  intervalId: PropTypes.number,
+  startPomodoro: PropTypes.func.isRequired,
+  stopPomodoro: PropTypes.func.isRequired,
+  pomodoroCompleted: PropTypes.func.isRequired,
+  isPomodoro: PropTypes.bool.isRequired,
+  completedSessions: PropTypes.number.isRequired
 };
 
 export default pomodoro;
