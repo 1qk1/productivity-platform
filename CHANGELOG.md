@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.1] - 2019-01-10
+
+### Added
+
+- Added proptypes in the components: auth forms, landing page navbar, sidebar, sidebar buttons, pomodoro,
+  card, list, new card, dropdown, modal and toggler
+
+### Changed
+
+- Fixed a bug that made the pomodoro slow when the tab wasn't active
+
 ## [1.4.0] - 2019-01-06
 
 ### Added

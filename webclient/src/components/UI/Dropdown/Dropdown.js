@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import onClickOutside from "react-onclickoutside";
+import PropTypes from "prop-types";
 
 import "./Dropdown.scss";
 
@@ -35,7 +36,8 @@ class Dropdown extends Component {
     return (
       <div
         className={
-          "Dropdown" + (this.props.classes ? ` ${this.props.classes}` : "")
+          "Dropdown" +
+          (this.props.dropdownClasses ? ` ${this.props.dropdownClasses}` : "")
         }
         style={this.state.show ? { opacity: 1 } : null}
       >
@@ -65,10 +67,12 @@ class Dropdown extends Component {
   }
 }
 
-// props will finally be
-// button title
-// button classes
-// icon classes (add an i tag with those classes if they are inputted)
-// children
+Dropdown.PropTypes = {
+  children: PropTypes.element.isRequired,
+  title: PropTypes.string.isRequired,
+  iconClasses: PropTypes.string,
+  dropdownClasses: PropTypes.string,
+  buttonClasses: PropTypes.string
+};
 
 export default onClickOutside(Dropdown);

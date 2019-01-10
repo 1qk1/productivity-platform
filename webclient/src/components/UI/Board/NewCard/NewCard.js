@@ -1,6 +1,7 @@
 import React from "react";
 import "./NewCard.scss";
 import onClickOutside from "react-onclickoutside";
+import PropTypes from "prop-types";
 
 const newCard = props => {
   return (
@@ -20,6 +21,13 @@ const newCard = props => {
       </form>
     </div>
   );
+};
+
+newCard.PropTypes = {
+  onSubmitHandler: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  handleClickOutside: PropTypes.func
 };
 
 export default onClickOutside(newCard);

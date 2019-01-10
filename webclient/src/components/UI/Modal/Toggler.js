@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import Modal from "./Modal";
+import PropTypes from "prop-types";
 
 class Toggler extends Component {
   state = {
@@ -31,5 +32,12 @@ class Toggler extends Component {
     );
   }
 }
+
+Toggler.PropTypes = {
+  title: PropTypes.string.isRequired,
+  backdropClasses: PropTypes.string,
+  modalClasses: PropTypes.string,
+  children: PropTypes.element.isRequired
+};
 
 export default Toggler;

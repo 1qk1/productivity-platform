@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import "./Auth.scss";
 
@@ -25,6 +26,11 @@ const login = props => {
       </form>
     </div>
   );
+};
+
+login.PropTypes = {
+  submitHandler: PropTypes.func.isRequired,
+  onChangeHandler: PropTypes.func.isRequired
 };
 
 export default login;

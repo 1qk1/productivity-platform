@@ -109,7 +109,7 @@ const card = props => {
           text={props.text}
         />
         <Dropdown
-          classes="Card-Controls Board-Controls"
+          dropdownClasses="Card-Controls Board-Controls"
           buttonClasses="btn-invisible Card-Controls--Button"
           iconClasses="fas fa-ellipsis-h"
         >
