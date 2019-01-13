@@ -69,10 +69,10 @@ class Dropdown extends Component {
 
 Dropdown.propTypes = {
   children: PropTypes.element.isRequired,
-  title: PropTypes.string.isRequired,
   iconClasses: PropTypes.string,
   dropdownClasses: PropTypes.string,
-  buttonClasses: PropTypes.string
+  buttonClasses: PropTypes.string,
+  title: PropTypes.string
 };
 
 export default onClickOutside(Dropdown);
