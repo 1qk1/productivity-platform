@@ -13,8 +13,10 @@ export const startPomodoro = () => {
 };
 
 export const updateTimer = () => {
-  return dispatch => {
-    dispatch({ type: actionTypes.UPDATE_TIMER });
+  return (dispatch, getState) => {
+    if (getState().pomodoro.intervalId !== null) {
+      dispatch({ type: actionTypes.UPDATE_TIMER });
+    }
   };
 };
 

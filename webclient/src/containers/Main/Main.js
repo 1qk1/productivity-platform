@@ -12,9 +12,7 @@ class Main extends Component {
   // This is the main component
   // It contains the routes for each page
   componentDidMount() {
-    if (this.props.intervalId !== null) {
-      window.addEventListener("focus", this.props.updateTimer);
-    }
+    window.addEventListener("focus", this.props.updateTimer);
   }
   render() {
     return (
