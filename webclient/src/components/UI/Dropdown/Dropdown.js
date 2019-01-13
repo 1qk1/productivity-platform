@@ -67,7 +67,7 @@ class Dropdown extends Component {
   }
 }
 
-Dropdown.PropTypes = {
+Dropdown.propTypes = {
   children: PropTypes.element.isRequired,
   title: PropTypes.string.isRequired,
   iconClasses: PropTypes.string,

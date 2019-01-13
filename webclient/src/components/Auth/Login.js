@@ -28,7 +28,7 @@ const login = props => {
   );
 };
 
-login.PropTypes = {
+login.propTypes = {
   submitHandler: PropTypes.func.isRequired,
   onChangeHandler: PropTypes.func.isRequired
 };

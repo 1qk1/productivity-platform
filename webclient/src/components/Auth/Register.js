@@ -32,7 +32,7 @@ const register = props => {
   );
 };
 
-register.PropTypes = {
+register.propTypes = {
   submitHandler: PropTypes.func.isRequired,
   onChangeHandler: PropTypes.func.isRequired
 };
