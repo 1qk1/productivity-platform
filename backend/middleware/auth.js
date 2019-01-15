@@ -1,23 +1,23 @@
 const jwt = require("jsonwebtoken"),
-  base64 = require("js-base64").Base64,
   passport = require("passport"),
   errorMiddleware = require("./error");
 
 const verifyToken = (req, res, next) => {
-  try {
-    // split the token from the Bearer
-    const token = req.headers.authorization.split(" ")[1];
-    // verify the token
-    // if token will get verified, the jwt's content
-    // will be req.user so the next function can use it
-    // if jwt is invalid, it will throw an error
-    req.user = jwt.verify(token, process.env.JWT_SECRET);
-    // continue
-    next();
-  } catch (err) {
-    // if error send response
-    res.handleError(err);
-  }
+  // split the token from the Bearer
+  const token = req.headers.authorization.split(" ")[1];
+  // verify the token
+  // if token will get verified, the jwt's content
+  // will be req.user so the next function can use it
+  // if jwt is invalid, it will throw an error
+  jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
+    if (error) {
+      res.handleError(error);
+    } else {
+      req.user = { ...decoded };
+      // continue
+      next();
+    }
+  });
 };
 
 const verifyPassword = (req, res, next) => {
