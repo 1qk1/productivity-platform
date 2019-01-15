@@ -7,12 +7,19 @@ export const checkAuth = () => {
     const token = localStorage.getItem("token");
     // if token exists
     if (token !== null) {
-      // get user data
-      const user = JSON.parse(localStorage.getItem("user"));
       // add token to Authorization header
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      // and dispatch AUTH_SUCCESS
-      dispatch({ type: actionTypes.AUTH_SUCCESS, token, user });
+      axios
+        .get("/auth/verifyToken")
+        .then(() => {
+          // get user data
+          const user = JSON.parse(localStorage.getItem("user"));
+          // and dispatch AUTH_SUCCESS
+          dispatch({ type: actionTypes.AUTH_SUCCESS, token, user });
+        })
+        .catch(() => {
+          dispatch(logoutHandler());
+        });
     } else {
       // if there isn't a token
       // logout
