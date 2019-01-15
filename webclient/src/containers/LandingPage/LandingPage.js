@@ -89,12 +89,14 @@ class LandingPage extends Component {
           <Login
             submitHandler={this.submitHandler}
             onChangeHandler={this.onChangeHandler}
+            {...this.state.login}
           />
           {/* show error if there is an error with the authentication process */}
           {errorMessage ? <p style={{ color: "red" }}>{errorMessage}</p> : null}
           <Register
             submitHandler={this.submitHandler}
             onChangeHandler={this.onChangeHandler}
+            {...this.state.register}
           />
         </div>
       </Fragment>
