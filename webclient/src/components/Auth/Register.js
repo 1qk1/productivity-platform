@@ -10,7 +10,12 @@ const register = props => {
       <form id="register" onSubmit={props.submitHandler}>
         <label>
           Username
-          <input onChange={props.onChangeHandler} type="text" name="username" />
+          <input
+            onChange={props.onChangeHandler}
+            type="text"
+            name="username"
+            value={props.username}
+          />
         </label>
         <label>
           Password
@@ -18,11 +23,17 @@ const register = props => {
             onChange={props.onChangeHandler}
             type="password"
             name="password"
+            value={props.password}
           />
         </label>
         <label>
           Email
-          <input onChange={props.onChangeHandler} type="email" name="email" />
+          <input
+            onChange={props.onChangeHandler}
+            type="email"
+            name="email"
+            value={props.email}
+          />
         </label>
         <button className="btn" type="submit" name="action">
           Submit
@@ -34,7 +45,10 @@ const register = props => {
 
 register.propTypes = {
   submitHandler: PropTypes.func.isRequired,
-  onChangeHandler: PropTypes.func.isRequired
+  onChangeHandler: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired
 };
 
 export default register;
