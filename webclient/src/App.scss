@@ -10,12 +10,15 @@ body {
 
   color: $color-white;
 }
+
 #root {
   overflow: auto;
 }
+
 * {
   box-sizing: border-box;
 }
+
 // Utility Classes
 .Container {
   width: 80%;
@@ -23,12 +26,14 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+
 .Container--Wide {
   width: 92%;
   margin-left: auto;
   margin-right: auto;
   height: 99%;
 }
+
 .btn-invisible,
 .btn-invisible:focus,
 .btn-invisible:active,
@@ -36,9 +41,8 @@ body {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  &:hover {
-  }
 }
+
 // colors:
 // bg #34495e,
 // green #2ecc71,
