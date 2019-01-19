@@ -1,34 +1,34 @@
 @import "./scss/variables";
 
 body {
-  background-color: $color-tertiary;
+  background: rgb(52, 73, 94);
+  background: linear-gradient(
+    to bottom right,
+    rgba(52, 73, 94, 1) 30%,
+    #39425f 100%
+  );
+
   color: $color-white;
 }
-
 #root {
   overflow: auto;
 }
-
 * {
   box-sizing: border-box;
 }
-
 // Utility Classes
-
 .Container {
   width: 80%;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
 }
-
 .Container--Wide {
   width: 92%;
   margin-left: auto;
   margin-right: auto;
   height: 99%;
 }
-
 .btn-invisible,
 .btn-invisible:focus,
 .btn-invisible:active,
@@ -39,7 +39,6 @@ body {
   &:hover {
   }
 }
-
 // colors:
 // bg #34495e,
 // green #2ecc71,
