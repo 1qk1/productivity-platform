@@ -45,7 +45,7 @@ class Dropdown extends Component {
           onClick={this.toggleHandler}
           className={"Dropdown--Button " + (this.props.buttonClasses || "")}
         >
-          {this.props.title}
+          {this.props.title ? this.props.title : null}
           {this.props.iconClasses ? (
             <i className={this.props.iconClasses} />
           ) : null}
