@@ -1,7 +1,13 @@
 @import "./scss/variables";
 
 body {
-  background-color: $color-tertiary;
+  background: rgb(52, 73, 94);
+  background: linear-gradient(
+    to bottom right,
+    rgba(52, 73, 94, 1) 30%,
+    #39425f 100%
+  );
+
   color: $color-white;
 }
 
@@ -14,7 +20,6 @@ body {
 }
 
 // Utility Classes
-
 .Container {
   width: 80%;
   max-width: 1200px;
@@ -36,8 +41,6 @@ body {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  &:hover {
-  }
 }
 
 // colors:

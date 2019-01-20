@@ -45,7 +45,7 @@ class Dropdown extends Component {
           onClick={this.toggleHandler}
           className={"Dropdown--Button " + (this.props.buttonClasses || "")}
         >
-          {this.props.title}
+          {this.props.title ? this.props.title : null}
           {this.props.iconClasses ? (
             <i className={this.props.iconClasses} />
           ) : null}
@@ -67,12 +67,12 @@ class Dropdown extends Component {
   }
 }
 
-Dropdown.PropTypes = {
+Dropdown.propTypes = {
   children: PropTypes.element.isRequired,
-  title: PropTypes.string.isRequired,
   iconClasses: PropTypes.string,
   dropdownClasses: PropTypes.string,
-  buttonClasses: PropTypes.string
+  buttonClasses: PropTypes.string,
+  title: PropTypes.string
 };
 
 export default onClickOutside(Dropdown);

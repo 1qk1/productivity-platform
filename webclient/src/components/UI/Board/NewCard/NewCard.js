@@ -23,7 +23,7 @@ const newCard = props => {
   );
 };
 
-newCard.PropTypes = {
+newCard.propTypes = {
   onSubmitHandler: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,

@@ -21,7 +21,7 @@ const sidebar = ({ logout }) => (
     </ul>
   </div>
 );
-sidebar.PropTypes = {
+sidebar.propTypes = {
   logout: PropTypes.func.isRequired
 };
 

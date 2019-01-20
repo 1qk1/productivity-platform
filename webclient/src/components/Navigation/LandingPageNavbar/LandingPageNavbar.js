@@ -54,7 +54,7 @@ const landingPageNavbar = props => {
   );
 };
 
-landingPageNavbar.PropTypes = {
+landingPageNavbar.propTypes = {
   state: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
