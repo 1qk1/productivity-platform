@@ -12,7 +12,7 @@ const sideButton = ({ iconClasses, path }) => (
   </li>
 );
 
-sideButton.PropTypes = {
+sideButton.propTypes = {
   iconClasses: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired
 };

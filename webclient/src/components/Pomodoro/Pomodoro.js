@@ -22,6 +22,7 @@ const pomodoro = ({
 
   const running = intervalId !== null;
 
+  // every 4 sessions the break will be 10 minutes instead of 5
   const breakTime = completedSessions % 4 !== 0 ? 300 : 600;
 
   const fullTime = isPomodoro ? 1500 : breakTime;
@@ -56,14 +57,14 @@ const pomodoro = ({
   );
 };
 
-pomodoro.PropTypes = {
+pomodoro.propTypes = {
   timer: PropTypes.number.isRequired,
-  intervalId: PropTypes.number,
   startPomodoro: PropTypes.func.isRequired,
   stopPomodoro: PropTypes.func.isRequired,
   pomodoroCompleted: PropTypes.func.isRequired,
   isPomodoro: PropTypes.bool.isRequired,
-  completedSessions: PropTypes.number.isRequired
+  completedSessions: PropTypes.number.isRequired,
+  intervalId: PropTypes.number
 };
 
 export default pomodoro;

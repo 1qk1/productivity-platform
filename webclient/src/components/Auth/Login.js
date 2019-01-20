@@ -10,11 +10,17 @@ const login = props => {
       <form id="login" onSubmit={props.submitHandler}>
         <label>
           Username
-          <input onChange={props.onChangeHandler} type="text" name="username" />
+          <input
+            value={props.username}
+            onChange={props.onChangeHandler}
+            type="text"
+            name="username"
+          />
         </label>
         <label>
           Password
           <input
+            value={props.password}
             onChange={props.onChangeHandler}
             type="password"
             name="password"
@@ -28,9 +34,11 @@ const login = props => {
   );
 };
 
-login.PropTypes = {
+login.propTypes = {
   submitHandler: PropTypes.func.isRequired,
-  onChangeHandler: PropTypes.func.isRequired
+  onChangeHandler: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired
 };
 
 export default login;

@@ -33,7 +33,7 @@ class Toggler extends Component {
   }
 }
 
-Toggler.PropTypes = {
+Toggler.propTypes = {
   title: PropTypes.string.isRequired,
   backdropClasses: PropTypes.string,
   modalClasses: PropTypes.string,
