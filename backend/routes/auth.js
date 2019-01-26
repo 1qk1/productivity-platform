@@ -10,9 +10,10 @@ router.post(
   // check the credentials sent by the user
   verifyPassword,
   // if they correct, send a JWT response
-  authHandlers.sendJSONResponse
+  authHandlers.sendNewToken
 );
 
-router.get("/verifyToken", verifyToken, (req, res) => res.sendStatus(200));
+// get the user data based on the encrypted data from the JWT
+router.get("/getUser", verifyToken, authHandlers.sendUserJSON);
 
 module.exports = router;
