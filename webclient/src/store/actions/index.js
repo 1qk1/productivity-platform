@@ -1,4 +1,10 @@
-export { checkAuth, authHandler, logoutHandler } from "./auth";
+export {
+  checkAuth,
+  authHandler,
+  logoutHandler,
+  addExtension,
+  removeExtension
+} from "./auth";
 export {
   pomodoroCompleted,
   getPomodoros,
