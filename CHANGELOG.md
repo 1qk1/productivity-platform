@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2019-01-26
+
+### Added
+
+- An extension store where you can select what features of the platform you want.
+
+### Changed
+
+- Improved authentication handling.
+- Now routes and sidebar buttons load dynamically based on the user's selected extensions
+
 ## [1.4.2] - 2019-01-20
 
 ### Added

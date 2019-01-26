@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken"),
-  passport = require("passport"),
-  errorMiddleware = require("./error");
+  passport = require("passport");
 
 const verifyToken = (req, res, next) => {
   // split the token from the Bearer
@@ -30,7 +29,7 @@ const verifyPassword = (req, res, next) => {
       if (error) return res.handleError(error);
       // if there is no error
       // add the user to req.user
-      req.user = { username: user.username, id: user._id.toString() };
+      req.user = { ...user };
       // continue with the next function
       next();
     },

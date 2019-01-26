@@ -10,12 +10,14 @@ export const checkAuth = () => {
       // add token to Authorization header
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       axios
-        .get("/auth/verifyToken")
-        .then(() => {
-          // get user data
-          const user = JSON.parse(localStorage.getItem("user"));
-          // and dispatch AUTH_SUCCESS
-          dispatch({ type: actionTypes.AUTH_SUCCESS, token, user });
+        .get("/auth/getUser")
+        .then(response => {
+          // dispatch AUTH_SUCCESS
+          dispatch({
+            type: actionTypes.AUTH_SUCCESS,
+            token,
+            user: response.data.user
+          });
         })
         .catch(() => {
           dispatch(logoutHandler());
@@ -35,11 +37,9 @@ export const authHandler = (authType, data) => {
     axios
       .post(`/auth/${authType}`, data)
       .then(res => {
-        console.log(res.data);
         const { token, user } = res.data;
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user));
         dispatch({ type: actionTypes.AUTH_SUCCESS, token, user });
       })
       .catch(error => {
@@ -52,7 +52,19 @@ export const logoutHandler = () => {
   return dispatch => {
     delete axios.defaults.headers.common["Authorization"];
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
     dispatch({ type: actionTypes.AUTH_LOGOUT });
   };
+};
+
+// store actions
+
+export const addExtension = extensionName => dispatch => {
+  axios.post("/extensions", { extensionName }).then(() => {
+    dispatch({ type: actionTypes.ADD_EXTENSION, extensionName });
+  });
+};
+export const removeExtension = extensionName => dispatch => {
+  axios.delete(`/extensions/${extensionName}`).then(() => {
+    dispatch({ type: actionTypes.REMOVE_EXTENSION, extensionName });
+  });
 };
