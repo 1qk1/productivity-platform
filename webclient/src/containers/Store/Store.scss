@@ -1,0 +1,17 @@
+.Store {
+  display: flex;
+  padding: 1rem;
+
+  &-Extension {
+    // border: 1px solid #999;
+    background-color: #566e88;
+    padding: 2rem 1rem;
+    flex: 0 0 200px;
+    text-align: center;
+    margin: 0 0.5rem;
+    h6 {
+      margin: 0;
+      margin-bottom: 2rem;
+    }
+  }
+}
