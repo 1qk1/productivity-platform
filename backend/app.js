@@ -6,6 +6,7 @@ const express = require("express"),
   pomodoroRoutes = require("./routes/pomodoro"),
   boardListRoutes = require("./routes/boardList"),
   boardCardRoutes = require("./routes/boardCard"),
+  extensionRoutes = require("./routes/extensions"),
   passport = require("passport"),
   cors = require("cors"),
   errorMiddleware = require("./middleware/error").errorMiddleware,
@@ -38,6 +39,7 @@ app.use("/auth", authRoutes);
 app.use("/pomodoro", pomodoroRoutes);
 app.use("/board/list", boardListRoutes);
 app.use("/board/card", boardCardRoutes);
+app.use("/extensions", extensionRoutes);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
