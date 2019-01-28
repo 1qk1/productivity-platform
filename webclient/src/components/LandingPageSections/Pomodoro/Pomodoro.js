@@ -1,5 +1,5 @@
 import React from "react";
-import clockIcon from "../../../assets/clock.svg";
+import clockIcon from "../../../assets/clock.png";
 
 const pomodoro = () => {
   return (
