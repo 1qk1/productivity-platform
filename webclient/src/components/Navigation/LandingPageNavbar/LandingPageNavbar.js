@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import "./LandingPageNavbar.scss";
 import { NavLink } from "react-router-dom";
@@ -24,7 +24,7 @@ const landingPageNavbar = props => {
             <NavLink to="/">FAQ</NavLink>
           </li>
           <li>
-            <NavLink to="/">Pricing</NavLink>
+            <NavLink to="/">Features</NavLink>
           </li>
           <li>
             <Modal
@@ -35,17 +35,21 @@ const landingPageNavbar = props => {
               modalClasses="AuthModal"
               title="Join Us"
             >
-              <Login
-                submitHandler={props.onSubmit}
-                onChangeHandler={props.onChange}
-              />
-              {errorMessage ? (
-                <p style={{ color: "red" }}>{errorMessage}</p>
-              ) : null}
-              <Register
-                submitHandler={props.onSubmit}
-                onChangeHandler={props.onChange}
-              />
+              <Fragment>
+                <Login
+                  submitHandler={props.onSubmit}
+                  onChangeHandler={props.onChange}
+                  {...props.state.login}
+                />
+                {errorMessage ? (
+                  <p style={{ color: "red" }}>{errorMessage}</p>
+                ) : null}
+                <Register
+                  submitHandler={props.onSubmit}
+                  onChangeHandler={props.onChange}
+                  {...props.state.register}
+                />
+              </Fragment>
             </Modal>
           </li>
         </ul>

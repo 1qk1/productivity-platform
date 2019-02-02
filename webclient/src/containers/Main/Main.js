@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { withRouter, Switch, Route, Redirect } from "react-router-dom";
 import Sidebar from "../../components/Navigation/Sidebar/Sidebar";
 import Store from "../Store/Store";
@@ -11,14 +11,16 @@ import extensionMap from "../Store/extensionMap";
 class Main extends Component {
   render() {
     return (
-      <Fragment>
+      <div className="App row">
         {/* Sidebar */}
-        <Sidebar
-          logout={this.props.logout}
-          extensions={this.props.extensions}
-        />
+        <div className="col s2 m1">
+          <Sidebar
+            logout={this.props.logout}
+            extensions={this.props.extensions}
+          />
+        </div>
         {/* Routes */}
-        <div className="Container--Wide">
+        <div className="col s10 m11">
           <Switch>
             {this.props.extensions.map(extension => (
               <Route
@@ -30,9 +32,9 @@ class Main extends Component {
             <Route path="/store" component={Store} />
             <Redirect to={`${this.props.extensions[0] || "/store"}`} />
           </Switch>
+          <ToastContainer autoClose={5000} pauseOnFocusLoss={false} />
         </div>
-        <ToastContainer autoClose={5000} pauseOnFocusLoss={false} />
-      </Fragment>
+      </div>
     );
   }
 }

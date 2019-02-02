@@ -35,11 +35,11 @@ app.use(passport.initialize());
 
 app.use(errorMiddleware);
 
-app.use("/auth", authRoutes);
-app.use("/pomodoro", pomodoroRoutes);
-app.use("/board/list", boardListRoutes);
-app.use("/board/card", boardCardRoutes);
-app.use("/extensions", extensionRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/pomodoro", pomodoroRoutes);
+app.use("/api/board/list", boardListRoutes);
+app.use("/api/board/card", boardCardRoutes);
+app.use("/api/extensions", extensionRoutes);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

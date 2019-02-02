@@ -1,12 +1,12 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/auth";
-// import Navbar from "../../components/Navigation/LandingPageNavbar/LandingPageNavbar";
-// import PomodoroSection from "../../components/LandingPageSections/Pomodoro/Pomodoro";
-// import BoardSection from "../../components/LandingPageSections/Board/Board";
-// import Hero from "../../components/LandingPageSections/Hero/Hero";
-import Login from "../../components/Auth/Login";
-import Register from "../../components/Auth/Register";
+import Navbar from "../../components/Navigation/LandingPageNavbar/LandingPageNavbar";
+import PomodoroSection from "../../components/LandingPageSections/Pomodoro/Pomodoro";
+import BoardSection from "../../components/LandingPageSections/Board/Board";
+import StatsSection from "../../components/LandingPageSections/Stats/Stats";
+import Footer from "../../components/LandingPageSections/Footer/Footer";
+import Hero from "../../components/LandingPageSections/Hero/Hero";
 import "./LandingPage.scss";
 
 class LandingPage extends Component {
@@ -47,59 +47,21 @@ class LandingPage extends Component {
   };
 
   render() {
-    // check for error
-    const { error } = this.props;
-    let errorMessage = null;
-
-    if (error) {
-      errorMessage = error.response.data.error.message;
-    }
     return (
-      // This is the website for when you're not logged in
-      // So far it will have a login and a signup form
-
-      // Commented out the preview components because
-      // they're looking bad at the moment.
-
-      <Fragment>
+      <div className="Landing-Page">
         {/* this is the navbar with the auth forms modal */}
-        {/* <Navbar
+        <Navbar
           error={this.props.error}
           state={this.state}
           onSubmit={this.submitHandler}
-          onChange={this.onChangeHandler} */}
-        {/* /> */}
-
-        {/* feature preview sections */}
-
-        {/* hero section */}
-        {/* <Hero /> */}
-
-        {/* pomodoro section */}
-        {/* <PomodoroSection /> */}
-
-        {/* Board section */}
-        {/* <BoardSection /> */}
-
-        {/* todo section */}
-        {/*  */}
-
-        <div className="Container">
-          {/* Auth forms */}
-          <Login
-            submitHandler={this.submitHandler}
-            onChangeHandler={this.onChangeHandler}
-            {...this.state.login}
-          />
-          {/* show error if there is an error with the authentication process */}
-          {errorMessage ? <p style={{ color: "red" }}>{errorMessage}</p> : null}
-          <Register
-            submitHandler={this.submitHandler}
-            onChangeHandler={this.onChangeHandler}
-            {...this.state.register}
-          />
-        </div>
-      </Fragment>
+          onChange={this.onChangeHandler}
+        />
+        <Hero />
+        <PomodoroSection />
+        <BoardSection />
+        <StatsSection />
+        <Footer />
+      </div>
     );
   }
 }

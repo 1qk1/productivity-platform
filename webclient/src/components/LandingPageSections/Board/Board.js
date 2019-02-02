@@ -1,21 +1,23 @@
 import React from "react";
+import landingBoardImage from "../../../assets/landing-board.svg";
 
 const board = () => {
   return (
     <section className="Section Section-Board Section-Reversed">
-      <div className="Section-Wrapper Container">
-        <div className="Subsection">
-          <h3 className="Subsection-Header">
-            Your time, <br />
-            Organized.
-          </h3>
+      <div className="Container row">
+        <div className="Subsection col m8">
+          <h2 className="Subsection-Header">Your time, organized.</h2>
           <p className="Subsection-Paragraph">
             Organize your tasks in seperate categories and focus on the things
             that matter.
           </p>
         </div>
-        <div className="Subsection">
-          <img className="Subsection-Image" alt="Board" />
+        <div className="Subsection col m4">
+          <img
+            className="Subsection-Image"
+            src={landingBoardImage}
+            alt="Board"
+          />
         </div>
       </div>
     </section>
