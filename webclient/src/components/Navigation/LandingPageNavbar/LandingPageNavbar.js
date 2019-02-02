@@ -24,7 +24,7 @@ const landingPageNavbar = props => {
             <NavLink to="/">FAQ</NavLink>
           </li>
           <li>
-            <NavLink to="/">Pricing</NavLink>
+            <NavLink to="/">Features</NavLink>
           </li>
           <li>
             <Modal
