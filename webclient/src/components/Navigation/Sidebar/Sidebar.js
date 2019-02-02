@@ -1,18 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
+import extensionMap from "../../../containers/Store/extensionMap";
 
 import SideButton from "./SideButton/SideButton";
 
 import "./Sidebar.scss";
 
-const sidebar = ({ logout }) => (
+const sidebar = ({ logout, extensions }) => (
   <div className="Sidebar">
     {/* icons with nav links */}
     <ul className="Sidebar-Links">
-      <SideButton path="/" iconClasses="far fa-clock" />
-      {/* the trello icon will be changed */}
-      {/* i couldn't find a better icon */}
-      <SideButton path="/board" iconClasses="fab fa-trello" />
+      {extensions.map(extension => (
+        <SideButton
+          key={`${extension}-sideButton`}
+          path={`/${extension}`}
+          iconClasses={extensionMap[extension].iconClasses}
+        />
+      ))}
+      <SideButton path="/store" iconClasses="fas fa-store" />
       {/* placeholders for future features */}
       {/* <SideButton path="/todo" iconClasses="fas fa-tasks" /> */}
       <li className="Sidebar-Link">
@@ -22,7 +27,8 @@ const sidebar = ({ logout }) => (
   </div>
 );
 sidebar.propTypes = {
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
+  extensions: PropTypes.array.isRequired
 };
 
 export default sidebar;

@@ -22,9 +22,15 @@ passport.use(
             if (!passwordIsValid) {
               throw new CustomError(401, "Incorrect username or password.");
             }
+            const { username, _id, extensions } = user;
+            const userData = {
+              username,
+              id: _id,
+              extensions
+            };
             // if the password was correct
             // continue and pass the user to done()
-            return done(null, user);
+            return done(null, userData);
           })
           // pass the error to done() and continue
           .catch(error => done(error));

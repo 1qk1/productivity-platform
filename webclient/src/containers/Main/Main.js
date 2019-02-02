@@ -1,91 +1,50 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { withRouter, Switch, Route, Redirect } from "react-router-dom";
 import Sidebar from "../../components/Navigation/Sidebar/Sidebar";
-import Pomodoro from "../../components/Pomodoro/Pomodoro";
-import Board from "../Board/Board";
+import Store from "../Store/Store";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
+import extensionMap from "../Store/extensionMap";
 
 class Main extends Component {
-  // This is the main component
-  // It contains the routes for each page
-  componentDidMount() {
-    window.addEventListener("focus", this.props.updateTimer);
-  }
   render() {
     return (
-      <Fragment>
+      <div className="App row">
         {/* Sidebar */}
-        <Sidebar logout={this.props.logout} />
-        {/* Routes */}
-        <div className="Container--Wide">
-          <Switch>
-            {/* Pomodoro route */}
-            <Route
-              path="/"
-              exact
-              component={() => (
-                <Fragment>
-                  <Pomodoro
-                    timer={this.props.timer}
-                    intervalId={this.props.intervalId}
-                    startPomodoro={this.props.startPomodoro}
-                    stopPomodoro={this.props.stopTimer}
-                    pomodoroCompleted={this.props.pomodoroCompleted}
-                    isPomodoro={this.props.isPomodoro}
-                    completedSessions={this.props.completedSessions}
-                  />
-                  {/* helper buttons to test the pomodoro */}
-                  {/* uncomment it if you need to test stuff */}
-                  {/* {process.env.NODE_ENV === "development" && (
-                    <Fragment>
-                      <button onClick={this.props.pomodoroCompleted}>
-                        Completed
-                      </button>
-                      <button onClick={this.props.getPomodoros}>Get</button>
-                      <button onClick={this.props.endPomodoro}>5 SECS</button>
-                    </Fragment>
-                  )} */}
-                </Fragment>
-              )}
-            />
-            <Route path="/board" component={Board} />
-            {/* placeholders for future features */}
-            {/* <Route path="/todo" component={() => <h1>todo</h1>} /> */}
-            {/* <Route path="/notes" component={() => <h1>notes</h1>} /> */}
-            <Redirect to="/" />
-          </Switch>
+        <div className="col s2 m1">
+          <Sidebar
+            logout={this.props.logout}
+            extensions={this.props.extensions}
+          />
         </div>
-        <ToastContainer autoClose={5000} />
-      </Fragment>
+        {/* Routes */}
+        <div className="col s10 m11">
+          <Switch>
+            {this.props.extensions.map(extension => (
+              <Route
+                key={`${extension}-route`}
+                path={`/${extension}`}
+                component={() => extensionMap[extension].component}
+              />
+            ))}
+            <Route path="/store" component={Store} />
+            <Redirect to={`${this.props.extensions[0] || "/store"}`} />
+          </Switch>
+          <ToastContainer autoClose={5000} pauseOnFocusLoss={false} />
+        </div>
+      </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  timer: state.pomodoro.timer,
-  completedSessions: state.pomodoro.completedSessions,
-  intervalId: state.pomodoro.intervalId,
-  isPomodoro: state.pomodoro.isPomodoro,
-  userId: state.auth.user.id
+  extensions: state.auth.user.extensions
 });
 
 const mapDispatchToProps = dispatch => ({
-  stopTimer: () => dispatch(actions.stopTimer()),
-  logout: () => dispatch(actions.logoutHandler()),
-  // function to run when a pomodoro got completed
-  // takes if the clock was a pomodoro or a break as
-  // an argument
-  updateTimer: () => dispatch(actions.updateTimer()),
-  pomodoroCompleted: isPomodoro =>
-    dispatch(actions.pomodoroCompleted(isPomodoro)),
-  // get all the user's pomodoros from the server
-  getPomodoros: () => dispatch(actions.getPomodoros()),
-  startPomodoro: () => dispatch(actions.startPomodoro()),
-  // helper function to put the timer to 5 seconds left
-  endPomodoro: () => dispatch(actions.end5Seconds())
+  logout: () => dispatch(actions.logoutHandler())
 });
 
 export default withRouter(

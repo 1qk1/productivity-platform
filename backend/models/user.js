@@ -26,7 +26,8 @@ const userSchema = new mongoose.Schema({
       type: mongoose.SchemaTypes.ObjectId,
       ref: "boardList"
     }
-  ]
+  ],
+  extensions: [String]
 });
 
 // encode the password before saving

@@ -1,0 +1,17 @@
+.Landing-Page {
+  .Landing-Footer {
+    background-color: #34495e;
+    padding: 1.5rem 0;
+    .Footer-Links {
+      margin: 0;
+      text-align: right;
+      li {
+        display: inline-block;
+      }
+      a {
+        padding: 0 0.75rem;
+        color: #bdc3c7;
+      }
+    }
+  }
+}

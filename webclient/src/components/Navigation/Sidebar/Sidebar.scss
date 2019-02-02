@@ -1,14 +1,11 @@
 .Sidebar {
-  position: absolute;
+  // position: absolute;
   padding: 1rem;
-
-  @media screen and (max-width: 500px) {
-    display: none;
-  }
 
   &-Links {
     font-size: 2.5rem;
     padding: 0;
     list-style-type: none;
+    text-align: center;
   }
 }

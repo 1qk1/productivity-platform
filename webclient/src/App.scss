@@ -7,7 +7,9 @@ body {
     rgba(52, 73, 94, 1) 30%,
     #39425f 100%
   );
+}
 
+body .App {
   color: $color-white;
 }
 
@@ -41,6 +43,12 @@ body {
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+a.btn-long,
+button.btn-long {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
 }
 
 // colors:

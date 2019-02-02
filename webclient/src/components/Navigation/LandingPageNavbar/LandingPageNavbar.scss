@@ -2,7 +2,8 @@
 
 .Home-Navbar {
   box-shadow: none;
-  background-color: transparent;
+  background-color: #34495e;
+
   ul {
     height: 100%;
     display: flex;
@@ -12,7 +13,6 @@
       transition: $color-transition;
       text-transform: uppercase;
       font-weight: 500;
-      // font-size: 16px;
       &:hover {
         background-color: transparent;
         color: #2ecc71;
