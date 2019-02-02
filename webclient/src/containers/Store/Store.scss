@@ -1,17 +1,34 @@
 .Store {
   display: flex;
   padding: 1rem;
+  flex-wrap: wrap;
 
   &-Extension {
-    // border: 1px solid #999;
     background-color: #566e88;
-    padding: 2rem 1rem;
-    flex: 0 0 200px;
+    flex: 0 0 220px;
     text-align: center;
     margin: 0 0.5rem;
-    h6 {
-      margin: 0;
-      margin-bottom: 2rem;
+    margin-bottom: 1rem;
+
+    @media screen and (max-width: 600px) {
+      margin-left: auto;
+      margin-right: auto;
+      flex: 1 1 100%;
+      max-width: 300px;
+    }
+
+    .card-content {
+      margin-bottom: 4rem;
+    }
+    .card-action {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+    }
+
+    span.card-title {
+      font-size: 1.3rem;
     }
   }
 }
