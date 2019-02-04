@@ -3,7 +3,7 @@ import axios from "axios";
 const port = process.env.PORT || 3001;
 const ip = process.env.IP || "localhost";
 
-let url = `${ip}:${port}`;
+let url = `http://${ip}:${port}`;
 
 if (process.env.NODE_ENV === "production") {
   url = "";
