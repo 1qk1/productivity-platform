@@ -25,12 +25,12 @@ class App extends Component {
       // check if not logged in then
       // show the website
       content = (
-        <Switch>
-          <Suspense fallback={<Loader />}>
+        <Suspense fallback={<Loader />}>
+          <Switch>
             <Route path="/" exact component={() => <AsyncLandingPage />} />
             <Redirect to="/" />
-          </Suspense>
-        </Switch>
+          </Switch>
+        </Suspense>
       );
     } else if (token !== undefined) {
       // show main app when token is cheched (not undefined)

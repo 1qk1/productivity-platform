@@ -14,17 +14,13 @@ const express = require("express"),
 
 require("dotenv").config();
 
-mongoose.connect(
-  process.env.MONGODB_URI,
-  { useNewUrlParser: true },
-  error => {
-    if (!error) {
-      console.log("database connected");
-    } else {
-      console.log("database connection error:", error);
-    }
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, error => {
+  if (!error) {
+    console.log("database connected");
+  } else {
+    console.log("database connection error:", error);
   }
-);
+});
 mongoose.set("useCreateIndex", true);
 
 app.use(cors());
@@ -40,6 +36,16 @@ app.use("/api/pomodoro", pomodoroRoutes);
 app.use("/api/board/list", boardListRoutes);
 app.use("/api/board/card", boardCardRoutes);
 app.use("/api/extensions", extensionRoutes);
+
+if (process.env.NODE_ENV === "production") {
+  const path = require("path");
+
+  app.use(express.static(path.join(__dirname, "/webclient")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "/webclient/index.html"));
+  });
+}
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

@@ -1,6 +1,6 @@
 {
   "name": "productivity-platform",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "A productivity platform to help you be more focused, productive and manage your time better.",
   "keywords": [
     "productivity",
@@ -14,7 +14,15 @@
     "oss"
   ],
   "scripts": {
-    "start": "concurrently \" cd webclient && npm start\" \" cd backend && npm start \""
+    "install": "npm run install:client && npm run install:server",
+    "install:client": "cd webclient && npm install",
+    "install:server": "cd backend && npm install",
+    "start": "cd backend && npm start",
+    "dev": "concurrently \"npm run start:server\" \"npm run start:client\"",
+    "start:server": "cd backend && npm run start:dev",
+    "start:client": "cd webclient && npm start",
+    "build": "cd webclient && npm run build && cd .. && node postbuild.js",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -28,5 +36,8 @@
   "homepage": "https://github.com/1qk1/productivity-platform#readme",
   "devDependencies": {
     "concurrently": "^4.0.1"
+  },
+  "engines": {
+    "node": "10.3.0"
   }
 }
