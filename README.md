@@ -12,17 +12,15 @@ A step by step series of examples that tell you how to get a development env run
 
 1. Navigate into the project folder.
 
-2. Install dependencies with `npm install`
+2. Install dependencies with `npm run install`.
 
-3. Navigate in each of the subprojects (backend/webclient) and run `npm install` again.
+3. In the backend folder, make a `.env` file with 2 keys: `MONGODB_URI` and `JWT_SECRET`, and then give them a database url and a jwt secret.
 
-4. In the backend folder, make a `.env` file with 2 keys: `MONGODB_URI` and `JWT_SECRET`, and then give them a database url and a jwt secret.
+4. Go to the project folder again.
 
-5. Go to the project folder again.
+5. Run `npm run dev` to start the backend and the webclient.
 
-6. Run `npm start` to start the backend and the webclient.
-
-7. You're ready to code.
+6. You're ready to code.
 
 ## Running the tests
 
