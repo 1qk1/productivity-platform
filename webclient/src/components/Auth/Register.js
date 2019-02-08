@@ -35,8 +35,8 @@ const register = props => {
             value={props.email}
           />
         </label>
-        <button className="btn" type="submit" name="action">
-          Submit
+        <button className="btn btn-green" type="submit" name="action">
+          Sign Up
         </button>
       </form>
     </div>
