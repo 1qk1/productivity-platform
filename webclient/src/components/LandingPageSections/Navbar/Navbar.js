@@ -1,12 +1,12 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import "./LandingPageNavbar.scss";
+import "./Navbar.scss";
 import { NavLink } from "react-router-dom";
 import Modal from "../../UI/Modal/Toggler";
 import Login from "../../Auth/Login";
 import Register from "../../Auth/Register";
 
-const landingPageNavbar = props => {
+const navbar = props => {
   const { error } = props;
   let errorMessage = null;
 
@@ -14,7 +14,7 @@ const landingPageNavbar = props => {
     errorMessage = error.response.data.error.message;
   }
   return (
-    <nav className="Home-Navbar">
+    <nav className="Landing-Navbar">
       <div className="nav-wrapper Container">
         {/* <a href="#" class="brand-logo">
           Logo
@@ -58,11 +58,11 @@ const landingPageNavbar = props => {
   );
 };
 
-landingPageNavbar.propTypes = {
+navbar.propTypes = {
   state: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   error: PropTypes.object
 };
 
-export default landingPageNavbar;
+export default navbar;
