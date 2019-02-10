@@ -1,9 +1,19 @@
 .Landing-Page {
   background-color: #ecf0f1;
+
+  header {
+    background: #34495e;
+    background: linear-gradient(
+      -45deg,
+      rgba(52, 73, 94, 1) 0%,
+      rgba(72, 91, 117, 1) 100%
+    );
+  }
+
   * {
     letter-spacing: -0.5px;
   }
-  h2 {
+  .Subsection-Header {
     font-weight: 700;
   }
   p,
