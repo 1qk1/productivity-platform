@@ -15,13 +15,14 @@ const sidebar = ({ logout, extensions }) => (
           key={`${extension}-sideButton`}
           path={`/${extension}`}
           iconClasses={extensionMap[extension].iconClasses}
+          title={extensionMap[extension].title}
         />
       ))}
-      <SideButton path="/store" iconClasses="fas fa-store" />
+      <SideButton path="/store" iconClasses="fas fa-store" title="Store" />
       {/* placeholders for future features */}
       {/* <SideButton path="/todo" iconClasses="fas fa-tasks" /> */}
       <li className="Sidebar-Link">
-        <i onClick={logout} className="fas fa-sign-out-alt" />
+        <i onClick={logout} className="fas fa-sign-out-alt" title="Logout" />
       </li>
     </ul>
   </div>
