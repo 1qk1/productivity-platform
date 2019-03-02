@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 
 import "./SideButton.scss";
 
-const sideButton = ({ iconClasses, path }) => (
+const sideButton = ({ iconClasses, path, title }) => (
   <li className="Sidebar-Link">
     <NavLink to={path}>
-      <i className={iconClasses} />
+      <i className={iconClasses} title={title} />
     </NavLink>
   </li>
 );
