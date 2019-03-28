@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/auth";
-import Navbar from "../../components/Navigation/LandingPageNavbar/LandingPageNavbar";
+import Navbar from "../../components/LandingPageSections/Navbar/Navbar";
 import PomodoroSection from "../../components/LandingPageSections/Pomodoro/Pomodoro";
 import BoardSection from "../../components/LandingPageSections/Board/Board";
 import StatsSection from "../../components/LandingPageSections/Stats/Stats";
@@ -50,13 +50,15 @@ class LandingPage extends Component {
     return (
       <div className="Landing-Page">
         {/* this is the navbar with the auth forms modal */}
-        <Navbar
-          error={this.props.error}
-          state={this.state}
-          onSubmit={this.submitHandler}
-          onChange={this.onChangeHandler}
-        />
-        <Hero />
+        <header>
+          <Navbar
+            error={this.props.error}
+            state={this.state}
+            onSubmit={this.submitHandler}
+            onChange={this.onChangeHandler}
+          />
+          <Hero />
+        </header>
         <PomodoroSection />
         <BoardSection />
         <StatsSection />

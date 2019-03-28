@@ -13,7 +13,7 @@ body .App {
   color: $color-white;
 }
 
-#root {
+.App {
   overflow: auto;
 }
 
@@ -50,6 +50,14 @@ button.btn-long {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
 }
+
+// a.btn-green,
+// button.btn-green {
+//   background-color: $color-secondary;
+//   &:hover, {
+//     background-color: $color-main;
+//   }
+// }
 
 // colors:
 // bg #34495e,
