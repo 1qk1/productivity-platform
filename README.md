@@ -1,4 +1,4 @@
-# ⏲ Productivity platform (no name, please suggest one at [this issue](link-here))
+# ⏲ Productivity platform (no name, please suggest one at [this issue](https://github.com/1qk1/productivity-platform/issues/42))
 
 This project is aimed towards those who want to be more productive, be more focused or want help managing their time.
 
