@@ -26,8 +26,8 @@ const login = props => {
             name="password"
           />
         </label>
-        <button className="btn" type="submit" name="action">
-          Submit
+        <button className="btn btn-green" type="submit" name="action">
+          Log in
         </button>
       </form>
     </div>

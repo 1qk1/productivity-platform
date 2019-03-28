@@ -5,7 +5,7 @@ const pomodoro = () => {
   return (
     <section className="Section Section-Pomodoro">
       <div className="Container row">
-        <div className="Subsection col m8">
+        <div className="Subsection col l8 m12">
           <h2 className="Subsection-Header">
             Focus on your work. <br />
             Get rid of distractions.
@@ -15,7 +15,7 @@ const pomodoro = () => {
             and 5 minute breaks in between.
           </p>
         </div>
-        <div className="Subsection col m4">
+        <div className="Subsection col l4 m12">
           <img
             className="Subsection-Image"
             src={activityImage}

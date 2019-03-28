@@ -4,12 +4,12 @@ import heroImg from "../../../assets/landing-hero.svg";
 import "./Hero.scss";
 
 const hero = () => (
-  <section className="Hero">
+  <div className="Hero">
     <div className="Container row">
       <div className="Subsection col l6 m12">
-        <h2 className="Subsection-Header">
+        <h1 className="Subsection-Header">
           Beat procrastination and track your time.
-        </h2>
+        </h1>
         <p className="Subsection-Paragraph">
           Stay on top of things. Ineffective time management can take many
           forms. Whether it’s procrastination, personal distractions, or
@@ -24,7 +24,7 @@ const hero = () => (
         <img className="bg-image" src={heroImg} alt="Hero" />
       </div>
     </div>
-  </section>
+  </div>
 );
 
 export default hero;

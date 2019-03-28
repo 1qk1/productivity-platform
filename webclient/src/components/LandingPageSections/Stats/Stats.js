@@ -5,7 +5,7 @@ const stats = () => {
   return (
     <section className="Section Section-Stats">
       <div className="Container row">
-        <div className="Subsection col m8">
+        <div className="Subsection col l8 m12">
           <h2 className="Subsection-Header">
             See your most productive hours and more stats.
           </h2>
@@ -15,7 +15,7 @@ const stats = () => {
             <small style={{ color: "gray" }}>(coming soon)</small>
           </p>
         </div>
-        <div className="Subsection col m4">
+        <div className="Subsection col l4 m12">
           <img className="Subsection-Image" src={statsImage} alt="Clock Icon" />
         </div>
       </div>
