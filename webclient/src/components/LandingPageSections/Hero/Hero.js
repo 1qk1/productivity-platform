@@ -16,7 +16,7 @@ const hero = () => (
           projects that take more time than they should, there are tons of
           different things that waste our time every day.
         </p>
-        <a href="/" className="btn-large btn-long">
+        <a href="/" className="Hero--CTA btn-large btn-long">
           Sign up. For Free.
         </a>
       </div>
