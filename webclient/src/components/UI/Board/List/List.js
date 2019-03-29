@@ -97,7 +97,7 @@ class List extends PureComponent {
             textClasses="List-Title"
           />
           <Dropdown
-            classes="List-Controls Board-Controls"
+            dropdownClasses="List-Controls Board-Controls"
             buttonClasses="btn-invisible List-Controls--Button"
             iconClasses="fas fa-ellipsis-h"
           >
