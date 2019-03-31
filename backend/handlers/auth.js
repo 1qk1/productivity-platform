@@ -48,11 +48,11 @@ const registerHandler = (req, res) => {
           // in req.user
           req.user = newUser;
           // and send a JWT response
-          sendJSONResponse(req, res);
+          sendNewToken(req, res);
         })
-        .catch(error => res.handleError(error));
+        .catch(res.handleError);
     })
-    .catch(error => res.handleError(error));
+    .catch(res.handleError);
 };
 
 module.exports = {
