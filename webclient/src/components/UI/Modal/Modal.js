@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import "./Modal.scss";
@@ -6,7 +6,7 @@ import "./Modal.scss";
 const modal = props => {
   if (!Boolean(props.show)) return null;
   return (
-    <Fragment>
+    <div className="Modal-Container">
       <div
         onClick={props.close}
         className={`Backdrop ${props.backdropClasses || ""}`}
@@ -14,7 +14,7 @@ const modal = props => {
       <div className={`Modal ${props.modalClasses || ""}`}>
         {props.children}
       </div>
-    </Fragment>
+    </div>
   );
 };
 
