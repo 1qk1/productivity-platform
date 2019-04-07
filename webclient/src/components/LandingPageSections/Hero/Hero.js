@@ -1,9 +1,10 @@
 import React from "react";
 import heroImg from "../../../assets/landing-hero.svg";
+import PropTypes from "prop-types";
 
 import "./Hero.scss";
 
-const hero = () => (
+const hero = ({ toggleForms }) => (
   <div className="Hero">
     <div className="Container row">
       <div className="Subsection col l6 m12">
@@ -16,9 +17,9 @@ const hero = () => (
           projects that take more time than they should, there are tons of
           different things that waste our time every day.
         </p>
-        <a href="/" className="Hero--CTA btn-large btn-long">
+        <button className="Hero--CTA btn-large btn-long" onClick={toggleForms}>
           Sign up. For Free.
-        </a>
+        </button>
       </div>
       <div className="col l6 m12">
         <img className="bg-image" src={heroImg} alt="Hero" />
@@ -26,5 +27,9 @@ const hero = () => (
     </div>
   </div>
 );
+
+hero.propTypes = {
+  toggleForms: PropTypes.func.isRequired
+};
 
 export default hero;

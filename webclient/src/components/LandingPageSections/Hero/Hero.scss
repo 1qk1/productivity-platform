@@ -2,10 +2,8 @@
   padding-top: 3rem;
   margin-bottom: 3rem;
   overflow: hidden;
-  // max-height: 80vh;
   position: relative;
   color: #ecf0f1;
-  // color: #fff;
   padding: 3rem 0;
   .Subsection {
     margin-bottom: 3rem;
@@ -15,9 +13,6 @@
     font-size: 1.2rem;
   }
   .bg-image {
-    // position: absolute;
-    // margin-left: 50%;
-    // left: 0;
     width: 100%;
     @media (max-width: 992px) {
       max-height: 300px;
@@ -25,6 +20,9 @@
   }
 
   &--CTA {
-    background-color: #258c6a;
+    background-color: #27ae7a;
+    &:hover {
+      background-color: #48c394;
+    }
   }
 }
