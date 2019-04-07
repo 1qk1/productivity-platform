@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken"),
   User = require("../models/user"),
-  CustomError = require("../middleware/error").CustomError;
+  CustomError = require("../middleware/error").CustomError,
+  { validationResult } = require("express-validator/check");
 
 const sendNewToken = (req, res, next) => {
   // get the user's username and id
@@ -33,6 +34,9 @@ const sendUserJSON = (req, res) => {
 };
 
 const registerHandler = (req, res) => {
+  const errors = validationResult(req).array();
+  if (errors.length > 0) return res.handleError(new CustomError(400, errors));
+
   const user = req.body;
   // check if user exists
   User.findOne({ username: user.username })
@@ -48,11 +52,11 @@ const registerHandler = (req, res) => {
           // in req.user
           req.user = newUser;
           // and send a JWT response
-          sendJSONResponse(req, res);
+          sendNewToken(req, res);
         })
-        .catch(error => res.handleError(error));
+        .catch(res.handleError);
     })
-    .catch(error => res.handleError(error));
+    .catch(res.handleError);
 };
 
 module.exports = {

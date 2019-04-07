@@ -13,13 +13,28 @@
   }
   button[type="submit"] {
     margin: 1rem 0;
+    background-color: #27ae7a;
+    &:hover {
+      background-color: #48c394;
+    }
   }
 }
 
-.AuthModal {
-  padding: 1rem 2.5rem 1.75rem 2.5rem;
-  width: 95%;
-  max-width: 600px;
-  top: 50%;
-  transform: translate(-50%, -50%);
+.Modal {
+  &.AuthModal {
+    padding: 1rem 2.5rem 1.75rem 2.5rem;
+    width: 95%;
+    max-width: 600px;
+    top: 50%;
+  }
+  .Modal-Container {
+    position: relative;
+    padding-top: 2rem;
+  }
+  .Modal-Button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 1rem 0.5rem;
+  }
 }

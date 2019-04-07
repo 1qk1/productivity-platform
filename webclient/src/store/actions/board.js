@@ -36,7 +36,6 @@ export const dropCard = (cardId, toIndex, fromList, toList) => {
   return {
     queue: actionTypes.MOVE_CARD,
     callback: (next, dispatch, getState) => {
-      console.log("sent request");
       axios
         .put("/board/card/moveCard", {
           fromList,
@@ -45,7 +44,6 @@ export const dropCard = (cardId, toIndex, fromList, toList) => {
           toIndex
         })
         .then(() => {
-          console.log("done moving");
           next();
         })
         .catch(error => {
@@ -85,7 +83,6 @@ export const changeListTitle = (listId, newTitle) => {
         edit: { title: newTitle }
       })
       .then(res => {
-        console.log(res.data.updatedList);
         dispatch({ type: actionTypes.UPDATE_LIST, list: res.data.updatedList });
       })
       .catch(error => {
@@ -102,7 +99,6 @@ export const changeCardText = (listId, cardId, newText) => {
         edit: { text: newText }
       })
       .then(res => {
-        console.log(res.data.updatedCard);
         dispatch({
           type: actionTypes.CHANGE_CARD_TEXT,
           listId,

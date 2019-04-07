@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken"),
-  passport = require("passport");
+  passport = require("passport"),
+  { body } = require("express-validator/check");
 
 const verifyToken = (req, res, next) => {
   // split the token from the Bearer
@@ -41,7 +42,18 @@ const verifyPassword = (req, res, next) => {
   // but prettier doesn't do me the favor
 };
 
+const registerValidations = [
+  body("email", "Please enter a valid e-mail address.").isEmail(),
+  body("username", "Username should be more than 3 characters long.").isLength({
+    min: 3
+  }),
+  body("password", "Password should be more than 5 characters long.").isLength({
+    min: 5
+  })
+];
+
 module.exports = {
   verifyToken,
-  verifyPassword
+  verifyPassword,
+  registerValidations
 };

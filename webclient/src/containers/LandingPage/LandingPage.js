@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import axios from "../../axios";
 import * as actions from "../../store/actions/auth";
 import Navbar from "../../components/LandingPageSections/Navbar/Navbar";
 import PomodoroSection from "../../components/LandingPageSections/Pomodoro/Pomodoro";
@@ -7,57 +8,111 @@ import BoardSection from "../../components/LandingPageSections/Board/Board";
 import StatsSection from "../../components/LandingPageSections/Stats/Stats";
 import Footer from "../../components/LandingPageSections/Footer/Footer";
 import Hero from "../../components/LandingPageSections/Hero/Hero";
+import AuthForms from "../../components/Auth/Auth";
+import _ from "lodash";
+import initialState from "./initialState";
+import { validate } from "../../shared/utilities";
+
 import "./LandingPage.scss";
 
 class LandingPage extends Component {
-  state = {
-    login: {
-      username: "",
-      password: ""
-    },
-    register: {
-      username: "",
-      password: "",
-      email: ""
-    }
-  };
+  // moved the state in a separate file because it was huge
+  state = initialState;
+
   submitHandler = event => {
     // prevent the default submit action
     event.preventDefault();
-    console.log(event);
     // get the type of the submitted form (register/login)
     const type = event.target.id;
+    if (!_.every(this.state.formData[type], ["valid", true])) return;
     // start authentication with the login data
-    this.props.onAuth({ authType: type, data: this.state[type] });
+    // convert the form fields in a {username: "something"} form
+    const data = Object.keys(this.state.formData[type]).reduce(
+      (sum, key) => ({ ...sum, [key]: this.state.formData[type][key].value }),
+      {}
+    );
+    this.makeAuthRequest(type, data);
+  };
+
+  makeAuthRequest = (type, data) => {
+    // send the data
+    axios
+      .post(`/auth/${type}`, data)
+      .then(res => {
+        const { token, user } = res.data;
+        // set the auth header as the user's JWT
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        // set the token in local storage
+        localStorage.setItem("token", token);
+        // send the user to redux
+        this.props.onAuthSuccess(token, user);
+      })
+      .catch(error => {
+        // get the error array from the objects
+        const errors = error.response.data.error.message;
+        const newFormData = _.cloneDeep(this.state.formData);
+        // if the errors is a string
+        if (_.isString(errors)) {
+          // set the form's error to this error
+          newFormData.error = errors;
+          this.setState({ formData: newFormData });
+          // else (array)
+        } else {
+          // set each field's error based on each error in the array
+          _.forEach(newFormData[type], field => (field.errors = []));
+          errors.forEach(err =>
+            newFormData[type][err.param].errors.push(err.msg)
+          );
+          // update state with the errors
+          this.setState({ formData: newFormData });
+        }
+      });
   };
 
   onChangeHandler = e => {
     // get the value from the element
     const value = e.target.value;
-    // get what action you want to do (login/register)
+    // get what action you want to do (login/register) from the closest form id
     const actionType = e.target.closest("form").id;
-    //get what the element action is (username/password etc)
-    const elType = e.target.name;
-    // clone the login/register field
-    const newState = { ...this.state[actionType] };
+    //get the field name
+    const fieldName = e.target.name;
+    // clone the form data
+    const newFormData = _.cloneDeep(this.state.formData);
     // change the value
-    newState[elType] = value;
+    newFormData[actionType][fieldName].value = value;
+    newFormData[actionType][fieldName].touched = true;
+
+    // validate the field
+    const validationErrors = validate(
+      value,
+      this.state.formData[actionType][fieldName].rules
+    );
+    // update the new form data
+    newFormData[actionType][fieldName] = {
+      ...newFormData[actionType][fieldName],
+      errors: validationErrors,
+      valid: validationErrors.length === 0
+    };
     // change the state
-    this.setState(() => ({ [actionType]: newState }));
+    this.setState({ formData: newFormData });
   };
+
+  toggleModal = () =>
+    this.setState(() => ({ showForms: !this.state.showForms }));
 
   render() {
     return (
       <div className="Landing-Page">
-        {/* this is the navbar with the auth forms modal */}
+        <AuthForms
+          submitHandler={this.submitHandler}
+          onChangeHandler={this.onChangeHandler}
+          formData={this.state.formData}
+          showForms={this.state.showForms}
+          toggleModal={this.toggleModal}
+        />
         <header>
-          <Navbar
-            error={this.props.error}
-            state={this.state}
-            onSubmit={this.submitHandler}
-            onChange={this.onChangeHandler}
-          />
-          <Hero />
+          <Navbar toggleForms={this.toggleModal} />
+          <Hero toggleForms={this.toggleModal} />
         </header>
         <PomodoroSection />
         <BoardSection />
@@ -73,8 +128,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  // executes when authentication starts
-  onAuth: ({ authType, data }) => dispatch(actions.authHandler(authType, data))
+  onAuthSuccess: (token, user) => dispatch(actions.authSuccess(token, user))
 });
 
 export default connect(

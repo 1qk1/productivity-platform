@@ -1,9 +1,9 @@
 import React, { Component, lazy, Suspense } from "react";
-import "./App.scss";
-import Loader from "./components/UI/Loader/Loader";
 import { connect } from "react-redux";
 import * as actions from "./store/actions/auth";
 import { Switch, Redirect, Route, BrowserRouter } from "react-router-dom";
+import Loader from "./components/UI/Loader/Loader";
+import "./App.scss";
 
 const AsyncLandingPage = lazy(() =>
   import("./containers/LandingPage/LandingPage")
