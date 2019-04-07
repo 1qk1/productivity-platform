@@ -2,13 +2,11 @@
   .List {
     background-color: #ddd;
     margin: 0 0.5rem;
-    // padding: 0.75rem;
     border-radius: 3px;
     flex: 0 0 300px;
     color: #333;
     height: fit-content;
     max-height: 80vh;
-    // overflow-y: hidden;
     &-Header {
       display: flex;
       justify-content: space-between;
