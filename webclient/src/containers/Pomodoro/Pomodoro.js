@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import { secondsToTime } from "../../utilities";
+import { secondsToTime } from "../../shared/utilities";
 import "./Pomodoro.scss";
 
 class Pomodoro extends Component {
@@ -18,7 +18,6 @@ class Pomodoro extends Component {
   };
 
   componentDidUpdate() {
-    console.log(this.props.intervalId);
     const time = secondsToTime(this.props.timer);
     if (this.props.intervalId !== null) {
       document.title = `${
