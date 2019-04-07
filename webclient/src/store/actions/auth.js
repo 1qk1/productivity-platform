@@ -30,21 +30,9 @@ export const checkAuth = () => {
   };
 };
 
-export const authHandler = (authType, data) => {
+export const authSuccess = (token, user) => {
   return dispatch => {
-    dispatch({ type: actionTypes.AUTH_START });
-    // send the data
-    axios
-      .post(`/auth/${authType}`, data)
-      .then(res => {
-        const { token, user } = res.data;
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-        localStorage.setItem("token", token);
-        dispatch({ type: actionTypes.AUTH_SUCCESS, token, user });
-      })
-      .catch(error => {
-        dispatch({ type: actionTypes.AUTH_FAIL, error });
-      });
+    dispatch({ type: actionTypes.AUTH_SUCCESS, token, user });
   };
 };
 

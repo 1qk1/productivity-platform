@@ -1,6 +1,6 @@
 export {
   checkAuth,
-  authHandler,
+  authSuccess,
   logoutHandler,
   addExtension,
   removeExtension
