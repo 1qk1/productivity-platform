@@ -33,7 +33,6 @@ const cardSource = {
 
     if (initialIndex === index && listIndex === initialListIndex) return;
 
-    console.log("inside endDrag", cardId, index, initialListId, listId);
     props.dropCard(cardId, index, initialListId, listId);
   }
 };
@@ -79,7 +78,6 @@ const cardTarget = {
     if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
       return;
     }
-    console.log(dragIndex, hoverIndex, listIndex);
 
     // Time to actually perform the action
     props.moveCard(dragIndex, hoverIndex, listIndex, listIndex);

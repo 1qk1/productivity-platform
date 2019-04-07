@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from "react";
 import { withRouter, Switch, Route, Redirect } from "react-router-dom";
-import Sidebar from "../../components/Navigation/Sidebar/Sidebar";
-import Store from "../Store/Store";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
-import "react-toastify/dist/ReactToastify.min.css";
-import { ToastContainer } from "react-toastify";
 import extensionMap from "../Store/extensionMap";
+import { ToastContainer } from "react-toastify";
+import Store from "../Store/Store";
+import Sidebar from "../../components/Navigation/Sidebar/Sidebar";
 import "./Main.scss";
+import "react-toastify/dist/ReactToastify.min.css";
 
 class Main extends Component {
   render() {

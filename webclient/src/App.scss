@@ -51,13 +51,19 @@ button.btn-long {
   padding-right: 2.5rem;
 }
 
-// a.btn-green,
-// button.btn-green {
-//   background-color: $color-secondary;
-//   &:hover, {
-//     background-color: $color-main;
-//   }
-// }
+input.Input-Invalid {
+  border-bottom: 1px solid #cc0000 !important;
+  box-shadow: 0 1px 0 0 #cc0000 !important;
+}
+
+p.Error-Message {
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.Error-red {
+  color: #cc0000;
+}
 
 // colors:
 // bg #34495e,

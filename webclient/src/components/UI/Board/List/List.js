@@ -37,9 +37,6 @@ const listTarget = {
     } = monitor.getItem();
 
     if (initialIndex === index && listIndex === initialListIndex) return;
-    console.log("inside drop", cardId, index, initialListId, listId);
-
-    // console.log(props, monitor.getItem());
     props.dropCard(cardId, index, initialListId, listId);
   }
 };
@@ -73,7 +70,6 @@ class List extends PureComponent {
   };
 
   onCardChangeHandler = e => {
-    console.log(e.target.value);
     this.setState({ newCardText: e.target.value });
   };
 
@@ -97,7 +93,7 @@ class List extends PureComponent {
             textClasses="List-Title"
           />
           <Dropdown
-            classes="List-Controls Board-Controls"
+            dropdownClasses="List-Controls Board-Controls"
             buttonClasses="btn-invisible List-Controls--Button"
             iconClasses="fas fa-ellipsis-h"
           >
