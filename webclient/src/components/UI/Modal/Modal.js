@@ -6,7 +6,7 @@ import "./Modal.scss";
 const modal = props => {
   if (!Boolean(props.show)) return null;
   return (
-    <div className="Modal-Container">
+    <div className="Modal-Wrapper">
       <div
         onClick={props.close}
         className={`Backdrop ${props.backdropClasses || ""}`}
