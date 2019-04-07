@@ -1,9 +1,10 @@
 const router = require("express").Router(),
   authHandlers = require("../handlers/auth"),
   verifyPassword = require("../middleware/auth").verifyPassword,
-  verifyToken = require("../middleware/auth").verifyToken;
+  verifyToken = require("../middleware/auth").verifyToken,
+  registerValidations = require("../middleware/auth").registerValidations;
 
-router.post("/register", authHandlers.registerHandler);
+router.post("/register", registerValidations, authHandlers.registerHandler);
 
 router.post(
   "/login",
