@@ -22,17 +22,19 @@
   .AuthButton {
     background-color: #27ae7a;
     border: none;
-    padding: 0.6rem 1rem;
-    border-radius: 20px;
+    padding: 0.75rem 1rem;
+    border-radius: 2px;
     cursor: pointer;
     color: #fff;
     font-weight: 500;
     text-transform: uppercase;
-    transition: $color-transition;
+    transition: all 0.1s ease-out;
     margin-left: 1rem;
     white-space: nowrap;
+    font-size: 0.9rem;
+    box-shadow: 2px 3px 3px rgba($color: #000000, $alpha: 0.1);
     &:hover {
-      background-color: #24b661;
+      background-color: #48c394;
     }
   }
 }
