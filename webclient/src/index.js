@@ -1,16 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.scss";
-import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import "normalize.css";
 import { Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+
+import App from "./App";
+
 import thunk from "redux-thunk";
 import ReduxAsyncQueue from "redux-async-queue";
 import pomodoroReducer from "./store/reducers/pomodoro";
 import authReducer from "./store/reducers/auth";
 import boardReducer from "./store/reducers/board";
+
+import "./index.scss";
+import "normalize.css";
 import "./vendors/materialize/sass/materialize.scss";
 import "./scss/_index.scss";
 
