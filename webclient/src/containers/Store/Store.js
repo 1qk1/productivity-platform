@@ -27,7 +27,7 @@ class Store extends Component {
 }
 
 const mapStateToProps = state => ({
-  extensions: state.auth.user.extensions
+  extensions: state.user.user.extensions
 });
 
 const mapDispatchToProps = dispatch => ({

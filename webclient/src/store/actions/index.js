@@ -4,7 +4,7 @@ export {
   logoutHandler,
   addExtension,
   removeExtension
-} from "./auth";
+} from "./user";
 export {
   pomodoroCompleted,
   getPomodoros,

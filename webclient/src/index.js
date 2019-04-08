@@ -9,7 +9,7 @@ import App from "./App";
 import thunk from "redux-thunk";
 import ReduxAsyncQueue from "redux-async-queue";
 import pomodoroReducer from "./store/reducers/pomodoro";
-import authReducer from "./store/reducers/auth";
+import userReducer from "./store/reducers/user";
 import boardReducer from "./store/reducers/board";
 
 import "./index.scss";
@@ -21,7 +21,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   pomodoro: pomodoroReducer,
-  auth: authReducer,
+  user: userReducer,
   board: boardReducer
 });
 
