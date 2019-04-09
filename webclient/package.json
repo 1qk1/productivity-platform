@@ -1,6 +1,7 @@
 {
   "name": "webclient",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.8.1",
     "axios": "^0.18.0",
     "node-sass": "^4.11.0",
     "normalize.css": "^8.0.0",

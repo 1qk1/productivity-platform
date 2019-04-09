@@ -16,6 +16,7 @@ import "./index.scss";
 import "normalize.css";
 import "./vendors/materialize/sass/materialize.scss";
 import "./scss/_index.scss";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
