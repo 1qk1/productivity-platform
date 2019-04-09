@@ -1,8 +1,10 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component, lazy, Suspense, Fragment } from "react";
 import { connect } from "react-redux";
 import * as actions from "./store/actions/user";
 import { Switch, Redirect, Route, BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Loader from "./components/UI/Loader/Loader";
+import "react-toastify/dist/ReactToastify.min.css";
 import "./App.scss";
 
 const AsyncLandingPage = lazy(() =>
@@ -43,7 +45,12 @@ class App extends Component {
       );
     }
 
-    return <BrowserRouter>{content}</BrowserRouter>;
+    return (
+      <Fragment>
+        <BrowserRouter>{content}</BrowserRouter>
+        <ToastContainer autoClose={5000} pauseOnFocusLoss={false} />
+      </Fragment>
+    );
   }
 }
 

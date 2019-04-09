@@ -3,11 +3,9 @@ import { withRouter, Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import extensionMap from "../Store/extensionMap";
-import { ToastContainer } from "react-toastify";
 import Store from "../Store/Store";
 import Sidebar from "../../components/Navigation/Sidebar/Sidebar";
 import "./Main.scss";
-import "react-toastify/dist/ReactToastify.min.css";
 
 class Main extends Component {
   render() {
@@ -34,7 +32,6 @@ class Main extends Component {
             </Switch>
           </div>
         </div>
-        <ToastContainer autoClose={5000} pauseOnFocusLoss={false} />
       </Fragment>
     );
   }
