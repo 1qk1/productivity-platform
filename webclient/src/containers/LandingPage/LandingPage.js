@@ -48,6 +48,7 @@ class LandingPage extends Component {
         this.props.onAuthSuccess(token, user);
       })
       .catch(error => {
+        if (error.response === undefined) return;
         // get the error array from the objects
         const errors = error.response.data.error.message;
         const newFormData = _.cloneDeep(this.state.formData);
