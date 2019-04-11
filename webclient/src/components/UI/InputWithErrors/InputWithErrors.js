@@ -14,7 +14,7 @@ const InputWithErrors = ({ data, label, onChange, type, name, formId }) => {
       />
       {data.errors.map((error, index) => (
         <p
-          class="Error-Message Error-red"
+          className="Error-Message Error-red"
           key={`${formId}-${name}-error-${index}`}
         >
           {error}
