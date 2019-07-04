@@ -4,7 +4,9 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "start:dev": "nodemon app.js"
+    "start:dev": "nodemon app.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "",
   "dependencies": {
@@ -19,9 +21,11 @@
     "mongoose": "^5.3.14",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.7"
-  }
+  },
+  "snyk": true
 }
