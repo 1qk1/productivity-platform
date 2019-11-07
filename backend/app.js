@@ -4,8 +4,7 @@ const express = require("express"),
   mongoose = require("mongoose"),
   authRoutes = require("./routes/auth"),
   pomodoroRoutes = require("./routes/pomodoro"),
-  boardListRoutes = require("./routes/boardList"),
-  boardCardRoutes = require("./routes/boardCard"),
+  boardRoutes = require("./routes/board"),
   extensionRoutes = require("./routes/extensions"),
   passport = require("passport"),
   cors = require("cors"),
@@ -33,8 +32,7 @@ app.use(errorMiddleware);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/pomodoro", pomodoroRoutes);
-app.use("/api/board/list", boardListRoutes);
-app.use("/api/board/card", boardCardRoutes);
+app.use("/api/boards", boardRoutes);
 app.use("/api/extensions", extensionRoutes);
 
 if (process.env.NODE_ENV === "production") {
