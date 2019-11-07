@@ -1,17 +1,28 @@
 const jwt = require("jsonwebtoken"),
   passport = require("passport"),
+  CustomError = require("./error").CustomError,
   { body } = require("express-validator/check");
 
 const verifyToken = (req, res, next) => {
+  const authToken = req.headers.authorization;
+  if (authToken === undefined) {
+    return res.handleError(new CustomError(401, "Unauthorized"));
+  }
   // split the token from the Bearer
-  const token = req.headers.authorization.split(" ")[1];
+  const token = authToken.split(" ")[1];
   // verify the token
   // if token will get verified, the jwt's content
   // will be req.user so the next function can use it
   // if jwt is invalid, it will throw an error
   jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
     if (error) {
-      res.handleError(error);
+      res.handleError(
+        new CustomError(
+          401,
+          "There was a problem with your authorization token, please log in again."
+        )
+      );
+      return res.json({ error });
     } else {
       req.user = { ...decoded };
       // continue
