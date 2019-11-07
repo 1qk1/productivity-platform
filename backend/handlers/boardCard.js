@@ -1,90 +1,133 @@
-const BoardList = require("../models/boardList"),
+const Board = require("../models/board"),
   BoardCard = require("../models/boardCard"),
-  boardHelpers = require("../helpers/board");
+  { ObjectId } = require("mongoose").Types;
 
 const newCardHandler = (req, res) => {
   // deconstruct the data we need to make a card
-  const { text, listId } = req.body;
+  const { text, listId, boardId } = req.body;
   // create the card data
   const cardData = {
     text,
-    listId,
-    userId: req.user.id
+    owner: req.user.id
   };
   // create card
   BoardCard.create(cardData)
     .then(newCard => {
       // get the list to save the card
-      BoardList.findByIdAndUpdate(
-        listId,
+      Board.updateOne(
+        { _id: boardId },
         // push the new card in the list's array of cards
-        { $push: { cards: newCard } },
-        { useFindAndModify: false }
+        { $push: { "lists.$[listId].cards": newCard } },
+        {
+          useFindAndModify: false,
+          arrayFilters: [{ "listId._id": ObjectId(listId) }]
+        }
       )
         .then(() => {
           // send the card back to the user
           res.json({ newCard });
         })
-        .catch(error => res.handleError(error));
+        .catch(res.handleError);
     })
-    .catch(error => res.handleError(error));
+    .catch(res.handleError);
 };
 
 const editCardHandler = (req, res) => {
+  const { text } = req.body;
   // find by id and update
-  BoardCard.findByIdAndUpdate(
-    // id
-    req.body.id,
-    //   // properties to change
-    { ...req.body.edit },
+  BoardCard.findOneAndUpdate(
+    {
+      $and: [
+        // get the card that matches the id in the parameter
+        { _id: req.body.cardId },
+        // and is owned by the logged in user
+        { owner: req.user.id }
+      ]
+    },
+    // properties to change
+    { $set: { text } },
     // don't use deprecated function
-    { useFindAndModify: false }
+    { useFindAndModify: false, new: true }
   )
-    .then(found => {
+    .then(updatedCard => {
       // update the object to send it back to the user
       // found has the old text although it has been
       // updated in the database
-      const updated = { ...found.toObject(), ...req.body.edit };
       // send it back to the user
-      res.json({ updatedCard: updated });
+      res.json({
+        updatedCard: { _id: updatedCard._id, text: updatedCard.text }
+      });
     })
-    .catch(error => res.handleError(error));
+    .catch(res.handleError);
 };
 
 const moveCardHandler = (req, res) => {
-  const { fromList, toList } = req.body;
-  const sameList = fromList === toList;
-  if (sameList) {
-    boardHelpers.moveToSameList(req, res);
-  } else {
-    boardHelpers.moveToAnotherList(req, res);
-  }
+  const { boardId, fromList, toList, cardId, toIndex } = req.body;
+
+  const pullPromise = Board.findOneAndUpdate(
+    boardId,
+    // pull cardId from fromList
+    {
+      $pull: { "lists.$[list].cards": ObjectId(cardId) }
+    },
+    {
+      useFindAndModify: false,
+      arrayFilters: [{ "list._id": ObjectId(fromList) }]
+    }
+  ).exec();
+  const pushPromise = Board.findOneAndUpdate(
+    boardId,
+    // add cardId to position
+    {
+      $push: {
+        "lists.$[list].cards": {
+          $each: [ObjectId(cardId)],
+          $position: toIndex
+        }
+      }
+    },
+    {
+      useFindAndModify: false,
+      arrayFilters: [{ "list._id": ObjectId(toList) }]
+    }
+  ).exec();
+
+  Promise.all([pullPromise, pushPromise])
+    .then(() => res.sendStatus(200))
+    .catch(res.handleError);
 };
 
 const deleteCardHandler = (req, res) => {
   // deconstruct the data we need to delete a card
-  const { listId, cardId } = req.params;
+  const { boardId, listId, cardId } = req.params;
   // delete card
-  BoardList.findByIdAndUpdate(
-    listId,
-    // pull from the list of cards, all values
-    // that equal cardId
-    // the card we want to remove will
-    // be an ObjectId reference so it will
-    // match with cardId
-    { $pull: { cards: cardId } },
-    { useFindAndModify: false }
+  Board.findOneAndUpdate(
+    {
+      $and: [
+        // get the board that matches the id in the parameter
+        { _id: boardId },
+        // and
+        { owner: req.user.id }
+      ]
+    },
+    {
+      $pull: { "lists.$[list].cards": ObjectId(cardId) }
+    },
+    {
+      useFindAndModify: false,
+      arrayFilters: [{ "list._id": ObjectId(listId) }]
+    }
   )
     .then(() => {
       // send reponse that everything was done
-      res.sendStatus(200);
       BoardCard.deleteOne({ _id: cardId })
         .then(() => {
           // delete card reference from list entry
+          res.sendStatus(200);
         })
-        .catch(error => res.handleError(error));
+        .catch(res.handleError);
     })
-    .catch(error => res.handleError(error));
+    .catch(res.handleError);
 };
 
 module.exports = {
