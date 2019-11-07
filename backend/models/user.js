@@ -15,19 +15,21 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  pomodoros: [
-    {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: "pomodoro"
-    }
-  ],
-  boardLists: [
-    {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: "boardList"
-    }
-  ],
-  extensions: [String]
+  extensions: [String],
+  extensionData: {
+    pomodoros: [
+      {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "pomodoro"
+      }
+    ],
+    boards: [
+      {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "board"
+      }
+    ]
+  }
 });
 
 // encode the password before saving
