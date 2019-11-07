@@ -89,7 +89,6 @@ class List extends PureComponent {
   };
 
   render() {
-    console.log("list data", this.props.list);
     return this.props.connectDropTarget(
       <div className="List">
         <div className="List-Header">
