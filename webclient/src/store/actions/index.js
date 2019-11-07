@@ -21,7 +21,7 @@ export {
   changeListTitle,
   changeCardText,
   changeCardList,
-  getLists,
+  getBoard,
   moveCard,
   dropCard
 } from "./board";
