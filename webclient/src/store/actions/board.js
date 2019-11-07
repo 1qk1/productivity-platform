@@ -1,11 +1,12 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios";
 import { toast } from "react-toastify";
+import { validateBoards } from "../../shared/utilities";
 
-export const addList = () => {
+export const addList = boardId => {
   return dispatch => {
     axios
-      .post("/board/list")
+      .post("/boards/list", { boardId })
       .then(res => {
         dispatch({ type: actionTypes.ADD_LIST, list: res.data.newList });
       })
@@ -32,20 +33,19 @@ export const moveCard = (
   };
 };
 
-export const dropCard = (cardId, toIndex, fromList, toList) => {
+export const dropCard = (boardId, cardId, toIndex, fromList, toList) => {
   return {
     queue: actionTypes.MOVE_CARD,
     callback: (next, dispatch, getState) => {
       axios
-        .put("/board/card/moveCard", {
-          fromList,
-          toList,
+        .put("/boards/card/moveCard", {
+          boardId,
           cardId,
-          toIndex
+          toIndex,
+          fromList,
+          toList
         })
-        .then(() => {
-          next();
-        })
+        .then(next)
         .catch(error => {
           dispatch({
             type: actionTypes.DROP_FAIL,
@@ -60,27 +60,32 @@ export const dropCard = (cardId, toIndex, fromList, toList) => {
   };
 };
 
-export const getLists = () => {
+export const getBoard = (boardId, history) => {
   return dispatch => {
     axios
-      .get("/board/list")
+      .get(`/boards/${boardId}`)
       .then(res => {
-        dispatch({ type: actionTypes.SET_LISTS, lists: res.data.lists });
+        dispatch({ type: actionTypes.SET_BOARD, board: res.data.board });
       })
       .catch(error => {
+        history.push("/boards");
         toast.error(error.response.data.error.message);
       });
   };
 };
 
-export const changeListTitle = (listId, newTitle) => {
+export const changeListTitle = (boardId, listId, newTitle) => {
   return dispatch => {
+    if (!validateBoards(newTitle)) {
+      return toast.error("List title can't be empty.");
+    }
     axios
-      .put("/board/list", {
+      .put("/boards/list", {
+        // id of the board
+        boardId,
         // id of the list
-        id: listId,
-        // fields to edit
-        edit: { title: newTitle }
+        listId,
+        newTitle
       })
       .then(res => {
         dispatch({ type: actionTypes.UPDATE_LIST, list: res.data.updatedList });
@@ -93,10 +98,13 @@ export const changeListTitle = (listId, newTitle) => {
 
 export const changeCardText = (listId, cardId, newText) => {
   return dispatch => {
+    if (!validateBoards(newText)) {
+      return toast.error("Card text can't be empty.");
+    }
     axios
-      .put("/board/card", {
-        id: cardId,
-        edit: { text: newText }
+      .put("/boards/card", {
+        cardId,
+        text: newText
       })
       .then(res => {
         dispatch({
@@ -112,13 +120,16 @@ export const changeCardText = (listId, cardId, newText) => {
   };
 };
 
-export const addCard = (listId, text) => {
+export const addCard = (boardId, listId, text) => {
   return dispatch => {
+    if (!validateBoards(text)) {
+      return toast.error("Card text can't be empty.");
+    }
     axios
-      .post("/board/card", { listId, text })
+      .post("/boards/card", { boardId, listId, text })
       .then(res => {
         const { newCard } = res.data;
-        dispatch({ type: actionTypes.ADD_CARD, newCard });
+        dispatch({ type: actionTypes.ADD_CARD, newCard, listId });
       })
       .catch(error => {
         toast.error(error.response.data.error.message);
@@ -126,10 +137,10 @@ export const addCard = (listId, text) => {
   };
 };
 
-export const deleteCard = (listId, cardId) => {
+export const deleteCard = (boardId, listId, cardId) => {
   return dispatch => {
     axios
-      .delete(`/board/card/${listId}/${cardId}`)
+      .delete(`/boards/card/${boardId}/${listId}/${cardId}`)
       .then(res => {
         dispatch({ type: actionTypes.DELETE_CARD, listId, cardId });
       })
@@ -139,11 +150,11 @@ export const deleteCard = (listId, cardId) => {
   };
 };
 
-export const deleteList = listId => {
+export const deleteList = (listId, boardId) => {
   return dispatch => {
     axios
-      .delete(`/board/list/${listId}`)
-      .then(res => {
+      .delete(`/boards/list/${boardId}/${listId}`)
+      .then(() => {
         dispatch({ type: actionTypes.DELETE_LIST, listId });
       })
       .catch(error => {
@@ -152,12 +163,18 @@ export const deleteList = listId => {
   };
 };
 
-export const changeCardList = (fromList, toList, cardId) => {
+export const changeCardList = (boardId, fromList, toList, cardId) => {
   return dispatch => {
     axios
-      .put("/board/card/changeList", { fromList, toList, cardId })
+      .put("/boards/card/changeList", { boardId, fromList, toList, cardId })
       .then(() => {
-        dispatch({ type: actionTypes.CHANGE_LIST, fromList, toList, cardId });
+        dispatch({
+          type: actionTypes.CHANGE_LIST,
+          boardId,
+          fromList,
+          toList,
+          cardId
+        });
       })
       .catch(error => toast.error(error.response.data.error.message));
   };
