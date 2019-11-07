@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { withRouter, Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
-import extensionMap from "../Store/extensionMap";
+import { extensionsToRoutes } from "../../shared/extensionMap";
 import Store from "../Store/Store";
 import Sidebar from "../../components/Navigation/Sidebar/Sidebar";
 import "./Main.scss";
@@ -20,13 +20,8 @@ class Main extends Component {
           {/* Routes */}
           <div className="Extension">
             <Switch>
-              {this.props.extensions.map(extension => (
-                <Route
-                  key={`${extension}-route`}
-                  path={`/${extension}`}
-                  component={() => extensionMap[extension].component}
-                />
-              ))}
+              {/* map user's extensions to routes */}
+              {extensionsToRoutes(this.props.extensions)}
               <Route path="/store" component={Store} />
               <Redirect to={`${this.props.extensions[0] || "/store"}`} />
             </Switch>
