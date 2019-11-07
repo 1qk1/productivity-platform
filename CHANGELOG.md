@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2019-11-07
+
+### Added
+
+- 🎉🥳 Added functionality for multiple boards 🎉🥳
+- Added components to view and manage all your boards, and one to view a single board
+- Added validation for inputted text in boards/lists/cards
+- Added board colors in both frontend and backend to make them the same and more consistent
+
+### Changed
+
+- User, board, list and card models in the backend to make less requests.
+- Improved the way routes and sidebar buttons are rendered
+- Updated (almost) all dependencies and fixed all vulnerabilities
+- Removed unused dependencies
+- Style improvements
+- Bug fixes
+- Rename install dependencies script. Now you can install all dependencies from the root folder of the project by running `npm run installdeps`
+
 ## [1.5.4] - 2019-07-04
 
 ### Added
