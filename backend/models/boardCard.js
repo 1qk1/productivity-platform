@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
 
 const boardCardSchema = new mongoose.Schema({
-  userId: mongoose.SchemaTypes.ObjectId,
   text: String,
-  listId: mongoose.SchemaTypes.ObjectId
+  owner: { type: mongoose.Types.ObjectId, ref: "user" }
 });
 
 const BoardCard = mongoose.model("boardCard", boardCardSchema);
