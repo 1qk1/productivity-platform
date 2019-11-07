@@ -26,3 +26,6 @@ export const validate = (value, rules) => {
   }
   return errors;
 };
+
+export const validateBoards = value =>
+  !isEmpty(value, { ignore_whitespace: true });
