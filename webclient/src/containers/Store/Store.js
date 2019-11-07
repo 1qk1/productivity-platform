@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ExtensionCard from "../../components/UI/Store/ExtensionCard/ExtensionCard";
-import extensionMap from "./extensionMap";
+import extensionMap from "../../shared/extensionMap";
 import * as actions from "../../store/actions/index";
 import "./Store.scss";
 
