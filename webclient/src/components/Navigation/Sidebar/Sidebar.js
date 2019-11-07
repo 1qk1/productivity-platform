@@ -18,8 +18,6 @@ const sidebar = ({ logout, extensions }) => (
         />
       ))}
       <SideButton path="/store" iconClasses="fas fa-store" />
-      {/* placeholders for future features */}
-      {/* <SideButton path="/todo" iconClasses="fas fa-tasks" /> */}
       <li className="Sidebar-Link">
         <i onClick={logout} className="fas fa-sign-out-alt" />
       </li>
