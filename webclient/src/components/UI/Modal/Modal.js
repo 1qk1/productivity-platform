@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 
 import "./Modal.scss";
 
-const modal = props => {
+const Modal = props => {
   if (!Boolean(props.show)) return null;
   return (
-    <div className="Modal-Wrapper">
+    <div className={`Modal-Wrapper ${props.wrapperClasses || ""}`}>
       <div
         onClick={props.close}
         className={`Backdrop ${props.backdropClasses || ""}`}
@@ -18,12 +18,13 @@ const modal = props => {
   );
 };
 
-modal.propTypes = {
+Modal.propTypes = {
   children: PropTypes.element.isRequired,
   show: PropTypes.bool.isRequired,
   backdropClasses: PropTypes.string,
   modalClasses: PropTypes.string,
+  wrapperClasses: PropTypes.string,
   close: PropTypes.func
 };
 
-export default modal;
+export default Modal;

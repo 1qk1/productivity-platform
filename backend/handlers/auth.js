@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken"),
   User = require("../models/user"),
   CustomError = require("../middleware/error").CustomError,
-  { validationResult } = require("express-validator/check");
+  { validationResult } = require("express-validator");
 
 const sendNewToken = (req, res, next) => {
   // get the user's username and id
@@ -23,14 +23,20 @@ const sendNewToken = (req, res, next) => {
 };
 
 const sendUserJSON = (req, res) => {
-  User.findById(req.user.id).then(user => {
-    const userJSON = {
-      username: user.username,
-      id: user._id,
-      extensions: user.extensions
-    };
-    res.json({ user: userJSON });
-  });
+  User.findById(req.user.id)
+    .then(user => {
+      if (user !== null) {
+        const userJSON = {
+          username: user.username,
+          id: user._id,
+          extensions: user.extensions
+        };
+        res.json({ user: userJSON });
+      } else {
+        throw new CustomError(401, "Unauthorized.");
+      }
+    })
+    .catch(res.handleError);
 };
 
 const registerHandler = (req, res) => {

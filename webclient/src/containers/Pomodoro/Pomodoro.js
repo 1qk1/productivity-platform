@@ -80,7 +80,7 @@ const mapStateToProps = state => ({
   completedSessions: state.pomodoro.completedSessions,
   intervalId: state.pomodoro.intervalId,
   isPomodoro: state.pomodoro.isPomodoro,
-  userId: state.auth.user.id
+  userId: state.user.user.id
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,6 +1,4 @@
-export const AUTH_START = "AUTH_START";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
-export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
 export const START_TIMER = "START_TIMER";
@@ -12,7 +10,8 @@ export const POMODORO_COMPLETED = "POMODORO_COMPLETED";
 export const GET_POMODOROS = "GET_POMODOROS";
 export const END_POMODORO_5_SECONDS = "END_POMODORO_5_SECONDS";
 
-export const SET_LISTS = "SET_LISTS";
+export const SET_BOARD = "GET_BOARD";
+export const NEW_BOARD = "NEW_BOARD";
 export const ADD_LIST = "ADD_LIST";
 export const ADD_CARD = "ADD_CARD";
 export const MOVE_CARD = "MOVE_CARD";

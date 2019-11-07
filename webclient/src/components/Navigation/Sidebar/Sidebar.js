@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import extensionMap from "../../../containers/Store/extensionMap";
+import extensionMap from "../../../shared/extensionMap";
 
 import SideButton from "./SideButton/SideButton";
 
@@ -15,14 +15,11 @@ const sidebar = ({ logout, extensions }) => (
           key={`${extension}-sideButton`}
           path={`/${extension}`}
           iconClasses={extensionMap[extension].iconClasses}
-          title={extensionMap[extension].title}
         />
       ))}
-      <SideButton path="/store" iconClasses="fas fa-store" title="Store" />
-      {/* placeholders for future features */}
-      {/* <SideButton path="/todo" iconClasses="fas fa-tasks" /> */}
+      <SideButton path="/store" iconClasses="fas fa-store" />
       <li className="Sidebar-Link">
-        <i onClick={logout} className="fas fa-sign-out-alt" title="Logout" />
+        <i onClick={logout} className="fas fa-sign-out-alt" />
       </li>
     </ul>
   </div>

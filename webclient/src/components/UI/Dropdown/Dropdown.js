@@ -52,7 +52,7 @@ class Dropdown extends Component {
         </button>
         {this.state.show ? (
           <div
-            className="Dropdown-Body"
+            className={"Dropdown-Body " + (this.props.bodyClasses || "")}
             onClick={this.closeHandler}
             style={{
               left: this.state.buttonCoords.x,
@@ -72,6 +72,7 @@ Dropdown.propTypes = {
   iconClasses: PropTypes.string,
   dropdownClasses: PropTypes.string,
   buttonClasses: PropTypes.string,
+  bodyClasses: PropTypes.string,
   title: PropTypes.string
 };
 

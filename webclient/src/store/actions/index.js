@@ -4,7 +4,7 @@ export {
   logoutHandler,
   addExtension,
   removeExtension
-} from "./auth";
+} from "./user";
 export {
   pomodoroCompleted,
   getPomodoros,
@@ -21,7 +21,7 @@ export {
   changeListTitle,
   changeCardText,
   changeCardList,
-  getLists,
+  getBoard,
   moveCard,
   dropCard
 } from "./board";

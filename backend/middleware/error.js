@@ -1,13 +1,13 @@
 class CustomError extends Error {
   constructor(statusCode, errorMessage) {
     super();
-    this.message = errorMessage;
     this.status = statusCode;
+    this.message = errorMessage;
   }
 }
 
 const errorMiddleware = (req, res, next) => {
-  res.handleError = error => res.status(error.status).json({ error });
+  res.handleError = error => res.status(error.status || 400).json({ error });
   next();
 };
 

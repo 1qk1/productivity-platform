@@ -1,15 +1,19 @@
 const router = require("express").Router(),
   verifyToken = require("../middleware/auth").verifyToken,
-  boardListHandlers = require("../handlers/boardList");
+  boardListHandlers = require("../handlers/boardList"),
+  { validationCheck, changeListTitle } = require("../middleware/validators");
 
 router.use(verifyToken);
 
-router.get("/", boardListHandlers.getAllListsHandler);
-
 router.post("/", boardListHandlers.newListHandler);
 
-router.put("/", boardListHandlers.editListHandler);
+router.put(
+  "/",
+  changeListTitle,
+  validationCheck,
+  boardListHandlers.changeListTitle
+);
 
-router.delete("/:listId", boardListHandlers.deleteListHandler);
+router.delete("/:boardId/:listId", boardListHandlers.deleteListHandler);
 
 module.exports = router;
