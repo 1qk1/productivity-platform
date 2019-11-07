@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken"),
   passport = require("passport"),
   CustomError = require("./error").CustomError,
-  { body } = require("express-validator/check");
+  { body } = require("express-validator");
 
 const verifyToken = (req, res, next) => {
   const authToken = req.headers.authorization;

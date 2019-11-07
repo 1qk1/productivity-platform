@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken"),
   User = require("../models/user"),
   CustomError = require("../middleware/error").CustomError,
-  { validationResult } = require("express-validator/check");
+  { validationResult } = require("express-validator");
 
 const sendNewToken = (req, res, next) => {
   // get the user's username and id

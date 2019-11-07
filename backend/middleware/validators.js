@@ -1,4 +1,4 @@
-const { check, validationResult } = require("express-validator/check"),
+const { body, validationResult } = require("express-validator"),
   { CustomError } = require("./error");
 
 const validationCheck = (req, res, next) => {
@@ -10,28 +10,28 @@ const validationCheck = (req, res, next) => {
 };
 
 const newBoard = [
-  check("boardTitle")
+  body("boardTitle")
     .trim()
     .not()
     .isEmpty()
     .withMessage("Board title cannot be empty.")
 ];
 const editBoard = [
-  check("boardTitle")
+  body("boardTitle")
     .trim()
     .not()
     .isEmpty()
     .withMessage("Board title cannot be empty.")
 ];
 const changeListTitle = [
-  check("title")
+  body("title")
     .trim()
     .not()
     .isEmpty()
     .withMessage("List title cannot be empty.")
 ];
 const cardText = [
-  check("text")
+  body("text")
     .trim()
     .not()
     .isEmpty()
