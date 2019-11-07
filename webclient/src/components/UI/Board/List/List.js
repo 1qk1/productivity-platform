@@ -33,11 +33,12 @@ const listTarget = {
       initialIndex,
       cardId,
       listId,
-      initialListId
+      initialListId,
+      boardId
     } = monitor.getItem();
 
     if (initialIndex === index && listIndex === initialListIndex) return;
-    props.dropCard(cardId, index, initialListId, listId);
+    props.dropCard(boardId, cardId, index, initialListId, listId);
   }
 };
 
@@ -75,15 +76,20 @@ class List extends PureComponent {
 
   onSubmitCardHandler = event => {
     event.preventDefault();
-    this.props.addCard(this.props.list._id, this.state.newCardText);
+    this.props.addCard(
+      this.props.boardId,
+      this.props.list._id,
+      this.state.newCardText
+    );
     this.setState({ newCardText: "" });
   };
 
   onSubmitTitleHandler = text => {
-    this.props.changeListTitle(this.props.list._id, text);
+    this.props.changeListTitle(this.props.boardId, this.props.list._id, text);
   };
 
   render() {
+    console.log("list data", this.props.list);
     return this.props.connectDropTarget(
       <div className="List">
         <div className="List-Header">
@@ -109,7 +115,7 @@ class List extends PureComponent {
               <li className="Board-Controls--Item">
                 <button
                   className="Board-Controls--Action btn-invisible"
-                  onClick={() => this.props.deleteList(this.props.list._id)}
+                  onClick={this.props.deleteList}
                 >
                   Delete List
                 </button>
@@ -141,7 +147,11 @@ class List extends PureComponent {
               dropCard={this.props.dropCard}
               listIndex={this.props.index}
               deleteCard={this.props.deleteCard}
-              {...card}
+              card={{
+                ...card,
+                listId: this.props.list._id,
+                boardId: this.props.boardId
+              }}
             />
           ))}
         </div>
