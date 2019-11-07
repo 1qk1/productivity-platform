@@ -10,13 +10,14 @@ const cardSource = {
     // return the dragged card "description" upon start dragging
     // this data will go to the list's drop() dnd function
     return {
-      listId: props.listId,
-      cardId: props._id,
+      listId: props.card.listId,
+      cardId: props.card._id,
       index: props.index,
       listIndex: props.listIndex,
       initialListIndex: props.listIndex,
-      initialListId: props.listId,
-      initialIndex: props.index
+      initialListId: props.card.listId,
+      initialIndex: props.index,
+      boardId: props.card.boardId
     };
   },
   endDrag(props, monitor, component) {
@@ -28,12 +29,13 @@ const cardSource = {
       initialIndex,
       cardId,
       listId,
-      initialListId
+      initialListId,
+      boardId
     } = monitor.getItem();
 
     if (initialIndex === index && listIndex === initialListIndex) return;
 
-    props.dropCard(cardId, index, initialListId, listId);
+    props.dropCard(boardId, cardId, index, initialListId, listId);
   }
 };
 
@@ -102,9 +104,13 @@ const card = props => {
         <EditableText
           textClasses="Card-Text"
           onSubmitHandler={newText =>
-            props.changeCardText(props.listId, props._id.toString(), newText)
+            props.changeCardText(
+              props.card.listId,
+              props.card._id.toString(),
+              newText
+            )
           }
-          text={props.text}
+          text={props.card.text}
         />
         <Dropdown
           dropdownClasses="Card-Controls Board-Controls"
@@ -115,7 +121,13 @@ const card = props => {
             <li className="Board-Controls--Item">
               <button
                 className="Board-Controls--Action btn-invisible"
-                onClick={() => props.deleteCard(props.listId, props._id)}
+                onClick={() =>
+                  props.deleteCard(
+                    props.card.boardId,
+                    props.card.listId,
+                    props.card._id
+                  )
+                }
               >
                 Delete Card
               </button>

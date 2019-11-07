@@ -12,11 +12,11 @@ A step by step series of examples that tell you how to get a development env run
 
 1. Navigate into the project folder.
 
-2. Install dependencies with `npm run install`.
+2. Install dependencies with `npm install`.
 
 3. In the backend folder, make a `.env` file with 2 keys: `MONGODB_URI` and `JWT_SECRET`, and then give them a database url and a jwt secret.
 
-4. Go to the project folder again.
+4. Go to the project's root folder again.
 
 5. Run `npm run dev` to start the backend and the webclient.
 
@@ -89,4 +89,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ### Hat tip to anyone whose code was used
 
 - [PurpleBooth](https://github.com/PurpleBooth) for this [README template](https://gist.githubusercontent.com/PurpleBooth/109311bb0361f32d87a2/raw/8254b53ab8dcb18afc64287aaddd9e5b6059f880/README-Template.md)
+- [unDraw](https://undraw.co/illustrations) for the super awesome illustrations 😄
 - (More coming soon)

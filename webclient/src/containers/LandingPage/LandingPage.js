@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "../../axios";
-import * as actions from "../../store/actions/auth";
+import * as actions from "../../store/actions/index";
 import Navbar from "../../components/LandingPageSections/Navbar/Navbar";
 import PomodoroSection from "../../components/LandingPageSections/Pomodoro/Pomodoro";
 import BoardSection from "../../components/LandingPageSections/Board/Board";
@@ -48,6 +48,7 @@ class LandingPage extends Component {
         this.props.onAuthSuccess(token, user);
       })
       .catch(error => {
+        if (error.response === undefined) return;
         // get the error array from the objects
         const errors = error.response.data.error.message;
         const newFormData = _.cloneDeep(this.state.formData);
@@ -124,7 +125,7 @@ class LandingPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  error: state.auth.error
+  error: state.user.error
 });
 
 const mapDispatchToProps = dispatch => ({

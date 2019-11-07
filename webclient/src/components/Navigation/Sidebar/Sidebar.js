@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import extensionMap from "../../../containers/Store/extensionMap";
+import extensionMap from "../../../shared/extensionMap";
 
 import SideButton from "./SideButton/SideButton";
 

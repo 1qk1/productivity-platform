@@ -1,5 +1,5 @@
 import React from "react";
-import extensionMap from "../../../../containers/Store/extensionMap";
+import extensionMap from "../../../../shared/extensionMap";
 
 const extensionCard = props => {
   return (

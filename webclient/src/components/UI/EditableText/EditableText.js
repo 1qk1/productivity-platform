@@ -41,7 +41,11 @@ class EditableText extends Component {
         />
       </form>
     ) : (
-      <p onClick={this.toggleEditing} className={this.props.textClasses}>
+      <p
+        onClick={this.toggleEditing}
+        style={{ minWidth: "20%" }}
+        className={this.props.textClasses}
+      >
         {this.props.text}
       </p>
     );

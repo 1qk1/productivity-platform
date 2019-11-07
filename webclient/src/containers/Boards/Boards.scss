@@ -1,0 +1,30 @@
+.Boards {
+  max-width: 1200px;
+}
+
+.Boards--Preview {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  .Board-Preview--Button {
+    border: 0;
+    background-color: #aaad;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: all 0.08s ease-in;
+    &:hover {
+      box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.NewBoard--Modal {
+  input {
+    height: 2rem;
+  }
+  .github-picker {
+    // width: auto !important;
+    // flex-wrap: nowrap !important;
+  }
+}

@@ -1,11 +1,9 @@
 const express = require("express"),
   app = express(),
-  bodyParser = require("body-parser"),
   mongoose = require("mongoose"),
   authRoutes = require("./routes/auth"),
   pomodoroRoutes = require("./routes/pomodoro"),
-  boardListRoutes = require("./routes/boardList"),
-  boardCardRoutes = require("./routes/boardCard"),
+  boardRoutes = require("./routes/board"),
   extensionRoutes = require("./routes/extensions"),
   passport = require("passport"),
   cors = require("cors"),
@@ -14,18 +12,22 @@ const express = require("express"),
 
 require("dotenv").config();
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, error => {
-  if (!error) {
-    console.log("database connected");
-  } else {
-    console.log("database connection error:", error);
+mongoose.connect(
+  process.env.MONGODB_URI,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  error => {
+    if (!error) {
+      console.log("database connected");
+    } else {
+      console.log("database connection error:", error);
+    }
   }
-});
+);
 mongoose.set("useCreateIndex", true);
 
 app.use(cors());
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.use(passport.initialize());
 
@@ -33,8 +35,7 @@ app.use(errorMiddleware);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/pomodoro", pomodoroRoutes);
-app.use("/api/board/list", boardListRoutes);
-app.use("/api/board/card", boardCardRoutes);
+app.use("/api/boards", boardRoutes);
 app.use("/api/extensions", extensionRoutes);
 
 if (process.env.NODE_ENV === "production") {

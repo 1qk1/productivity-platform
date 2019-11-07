@@ -1,0 +1,78 @@
+.Board-Link {
+  display: block;
+  width: 19%;
+  height: 100px;
+  margin: 0 1.25% 1.25% 0;
+  cursor: pointer;
+  position: relative;
+  border-radius: 4px;
+  transition: all 0.08s ease-in;
+
+  &__Modal {
+    cursor: initial;
+  }
+
+  &:hover {
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.2);
+    .Board-Edit {
+      opacity: 1;
+    }
+  }
+
+  .Board-Preview {
+    padding: 0.5rem 0.75rem;
+    color: white;
+    font-weight: 600;
+    height: 100%;
+
+    &__Title > span {
+      display: block;
+      word-break: break-all;
+    }
+  }
+
+  .Board-Edit {
+    transition: all 0.08s ease-in;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    padding: 0.5rem 0.75rem;
+    &:focus {
+      opacity: 1;
+    }
+  }
+
+  @media (min-width: 1201px) {
+    &:nth-child(5n + 5) {
+      margin-right: 0;
+    }
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    width: 23.875%;
+    margin: 0 1.5% 1.5% 0;
+    &:nth-child(4n + 4) {
+      margin-right: 0;
+    }
+  }
+  @media (min-width: 769px) and (max-width: 992px) {
+    width: 32.33%;
+    margin: 0 1.5% 1.5% 0;
+    &:nth-child(3n + 3) {
+      margin-right: 0;
+    }
+  }
+
+  @media (min-width: 369px) and (max-width: 768px) {
+    width: 48.75%;
+    margin: 0 2.5% 2.5% 0;
+    &:nth-child(2n + 2) {
+      margin-right: 0;
+    }
+  }
+  @media (max-width: 368px) {
+    width: 100%;
+    margin: 0 0 1em 0;
+  }
+}

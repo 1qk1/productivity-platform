@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ExtensionCard from "../../components/UI/Store/ExtensionCard/ExtensionCard";
-import extensionMap from "./extensionMap";
+import extensionMap from "../../shared/extensionMap";
 import * as actions from "../../store/actions/index";
 import "./Store.scss";
 
@@ -27,7 +27,7 @@ class Store extends Component {
 }
 
 const mapStateToProps = state => ({
-  extensions: state.auth.user.extensions
+  extensions: state.user.user.extensions
 });
 
 const mapDispatchToProps = dispatch => ({
