@@ -11,8 +11,9 @@ const initialState = {
 export default (state = initialState, action) => {
   let newBoard = _.cloneDeep(state.board);
   switch (action.type) {
-    case actionTypes.SET_LISTS:
-      newBoard.lists = [...action.lists];
+    case actionTypes.SET_BOARD:
+      delete newBoard.board;
+      newBoard = { ...action.board };
       return { ...state, board: newBoard };
     case actionTypes.ADD_LIST:
       newBoard.lists.push(action.list);
@@ -29,7 +30,7 @@ export default (state = initialState, action) => {
     }
     case actionTypes.ADD_CARD: {
       const listIndex = newBoard.lists.findIndex(
-        list => list._id === action.newCard.listId
+        list => list._id === action.listId
       );
       newBoard.lists[listIndex].cards.push(action.newCard);
       return { ...state, board: newBoard };
