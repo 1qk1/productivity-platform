@@ -12,7 +12,7 @@ A step by step series of examples that tell you how to get a development env run
 
 1. Navigate into the project folder.
 
-2. Install dependencies with `npm install`.
+2. Install dependencies with `npm installdeps`.
 
 3. In the backend folder, make a `.env` file with 2 keys: `MONGODB_URI` and `JWT_SECRET`, and then give them a database url and a jwt secret.
 
