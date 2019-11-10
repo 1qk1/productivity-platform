@@ -38,16 +38,6 @@ app.use("/api/pomodoro", pomodoroRoutes);
 app.use("/api/boards", boardRoutes);
 app.use("/api/extensions", extensionRoutes);
 
-if (process.env.NODE_ENV === "production") {
-  const path = require("path");
-
-  app.use(express.static(path.join(__dirname, "/webclient")));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "/webclient/index.html"));
-  });
-}
-
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log("Server running on port " + port);
