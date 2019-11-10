@@ -6,10 +6,6 @@ const ip = process.env.IP || "localhost";
 
 let url = `http://${ip}:${port}`;
 
-if (process.env.NODE_ENV === "production") {
-  url = "";
-}
-
 const instance = axios.create({
   baseURL: `${url}/api`,
   timeout: 10000
