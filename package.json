@@ -38,6 +38,6 @@
     "concurrently": "^5.0.0"
   },
   "engines": {
-    "node": "12.13.0"
+    "node": "10.17.0"
   }
 }
