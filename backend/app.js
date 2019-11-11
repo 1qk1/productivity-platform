@@ -1,5 +1,7 @@
-const express = require("express"),
+const fs = require("fs"),
+  express = require("express"),
   app = express(),
+  spdy = require("spdy"),
   mongoose = require("mongoose"),
   authRoutes = require("./routes/auth"),
   pomodoroRoutes = require("./routes/pomodoro"),
@@ -39,6 +41,22 @@ app.use("/api/boards", boardRoutes);
 app.use("/api/extensions", extensionRoutes);
 
 const port = process.env.PORT || 3001;
-app.listen(port, () => {
-  console.log("Server running on port " + port);
-});
+
+if (process.env.NODE_ENV === "production") {
+  const options = {
+    cert: fs.readFileSync(__dirname + "/keys/fullchain.pem"),
+    key: fs.readFileSync(__dirname + "/keys/privkey.pem")
+  };
+  spdy.createServer(options, app).listen(port, error => {
+    if (error) {
+      console.error(error);
+      return process.exit(1);
+    } else {
+      console.log(`HTTP/2 server listening on port: ${port}`);
+    }
+  });
+} else {
+  app.listen(port, () => {
+    console.log("Development server running on port " + port);
+  });
+}
