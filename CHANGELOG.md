@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.3] - 2019-11-10
+
+### Added
+
+- Added spdy/http2 support
+- Added more env vars in the webclient for axios and fixed the current ones with the right prefix for create-react-app
+
+### Changed
+
+- Set the node version in the package.json files back to 10 because 12 was causing many problems with the spdy server and netlify
+
 ## [1.6.2] - 2019-11-10
 
 ### Changed

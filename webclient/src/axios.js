@@ -1,10 +1,11 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const port = process.env.PORT || 3001;
-const ip = process.env.IP || "localhost";
+const port = process.env.REACT_APP_PORT || 3001;
+const ip = process.env.REACT_APP_IP || "localhost";
+const protocol = process.env.REACT_APP_PROTOCOL || "http";
 
-let url = `http://${ip}:${port}`;
+let url = `${protocol}://${ip}:${port}`;
 
 const instance = axios.create({
   baseURL: `${url}/api`,
