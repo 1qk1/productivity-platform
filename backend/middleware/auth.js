@@ -36,7 +36,9 @@ const verifyPassword = (req, res, next) => {
   passport.authenticate("local", { session: false }, (error, user, info) => {
     // if there is an error or there is no user
     if (error || !user) {
-      res.handleError(new CustomError(400, "Incorrect username or password."));
+      return res.handleError(
+        new CustomError(400, "Incorrect username or password.")
+      );
     }
     const { username, _id, extensions } = user;
     const userData = {
