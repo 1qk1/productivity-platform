@@ -8,7 +8,7 @@ const fs = require("fs"),
   boardRoutes = require("./routes/board"),
   extensionRoutes = require("./routes/extensions"),
   passport = require("passport"),
-  cors = require("cors"),
+  setCORS = require("./helpers/cors"),
   errorMiddleware = require("./middleware/error").errorMiddleware,
   authStrategy = require("./passport");
 
@@ -27,7 +27,7 @@ mongoose.connect(
 );
 mongoose.set("useCreateIndex", true);
 
-app.use(cors());
+app.use(setCORS());
 
 app.use(express.json());
 
