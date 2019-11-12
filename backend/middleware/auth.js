@@ -32,25 +32,24 @@ const verifyToken = (req, res, next) => {
 };
 
 const verifyPassword = (req, res, next) => {
-  // authenticate username and password
-  passport.authenticate(
-    "local",
-    // function starts here
-    (error, user, info) => {
-      // if there is an error send an error response
-      if (error) return res.handleError(error);
-      // if there is no error
-      // add the user to req.user
-      req.user = { ...user };
-      // continue with the next function
-      next();
-    },
-    // function ends here
-    { session: false }
-  )(req, res, next);
-  // passport.authenticate ends here
-  // This indentantion is pretty confusing
-  // but prettier doesn't do me the favor
+  // get the result of the passport strategy
+  passport.authenticate("local", { session: false }, (error, user, info) => {
+    // if there is an error or there is no user
+    if (error || !user) {
+      res.handleError(new CustomError(400, "Incorrect username or password."));
+    }
+    const { username, _id, extensions } = user;
+    const userData = {
+      username,
+      id: _id,
+      extensions
+    };
+    // pass the user in req.user
+    req.user = userData;
+    // continue
+    next();
+    // use an immediately executed function to pass the req and res into the callback
+  })(req, res, next);
 };
 
 const registerValidations = [
