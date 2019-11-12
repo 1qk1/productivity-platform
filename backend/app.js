@@ -8,9 +8,9 @@ const fs = require("fs"),
   boardRoutes = require("./routes/board"),
   extensionRoutes = require("./routes/extensions"),
   passport = require("passport"),
-  cors = require("cors"),
+  setCORS = require("./helpers/cors"),
   errorMiddleware = require("./middleware/error").errorMiddleware,
-  passportConfig = require("./passport");
+  authStrategy = require("./passport");
 
 require("dotenv").config();
 
@@ -27,11 +27,15 @@ mongoose.connect(
 );
 mongoose.set("useCreateIndex", true);
 
-app.use(cors());
+app.use(setCORS());
 
 app.use(express.json());
 
+app.use(express.urlencoded({ extended: true }));
+
 app.use(passport.initialize());
+
+passport.use(authStrategy);
 
 app.use(errorMiddleware);
 
