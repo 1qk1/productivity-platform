@@ -10,7 +10,7 @@ const fs = require("fs"),
   passport = require("passport"),
   cors = require("cors"),
   errorMiddleware = require("./middleware/error").errorMiddleware,
-  passportConfig = require("./passport");
+  authStrategy = require("./passport");
 
 require("dotenv").config();
 
@@ -31,7 +31,11 @@ app.use(cors());
 
 app.use(express.json());
 
+app.use(express.urlencoded({ extended: true }));
+
 app.use(passport.initialize());
+
+passport.use(authStrategy);
 
 app.use(errorMiddleware);
 
