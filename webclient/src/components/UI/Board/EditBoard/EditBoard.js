@@ -19,9 +19,8 @@ class EditBoard extends Component {
   };
 
   onDelete = () => {
-    // this.props.closeModal();
-    // wait for the modal to close before executing the delete function
     this.props.deleteBoard(this.state.boardId);
+    this.props.closeModal();
   };
 
   render() {
