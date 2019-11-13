@@ -64,7 +64,7 @@ const editCardHandler = (req, res) => {
 const moveCardHandler = (req, res) => {
   const { boardId, fromList, toList, cardId, toIndex } = req.body;
 
-  const pullPromise = Board.findOneAndUpdate(
+  const pullPromise = Board.findByIdAndUpdate(
     boardId,
     // pull cardId from fromList
     {
@@ -75,7 +75,7 @@ const moveCardHandler = (req, res) => {
       arrayFilters: [{ "list._id": ObjectId(fromList) }]
     }
   ).exec();
-  const pushPromise = Board.findOneAndUpdate(
+  const pushPromise = Board.findByIdAndUpdate(
     boardId,
     // add cardId to position
     {

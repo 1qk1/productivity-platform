@@ -24,7 +24,7 @@ const editBoard = [
     .withMessage("Board title cannot be empty.")
 ];
 const changeListTitle = [
-  body("title")
+  body("newTitle")
     .trim()
     .not()
     .isEmpty()
