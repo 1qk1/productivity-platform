@@ -50,7 +50,9 @@ Coming soon
 
 ![Pomodoro break](https://i.imgur.com/90BTOon.png)
 
-![Board image](https://i.imgur.com/tJRBTRD.png)
+![All boards](https://i.imgur.com/WPfLMnY.png)
+
+![Board image](https://i.imgur.com/sFJ4DCx.png)
 
 ## 🔨 Built With
 
