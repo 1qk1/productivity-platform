@@ -102,6 +102,8 @@ class LandingPage extends Component {
     this.setState(() => ({ showForms: !this.state.showForms }));
 
   render() {
+    document.title = "Prodapp | Productivity Platform";
+
     return (
       <div className="Landing-Page">
         <AuthForms
@@ -132,7 +134,4 @@ const mapDispatchToProps = dispatch => ({
   onAuthSuccess: (token, user) => dispatch(actions.authSuccess(token, user))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LandingPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);

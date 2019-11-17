@@ -25,6 +25,8 @@ class Board extends PureComponent {
     ) {
       return <Loader />;
     }
+    document.title = this.props.board.title + " | Productivity Platform";
+
     return (
       <Fragment>
         <div className="Board scrollbar-horizontal">
@@ -86,10 +88,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default DragDropContext(HTML5Backend)(
-  withRouter(
-    connect(
-      mapStateToProps,
-      mapDispatchToProps
-    )(Board)
-  )
+  withRouter(connect(mapStateToProps, mapDispatchToProps)(Board))
 );

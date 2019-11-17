@@ -28,6 +28,7 @@ class Pomodoro extends Component {
 
   componentDidMount() {
     window.addEventListener("focus", this.props.updateTimer);
+    document.title = "Pomodoro | Productivity Platform";
   }
 
   render() {
@@ -98,8 +99,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Pomodoro)
+  connect(mapStateToProps, mapDispatchToProps)(Pomodoro)
 );

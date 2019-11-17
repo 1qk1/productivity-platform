@@ -7,6 +7,7 @@ import "./Store.scss";
 
 class Store extends Component {
   render() {
+    document.title = "Store | Productivity Platform";
     const extensions = Object.keys(extensionMap);
     return (
       <div className="Store">
@@ -36,7 +37,4 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actions.removeExtension(extensionName))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Store);
+export default connect(mapStateToProps, mapDispatchToProps)(Store);
