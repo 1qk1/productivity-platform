@@ -97,6 +97,9 @@ class Boards extends Component {
     if (this.state.boards === null) {
       return <Loader />;
     }
+
+    document.title = "Boards | Productivity Platform";
+
     return (
       <div className="Container--Wide Boards scrollbar-horizontal">
         {/* render list */}
@@ -111,9 +114,7 @@ class Boards extends Component {
             />
           ))}
           <button
-            className={`${
-              boardPreviewClasses["Board-Link"]
-            } Board-Preview--Button`}
+            className={`${boardPreviewClasses["Board-Link"]} Board-Preview--Button`}
             onClick={() =>
               this.setState({ showNewBoard: !this.state.showNewBoard })
             }
