@@ -6,7 +6,6 @@ import "./Boards.scss";
 import boardPreviewClasses from "../../components/UI/Board/BoardPreview/BoardPreview.module.scss";
 import { toast } from "react-toastify";
 import Modal from "../../components/UI/Modal/Modal";
-import _ from "lodash";
 import Loader from "../../components/UI/Loader/Loader";
 import { validateBoards } from "../../shared/utilities";
 import BoardPreview from "../../components/UI/Board/BoardPreview/BoardPreview";
@@ -15,16 +14,16 @@ import { cloneDeep } from "lodash";
 class Boards extends Component {
   state = {
     boards: null,
-    showNewBoard: false
+    showNewBoard: false,
   };
 
   getBoards = () => {
     axios
       .get("/boards")
-      .then(res => {
+      .then((res) => {
         this.setState(() => ({ boards: res.data.boards }));
       })
-      .catch(error => {
+      .catch((error) => {
         toast.error(error);
         this.props.history.push("/");
       });
@@ -36,25 +35,25 @@ class Boards extends Component {
         boardId,
         boardTitle,
         boardColor,
-        boardPrivate
+        boardPrivate,
       })
-      .then(res => {
+      .then((res) => {
         const newBoards = cloneDeep(this.state.boards);
         // replace board with updated board
         const boardIndex = this.state.boards.findIndex(
-          board => board._id === boardId
+          (board) => board._id === boardId
         );
         newBoards[boardIndex] = {
           ...newBoards[boardIndex],
           title: boardTitle,
           color: boardColor,
-          private: boardPrivate
+          private: boardPrivate,
         };
         this.setState({ boards: newBoards });
       });
   };
 
-  deleteBoard = boardId => {
+  deleteBoard = (boardId) => {
     // window.confirm("Are you sure you want to delete this board?");
     if (!window.confirm("Are you sure you want to delete this board?")) {
       return;
@@ -70,21 +69,21 @@ class Boards extends Component {
         }, []);
         this.setState(() => ({ boards: newBoards }));
       })
-      .catch(error => toast.error(error.response.data.error.message));
+      .catch((error) => toast.error(error.response.data.error.message));
   };
 
-  onSubmitNewBoard = boardData => {
+  onSubmitNewBoard = (boardData) => {
     if (!validateBoards(boardData.boardTitle)) {
       return toast.error("Board Title must be at least 3 characters long.");
     }
     axios
       .post("/boards", boardData)
-      .then(res => {
-        const newBoards = _.cloneDeep(this.state.boards);
+      .then((res) => {
+        const newBoards = cloneDeep(this.state.boards);
         newBoards.unshift(res.data.newBoard);
         this.setState({ boards: newBoards });
       })
-      .catch(error => {
+      .catch((error) => {
         toast.error(error.response.data.error.message);
       });
   };
