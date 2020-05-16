@@ -16,10 +16,10 @@
   "scripts": {
     "installdeps": "npm install && npm run install:client && npm run install:server",
     "install:client": "cd webclient && npm install",
-    "install:server": "cd backend && npm install",
-    "start": "cd backend && npm start",
+    "install:server": "cd prodapp-backend && npm install",
+    "start": "cd prodapp-backend && npm start",
     "dev": "concurrently \"npm run start:server\" \"npm run start:client\"",
-    "start:server": "cd backend && npm run start:dev",
+    "start:server": "cd prodapp-backend && npm run start:dev",
     "start:client": "cd webclient && npm start",
     "build": "cd webclient && npm run build && cd .. && node postbuild.js",
     "heroku-postbuild": "npm run build"
