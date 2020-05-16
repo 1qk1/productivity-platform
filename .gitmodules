@@ -1,0 +1,3 @@
+[submodule "prodapp-backend"]
+	path = prodapp-backend
+	url = https://github.com/1qk1/prodapp-backend.git
