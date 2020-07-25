@@ -36,9 +36,19 @@
   }
   .Card-Text {
     margin: 0.25rem;
-    cursor: text;
+    // cursor: text;
     display: inline-block;
     word-break: break-word;
+    width: 100%;
+  }
+  .Card-Text-Edit {
+    // margin: 0.25rem;
+    // padding: 1rem 0.75rem;
+    padding: 1rem 0 1.5rem 0rem;
+    border: none;
+    line-height: 1.5;
+    border-bottom: 1px solid #aaa;
+    outline: none;
   }
   .Dragging {
     opacity: 0.2;

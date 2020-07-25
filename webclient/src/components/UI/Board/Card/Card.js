@@ -17,7 +17,7 @@ const cardSource = {
       initialListIndex: props.listIndex,
       initialListId: props.card.listId,
       initialIndex: props.index,
-      boardId: props.card.boardId
+      boardId: props.card.boardId,
     };
   },
   endDrag(props, monitor, component) {
@@ -30,13 +30,13 @@ const cardSource = {
       cardId,
       listId,
       initialListId,
-      boardId
+      boardId,
     } = monitor.getItem();
 
     if (initialIndex === index && listIndex === initialListIndex) return;
 
     props.dropCard(boardId, cardId, index, initialListId, listId);
-  }
+  },
 };
 
 const cardTarget = {
@@ -89,21 +89,22 @@ const cardTarget = {
     // but it's good here for the sake of performance
     // to avoid expensive index searches.
     monitor.getItem().index = hoverIndex;
-  }
+  },
 };
 
 const collect = (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging()
+  isDragging: monitor.isDragging(),
 });
 
-const card = props => {
+const card = (props) => {
   return props.connectDragSource(
     props.connectDropTarget(
       <div className={`Card ${props.dragging ? "Dragging" : ""}`}>
         <EditableText
           textClasses="Card-Text"
-          onSubmitHandler={newText =>
+          textClassesEditing="Card-Text-Edit"
+          onSubmitHandler={(newText) =>
             props.changeCardText(
               props.card.listId,
               props.card._id.toString(),
@@ -111,6 +112,7 @@ const card = props => {
             )
           }
           text={props.card.text}
+          inputType="textarea"
         />
         <Dropdown
           dropdownClasses="Card-Controls Board-Controls"
@@ -139,6 +141,6 @@ const card = props => {
   );
 };
 
-export default DropTarget("CARD", cardTarget, connect => ({
-  connectDropTarget: connect.dropTarget()
+export default DropTarget("CARD", cardTarget, (connect) => ({
+  connectDropTarget: connect.dropTarget(),
 }))(DragSource("CARD", cardSource, collect)(card));

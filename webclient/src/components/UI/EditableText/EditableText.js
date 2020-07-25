@@ -1,45 +1,63 @@
 import React, { Component } from "react";
 import onClickOutside from "react-onclickoutside";
 import PropTypes from "prop-types";
+import TextareaAutosize from "react-textarea-autosize";
 
 class EditableText extends Component {
   state = {
     editing: false,
-    newText: ""
+    newText: this.props.text,
   };
 
-  onChangeHandler = event => {
+  onChangeHandler = (event) => {
+    console.log(event.target.value);
     this.setState({ newText: event.target.value });
   };
 
   toggleEditing = () => {
     this.setState({ editing: !this.state.editing });
+    this.props.onSubmitHandler(this.state.newText);
   };
 
   closeEditing = () => {
     this.setState({ editing: false });
+    this.props.onSubmitHandler(this.state.newText);
   };
 
   handleClickOutside = () => {
     this.closeEditing();
   };
 
-  onSubmitHandler = event => {
+  onSubmitHandler = (event) => {
     event.preventDefault();
     this.setState({ editing: false });
     this.props.onSubmitHandler(this.state.newText);
   };
 
   render() {
-    return this.state.editing ? (
-      <form onSubmit={this.onSubmitHandler}>
-        <input
-          type="text"
-          autoFocus
+    let editingElement = (
+      <input
+        type="text"
+        autoFocus
+        value={this.state.newText}
+        onChange={this.onChangeHandler}
+        className={this.props.textClassesEditing || ""}
+      />
+    );
+    if (this.state.editing && this.props.inputType === "textarea") {
+      editingElement = (
+        <TextareaAutosize
           value={this.state.newText}
           onChange={this.onChangeHandler}
+          maxRows="50"
+          minRows="2"
+          autoFocus
+          className={this.props.textClassesEditing || ""}
         />
-      </form>
+      );
+    }
+    return this.state.editing ? (
+      <form onSubmit={this.onSubmitHandler}>{editingElement}</form>
     ) : (
       <p
         onClick={this.toggleEditing}
@@ -56,7 +74,8 @@ EditableText.propTypes = {
   onSubmitHandler: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
   textClasses: PropTypes.string,
-  inputType: PropTypes.oneOf(["text", "textarea"])
+  textClassesEditing: PropTypes.string,
+  inputType: PropTypes.oneOf(["text", "textarea"]),
 };
 
 export default onClickOutside(EditableText);
