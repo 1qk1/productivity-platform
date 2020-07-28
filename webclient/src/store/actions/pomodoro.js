@@ -55,6 +55,8 @@ export const pomodoroCompleted = (isPomodoro) => {
     if (isPomodoro) {
       dispatch(submitPomodoro());
       dispatch({ type: actionTypes.START_BREAK });
+    } else {
+      dispatch({ type: actionTypes.STOP_TIMER });
     }
   };
 };
