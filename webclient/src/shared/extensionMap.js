@@ -2,6 +2,9 @@ import React, { lazy } from "react";
 import { Route } from "react-router-dom";
 
 const AsyncPomodoro = lazy(() => import("../containers/Pomodoro/Pomodoro"));
+const AsyncPomodoroTimesheets = lazy(() =>
+  import("../containers/Pomodoro/Timesheets")
+);
 const AsyncBoards = lazy(() => import("../containers/Boards/Boards"));
 const AsyncBoard = lazy(() => import("../containers/Boards/Board"));
 
@@ -10,20 +13,23 @@ const extensionMap = {
     title: "Pomodoro",
     component: <AsyncPomodoro />,
     iconClasses: "far fa-clock",
-    description: "A 25 minute clock with 5 minute breaks in between."
+    description: "A 25 minute clock with 5 minute breaks in between.",
+    childRoutes: {
+      "pomodoro/timesheets": { component: <AsyncPomodoroTimesheets /> },
+    },
   },
   boards: {
     title: "Kanban Boards",
     component: <AsyncBoards />,
     iconClasses: "fab fa-trello",
     description: "Trello without going on trello.",
-    childRoutes: { "boards/:boardId": { component: <AsyncBoard /> } }
-  }
+    childRoutes: { "boards/:boardId": { component: <AsyncBoard /> } },
+  },
 };
 
 export default extensionMap;
 
-export const extensionsToRoutes = extensions =>
+export const extensionsToRoutes = (extensions) =>
   extensions.reduce((allRoutes, extension) => {
     return [
       allRoutes,
@@ -34,12 +40,12 @@ export const extensionsToRoutes = extensions =>
         key={`${extension}-route`}
         path={`/${extension}`}
         component={() => extensionMap[extension].component}
-      />
+      />,
     ];
   }, []);
 
-const childExtensions = extension =>
-  Object.keys(extensionMap[extension].childRoutes).map(child => (
+const childExtensions = (extension) =>
+  Object.keys(extensionMap[extension].childRoutes).map((child) => (
     <Route
       key={`${child}-route`}
       path={`/${child}`}

@@ -37,3 +37,10 @@
     }
   }
 }
+
+.timesheets-container {
+  & > div {
+    display: inline-block;
+    width: 50%;
+  }
+}
