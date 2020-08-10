@@ -85,45 +85,43 @@ export class Timesheets extends Component {
         {/* You can change the settings and get previous days' pomodoros */}
         {/* Will display pomodoros */}
         <div className="timesheets-container">
-          <ResponsiveContainer width="49%" height={300}>
-            <BarChart data={this.state.barChart}>
-              <CartesianGrid strokeDasharray="0" />
-              <XAxis dataKey="name" />
-              <YAxis name="Pomodoros" allowDecimals={false} />
-              <Tooltip />
-              <Bar dataKey="pomos" fill="#8884d8" />
-            </BarChart>
-          </ResponsiveContainer>
-          <ResponsiveContainer width="49%" height={300}>
-            <LineChart
-              data={this.state.lineChart}
-              margin={{
-                top: 20,
-                right: 30,
-                left: 20,
-                bottom: 20,
-              }}
-            >
-              <CartesianGrid />
-              <XAxis dataKey="date" />
-              <YAxis
-                dataKey="pomos"
-                // domain={[
-                //   (dataMin) => dataMin,
-                //   (dataMax) => Math.ceil(dataMax / 5) * 5,
-                // ]}
-                name="Pomodoros"
-                allowDecimals={false}
-              />
-              <Tooltip />
-              <Line
-                type="monotone"
-                dataKey="pomos"
-                stroke="#8884d8"
-                // activeDot={{ r: 8 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+          <BarChart width={500} height={300} data={this.state.barChart}>
+            <CartesianGrid strokeDasharray="0" />
+            <XAxis dataKey="name" />
+            <YAxis name="Pomodoros" allowDecimals={false} />
+            <Tooltip />
+            <Bar dataKey="pomos" fill="#8884d8" />
+          </BarChart>
+          <LineChart
+            width={500}
+            height={300}
+            data={this.state.lineChart}
+            margin={{
+              top: 20,
+              right: 30,
+              left: 20,
+              bottom: 20,
+            }}
+          >
+            <CartesianGrid />
+            <XAxis dataKey="date" />
+            <YAxis
+              dataKey="pomos"
+              // domain={[
+              //   (dataMin) => dataMin,
+              //   (dataMax) => Math.ceil(dataMax / 5) * 5,
+              // ]}
+              name="Pomodoros"
+              allowDecimals={false}
+            />
+            <Tooltip />
+            <Line
+              type="monotone"
+              dataKey="pomos"
+              stroke="#8884d8"
+              // activeDot={{ r: 8 }}
+            />
+          </LineChart>
         </div>
       </div>
     );
