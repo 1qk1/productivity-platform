@@ -10,7 +10,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer,
+  // ResponsiveContainer,
   BarChart,
   Bar,
 } from "recharts";
@@ -122,6 +122,7 @@ export class Timesheets extends Component {
               // activeDot={{ r: 8 }}
             />
           </LineChart>
+        </div>
       </div>
     );
   }
