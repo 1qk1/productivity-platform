@@ -122,7 +122,6 @@ export class Timesheets extends Component {
               // activeDot={{ r: 8 }}
             />
           </LineChart>
-        </div>
       </div>
     );
   }
