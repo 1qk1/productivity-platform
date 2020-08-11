@@ -15,7 +15,7 @@ import {
   Bar,
 } from "recharts";
 
-import { getddmmYYYYDate } from "./../../shared/utilities";
+import { getddmmYYYYDate, weekDayMap } from "./../../shared/utilities";
 import "./Pomodoro.scss";
 
 export class Timesheets extends Component {
@@ -42,17 +42,17 @@ export class Timesheets extends Component {
 
   getCharts = () => {
     const lineChart = [];
-    const barChart = new Array(7);
+    const barChart = Array.apply(null, { length: 7 }).map((day, index) => ({
+      name: weekDayMap[index].name,
+      shortName: weekDayMap[index].short,
+      pomos: 0,
+    }));
     // get day
     // barchart[day].pomos++
     this.state.pomodoros.forEach((pomo) => {
       const pomoDate = getddmmYYYYDate(pomo.date);
       const pomoDay = new Date(pomo.date).getDay();
-      if (!barChart[pomoDay]) {
-        barChart[pomoDay] = { name: "Day " + pomoDay, pomos: 1 };
-      } else {
-        barChart[pomoDay].pomos = barChart[pomoDay].pomos + 1;
-      }
+      barChart[pomoDay].pomos++;
       if (lineChart.length === 0) {
         lineChart.push({ pomos: 1, date: pomoDate });
       } else {
@@ -63,13 +63,11 @@ export class Timesheets extends Component {
           lineChart.push({ pomos: 1, date: pomoDate });
         }
       }
-      console.log(barChart, barChart.length);
-      this.setState({ lineChart, barChart });
     });
+    this.setState({ lineChart, barChart });
   };
 
   render() {
-    console.log(this.state.pomodoros);
     if (
       this.state.pomodoros === null
       // this.state.barChart === null ||
@@ -87,7 +85,7 @@ export class Timesheets extends Component {
         <div className="timesheets-container">
           <BarChart width={500} height={300} data={this.state.barChart}>
             <CartesianGrid strokeDasharray="0" />
-            <XAxis dataKey="name" />
+            <XAxis dataKey="shortName" />
             <YAxis name="Pomodoros" allowDecimals={false} />
             <Tooltip />
             <Bar dataKey="pomos" fill="#8884d8" />
