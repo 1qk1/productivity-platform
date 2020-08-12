@@ -1,0 +1,12 @@
+.Timesheets {
+  &-Wrapper > div {
+    display: inline-block;
+  }
+  .recharts-rectangle.recharts-tooltip-cursor {
+    // display: none;
+    fill: none;
+  }
+  .recharts-layer.recharts-bar-rectangle > path:hover {
+    cursor: pointer;
+  }
+}
