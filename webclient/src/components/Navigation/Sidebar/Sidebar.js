@@ -35,6 +35,7 @@ const sidebar = ({ logout, extensions, location }) => (
                     />
                   );
                 }
+                return null;
               })}
             </Fragment>
           );
