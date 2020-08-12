@@ -1,22 +1,47 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import extensionMap from "../../../shared/extensionMap";
 
 import SideButton from "./SideButton/SideButton";
 
 import "./Sidebar.scss";
+import { withRouter } from "react-router-dom";
 
-const sidebar = ({ logout, extensions }) => (
+const sidebar = ({ logout, extensions, location }) => (
   <div className="Sidebar">
     {/* icons with nav links */}
     <ul className="Sidebar-Links">
-      {extensions.map(extension => (
-        <SideButton
-          key={`${extension}-sideButton`}
-          path={`/${extension}`}
-          iconClasses={extensionMap[extension].iconClasses}
-        />
-      ))}
+      {extensions.map((extension) => {
+        const ret = (
+          <SideButton
+            key={`${extension}-sideButton`}
+            path={`/${extension}`}
+            iconClasses={extensionMap[extension].iconClasses}
+          />
+        );
+        if (location.pathname.startsWith(`/${extension}`)) {
+          return (
+            <Fragment>
+              {ret}
+              {Object.keys(extensionMap[extension].childRoutes).map((key) => {
+                if (extensionMap[extension].childRoutes[key].sidebar) {
+                  return (
+                    <SideButton
+                      key={`${key}-sideButton`}
+                      path={`/${key}`}
+                      iconClasses={
+                        extensionMap[extension].childRoutes[key].iconClasses
+                      }
+                    />
+                  );
+                }
+                return null;
+              })}
+            </Fragment>
+          );
+        }
+        return ret;
+      })}
       <SideButton path="/store" iconClasses="fas fa-store" />
       <li className="Sidebar-Link">
         <i onClick={logout} className="fas fa-sign-out-alt" />
@@ -26,7 +51,7 @@ const sidebar = ({ logout, extensions }) => (
 );
 sidebar.propTypes = {
   logout: PropTypes.func.isRequired,
-  extensions: PropTypes.array.isRequired
+  extensions: PropTypes.array.isRequired,
 };
 
-export default sidebar;
+export default withRouter(sidebar);

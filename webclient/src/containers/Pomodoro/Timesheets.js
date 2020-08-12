@@ -16,13 +16,14 @@ import {
 } from "recharts";
 
 import { getddmmYYYYDate, weekDayMap } from "./../../shared/utilities";
-import "./Pomodoro.scss";
+import "./Timesheets.scss";
 
 export class Timesheets extends Component {
   state = {
     pomodoros: this.props.pomodoros,
     lineChart: null,
     barChart: null,
+    showTooltip: false,
   };
   componentDidMount() {
     // this.props.getPomodoros();
@@ -45,6 +46,7 @@ export class Timesheets extends Component {
     const barChart = Array.apply(null, { length: 7 }).map((day, index) => ({
       name: weekDayMap[index].name,
       shortName: weekDayMap[index].short,
+      longName: weekDayMap[index].name,
       pomos: 0,
     }));
     // get day
@@ -64,12 +66,10 @@ export class Timesheets extends Component {
         }
       }
     });
-    console.log(barChart, barChart.length);
     this.setState({ lineChart, barChart });
   };
 
   render() {
-    console.log(this.state.pomodoros);
     if (
       this.state.pomodoros === null
       // this.state.barChart === null ||
@@ -78,39 +78,52 @@ export class Timesheets extends Component {
       return <Loader />;
     }
     return (
-      <div className="Container">
-        <h1>Your timesheets</h1>
-        {/* Will get pomodoros from the server */}
-        {/* Will get last week's pomodoros by default */}
-        {/* You can change the settings and get previous days' pomodoros */}
-        {/* Will display pomodoros */}
-        <div className="timesheets-container">
-          <ResponsiveContainer width="49%" height={300}>
-            <BarChart data={this.state.barChart}>
-              <CartesianGrid strokeDasharray="0" />
-              <XAxis dataKey="shortName" />
-              <YAxis name="Pomodoros" allowDecimals={false} />
-              <Tooltip />
-              <Bar dataKey="pomos" fill="#8884d8" />
-            </BarChart>
-          </ResponsiveContainer>
-          <ResponsiveContainer width="49%" height={300}>
-            <LineChart
-              data={this.state.lineChart}
-              // margin={{
-              //   top: 20,
-              //   right: 30,
-              //   left: 20,
-              //   bottom: 20,
-              // }}
-            >
-              <CartesianGrid />
-              <XAxis dataKey="date" />
-              <YAxis dataKey="pomos" name="Pomodoros" allowDecimals={false} />
-              <Tooltip />
-              <Line type="monotone" dataKey="pomos" stroke="#8884d8" />
-            </LineChart>
-          </ResponsiveContainer>
+      <div className="Timesheets">
+        <div className="Container">
+          <h1>Your timesheets</h1>
+          {/* Will get pomodoros from the server */}
+          {/* Will get last week's pomodoros by default */}
+          {/* You can change the settings and get previous days' pomodoros */}
+          {/* Will display pomodoros */}
+          <div className="Timesheets-Wrapper">
+            <ResponsiveContainer width="49%" height={300}>
+              <BarChart data={this.state.barChart}>
+                <CartesianGrid strokeDasharray="0" />
+                <XAxis dataKey="shortName" name="name" />
+                <YAxis allowDecimals={false} />
+                <Tooltip
+                  animationDuration={100}
+                  labelStyle={{ color: "#34495e" }}
+                />
+                <Bar dataKey="pomos" name="Pomodoros" fill="#27ae60" />
+              </BarChart>
+            </ResponsiveContainer>
+            <ResponsiveContainer width="49%" height={300}>
+              <LineChart
+                data={this.state.lineChart}
+                // margin={{
+                //   top: 20,
+                //   right: 30,
+                //   left: 20,
+                //   bottom: 20,
+                // }}
+              >
+                <CartesianGrid />
+                <XAxis dataKey="date" />
+                <YAxis dataKey="pomos" name="Pomodoros" allowDecimals={false} />
+                <Tooltip
+                  animationDuration={100}
+                  labelStyle={{ color: "#34495e" }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="pomos"
+                  stroke="#27ae60"
+                  strokeWidth="3"
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
         </div>
       </div>
     );

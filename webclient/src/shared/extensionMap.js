@@ -15,7 +15,12 @@ const extensionMap = {
     iconClasses: "far fa-clock",
     description: "A 25 minute clock with 5 minute breaks in between.",
     childRoutes: {
-      "pomodoro/timesheets": { component: <AsyncPomodoroTimesheets /> },
+      "pomodoro/timesheets": {
+        component: <AsyncPomodoroTimesheets />,
+        text: "Timesheets",
+        sidebar: true,
+        iconClasses: "fas fa-chart-line mb-5",
+      },
     },
   },
   boards: {
