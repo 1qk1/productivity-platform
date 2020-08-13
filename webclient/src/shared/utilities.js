@@ -31,3 +31,13 @@ export const validateBoards = (value) =>
   !isEmpty(value, { ignore_whitespace: true });
 
 export const getddmmYYYYDate = (date) => new Date(date).toLocaleDateString();
+
+export const weekDayMap = [
+  { name: "Monday", short: "Mon" },
+  { name: "Tuesday", short: "Tue" },
+  { name: "Wednesday", short: "Wed" },
+  { name: "Thursday", short: "Thu" },
+  { name: "Friday", short: "Fri" },
+  { name: "Saturday", short: "Sat" },
+  { name: "Sunday", short: "Sun" },
+];
