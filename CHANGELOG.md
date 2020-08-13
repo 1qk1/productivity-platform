@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2020-08-13
+
+After a lot of inactivity, today we're introducing a new update with 2 kinda big features, quality improvements of the project and bug fixes. There are also changes that we never released a changelog for, so every change since the last changelog is documented here.
+
+### Added
+
+- 🎉🥳 Add timesheets for pomodoros. This shows your stats and it has 2 graphs. The first will show you which days of the week you are most productive and the other will show your completed pomodoros over time. This is still an incomplete version, there are more stuff that will be added, but now you can use all the pomodoros that you were completing all this time and be happy with yourself. 🎉🥳
+- 🎉🥳 Beta version of the app. This version will contain any upcoming changes and features that are almost-complete before going into the main app. This version is live on [beta.prodapp.xyz](https://beta.prodapp.xyz/). That way we can have 1 more testing step before features go to the main app. 🎉🥳
+
+### Changed
+
+- Functionality of the pomodoros is changed. Now when the break ends, you will have to manually start a new pomodoro.
+- Improve board cards. Now you text will wrap to a new line using auto-heighted textareas.
+- Fix bug on board cards that didn't show the old text when you went to edit it.
+- Remove snyk from the repository and the packages
+- Update packages
+- Remove double import of \_.cloneDeep
+- Add favicons
+- Move the backend to a [separate repository](https://github.com/1qk1/prodapp-backend) and add it as a submodule to make it easier to deploy the backend and the frontend, since they get deployed on different services and require different build processes.
+- Remove postbuild.js and heroku-postbuild from the build script and package.json. This has to do with the way backend is deployed now. Before it was deployed on a VPS using pm2. This made it very hard to maintain and easy to break since it was just a folder containing all the files. Now it's containerized using dokku on a [hetzner](https://www.hetzner.com/) VPS, behind an nginx webserver. That makes it way easier to handle SSL certificates(that was a problem before), domains and everything is more automated.
+
 ## [1.6.6] - 2019-11-17
 
 ### Changed
