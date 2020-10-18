@@ -7,7 +7,7 @@ import "./Hero.scss";
 const hero = ({ toggleForms }) => (
   <div className="Hero">
     <div className="Container row">
-      <div className="Subsection col l6 m12">
+      <div className="Subsection col-12 col-md-6">
         <h1 className="Subsection-Header">
           Beat procrastination and track your time.
         </h1>
@@ -21,7 +21,7 @@ const hero = ({ toggleForms }) => (
           Sign up. For Free.
         </button>
       </div>
-      <div className="col l6 m12">
+      <div className="col-12 col-md-6">
         <img className="bg-image" src={heroImg} alt="Hero" />
       </div>
     </div>
@@ -29,7 +29,7 @@ const hero = ({ toggleForms }) => (
 );
 
 hero.propTypes = {
-  toggleForms: PropTypes.func.isRequired
+  toggleForms: PropTypes.func.isRequired,
 };
 
 export default hero;

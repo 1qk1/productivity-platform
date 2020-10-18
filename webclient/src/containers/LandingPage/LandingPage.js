@@ -9,7 +9,7 @@ import StatsSection from "../../components/LandingPageSections/Stats/Stats";
 import Footer from "../../components/LandingPageSections/Footer/Footer";
 import Hero from "../../components/LandingPageSections/Hero/Hero";
 import AuthForms from "../../components/Auth/Auth";
-import _ from "lodash";
+import { every, cloneDeep, isString, forEach } from "lodash";
 import initialState from "./initialState";
 import { validate } from "../../shared/utilities";
 
@@ -19,12 +19,12 @@ class LandingPage extends Component {
   // moved the state in a separate file because it was huge
   state = initialState;
 
-  submitHandler = event => {
+  submitHandler = (event) => {
     // prevent the default submit action
     event.preventDefault();
     // get the type of the submitted form (register/login)
     const type = event.target.id;
-    if (!_.every(this.state.formData[type], ["valid", true])) return;
+    if (!every(this.state.formData[type], ["valid", true])) return;
     // start authentication with the login data
     // convert the form fields in a {username: "something"} form
     const data = Object.keys(this.state.formData[type]).reduce(
@@ -38,7 +38,7 @@ class LandingPage extends Component {
     // send the data
     axios
       .post(`/auth/${type}`, data)
-      .then(res => {
+      .then((res) => {
         const { token, user } = res.data;
         // set the auth header as the user's JWT
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -47,21 +47,21 @@ class LandingPage extends Component {
         // send the user to redux
         this.props.onAuthSuccess(token, user);
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response === undefined) return;
         // get the error array from the objects
         const errors = error.response.data.error.message;
-        const newFormData = _.cloneDeep(this.state.formData);
+        const newFormData = cloneDeep(this.state.formData);
         // if the errors is a string
-        if (_.isString(errors)) {
+        if (isString(errors)) {
           // set the form's error to this error
           newFormData.error = errors;
           this.setState({ formData: newFormData });
           // else (array)
         } else {
           // set each field's error based on each error in the array
-          _.forEach(newFormData[type], field => (field.errors = []));
-          errors.forEach(err =>
+          forEach(newFormData[type], (field) => (field.errors = []));
+          errors.forEach((err) =>
             newFormData[type][err.param].errors.push(err.msg)
           );
           // update state with the errors
@@ -70,7 +70,7 @@ class LandingPage extends Component {
       });
   };
 
-  onChangeHandler = e => {
+  onChangeHandler = (e) => {
     // get the value from the element
     const value = e.target.value;
     // get what action you want to do (login/register) from the closest form id
@@ -78,7 +78,7 @@ class LandingPage extends Component {
     //get the field name
     const fieldName = e.target.name;
     // clone the form data
-    const newFormData = _.cloneDeep(this.state.formData);
+    const newFormData = cloneDeep(this.state.formData);
     // change the value
     newFormData[actionType][fieldName].value = value;
     newFormData[actionType][fieldName].touched = true;
@@ -92,7 +92,7 @@ class LandingPage extends Component {
     newFormData[actionType][fieldName] = {
       ...newFormData[actionType][fieldName],
       errors: validationErrors,
-      valid: validationErrors.length === 0
+      valid: validationErrors.length === 0,
     };
     // change the state
     this.setState({ formData: newFormData });
@@ -126,12 +126,12 @@ class LandingPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  error: state.user.error
+const mapStateToProps = (state) => ({
+  error: state.user.error,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onAuthSuccess: (token, user) => dispatch(actions.authSuccess(token, user))
+const mapDispatchToProps = (dispatch) => ({
+  onAuthSuccess: (token, user) => dispatch(actions.authSuccess(token, user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
