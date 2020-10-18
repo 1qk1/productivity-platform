@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import InputWithErrors from "../UI/InputWithErrors/InputWithErrors";
 import { validate } from "../../shared/utilities";
 import { cloneDeep } from "lodash";
