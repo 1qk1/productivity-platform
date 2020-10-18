@@ -120,6 +120,7 @@ export class Timesheets extends Component {
                   dataKey="pomos"
                   stroke="#27ae60"
                   strokeWidth="3"
+                  name="Pomodoros"
                 />
               </LineChart>
             </ResponsiveContainer>

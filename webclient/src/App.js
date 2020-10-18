@@ -10,6 +10,12 @@ import "./App.scss";
 const AsyncLandingPage = lazy(() =>
   import("./containers/LandingPage/LandingPage")
 );
+const AsyncForgotPassword = lazy(() =>
+  import("./components/Auth/ForgotPassword")
+);
+const AsyncResetPassword = lazy(() =>
+  import("./components/Auth/ResetPassword")
+);
 
 const AsyncMain = lazy(() => import("./containers/Main/Main"));
 
@@ -29,6 +35,16 @@ class App extends Component {
       content = (
         <Suspense fallback={<Loader />}>
           <Switch>
+            <Route
+              path="/forgot-password"
+              exact
+              component={() => <AsyncForgotPassword />}
+            />
+            <Route
+              path="/reset-password"
+              exact
+              component={() => <AsyncResetPassword />}
+            />
             <Route path="/" exact component={() => <AsyncLandingPage />} />
             <Redirect to="/" />
           </Switch>
@@ -54,15 +70,12 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  token: state.user.token
+const mapStateToProps = (state) => ({
+  token: state.user.token,
 });
 
-const mapDispatchToProps = dispatch => ({
-  checkToken: () => dispatch(actions.checkAuth())
+const mapDispatchToProps = (dispatch) => ({
+  checkToken: () => dispatch(actions.checkAuth()),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
