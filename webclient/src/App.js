@@ -41,7 +41,7 @@ class App extends Component {
               component={() => <AsyncForgotPassword />}
             />
             <Route
-              path="/reset-password"
+              path="/reset-password/:resetToken"
               exact
               component={() => <AsyncResetPassword />}
             />
