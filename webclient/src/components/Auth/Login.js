@@ -24,9 +24,12 @@ const login = props => (
         name="password"
         formId="login"
       />
-      <button className="btn btn-green" type="submit" name="action">
-        Log in
-      </button>
+      <div>
+        <button className="btn btn-green" type="submit" name="action">
+          Log in
+        </button>
+        <a className="d-inline-block ml-4" href="/forgot-password">Forgot Pasword?</a>
+      </div>
     </form>
   </div>
 );

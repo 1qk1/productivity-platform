@@ -53,7 +53,7 @@ export class Timesheets extends Component {
     // barchart[day].pomos++
     this.state.pomodoros.forEach((pomo) => {
       const pomoDate = getddmmYYYYDate(pomo.date);
-      const pomoDay = new Date(pomo.date).getDay();
+      const pomoDay = (new Date(pomo.date).getDay() + 6) % 7;
       barChart[pomoDay].pomos++;
       if (lineChart.length === 0) {
         lineChart.push({ pomos: 1, date: pomoDate });
@@ -120,6 +120,7 @@ export class Timesheets extends Component {
                   dataKey="pomos"
                   stroke="#27ae60"
                   strokeWidth="3"
+                  name="Pomodoros"
                 />
               </LineChart>
             </ResponsiveContainer>
