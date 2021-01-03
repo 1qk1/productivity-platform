@@ -12,15 +12,17 @@ A step by step series that will get your development environment running.
 
 1. Navigate into the project folder (this folder).
 
-2. Install dependencies with `npm run installdeps`.
+2. Run `git submodule update --init --recursive` to pull the submodules (the backend is in a separate repo but linked to this one).
 
-3. In the backend folder, make a `.env` file with the keys specified in the README.md file and take a look at the .env.example file.
+3. Install dependencies with `npm run installdeps`.
 
-4. Go to the project's folder again.
+4. In the backend folder, make a `.env` file with the keys specified in the README.md file and take a look at the .env.example file. For the frontend, the .env files are needed only in production.
 
-5. Run `npm run dev` to start the backend and the webclient.
+5. Go to the project's folder again.
 
-6. You're ready to code.
+6. Run `npm run dev` to start the backend and the webclient.
+
+7. You're ready to code.
 
 ## Running the tests
 
