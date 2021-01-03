@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.2] - 2021-01-03
+
+### Changed
+
+- Completely replace materialize with bootstrap. At the moment the project loads only what it needs and not the whole library. This will make it easier to develop since way more people use bootstrap than materialize and will be more contributor-friendly too.
+
 ## [1.8.1] - 2021-01-02
 
 ### Changed
