@@ -52,6 +52,8 @@ Coming soon
 
 ![Pomodoro break](https://i.imgur.com/90BTOon.png)
 
+![Pomodoro Timesheets](https://i.imgur.com/5BvyoXX.jpg)
+
 ![All boards](https://i.imgur.com/WPfLMnY.png)
 
 ![Board image](https://i.imgur.com/sFJ4DCx.png)
