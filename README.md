@@ -8,15 +8,15 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### ⚙️ Installing
 
-A step by step series of examples that tell you how to get a development env running.
+A step by step series that will get your development environment running.
 
-1. Navigate into the project folder.
+1. Navigate into the project folder (this folder).
 
-2. Install dependencies with `npm installdeps`.
+2. Install dependencies with `npm run installdeps`.
 
-3. In the backend folder, make a `.env` file with 2 keys: `MONGODB_URI` and `JWT_SECRET`, and then give them a database url and a jwt secret.
+3. In the backend folder, make a `.env` file with the keys specified in the README.md file and take a look at the .env.example file.
 
-4. Go to the project's root folder again.
+4. Go to the project's folder again.
 
 5. Run `npm run dev` to start the backend and the webclient.
 
