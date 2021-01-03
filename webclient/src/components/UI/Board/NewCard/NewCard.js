@@ -15,7 +15,7 @@ const newCard = props => {
           className="New-Card-Input"
           onChange={props.onChange}
         />
-        <button type="submit" className="btn btn-small">
+        <button type="submit" className="btn btn-green">
           Add
         </button>
       </form>

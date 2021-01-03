@@ -59,13 +59,13 @@ class EditBoard extends Component {
         </div>
         <div className="EditBoard--Actions">
           <button
-            className="btn btn-small red"
+            className="btn btn-red"
             onClick={this.onDelete}
             type="button"
           >
             Delete Board
           </button>
-          <button type="submit" className="btn btn-small">
+          <button type="submit" className="btn btn-green">
             Update Board
           </button>
         </div>
