@@ -1,0 +1,23 @@
+label {
+  font-size: 0.8rem;
+  color: #9e9e9e;
+}
+
+input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #9e9e9e;
+  border-radius: 0;
+  outline: none;
+  height: 3rem;
+  width: 100%;
+  font-size: 16px !important;
+  margin: 0 0 8px 0 !important;
+  padding: 0;
+  box-shadow: none;
+  transition: all 0.3s, border 0.3s;
+  &:focus,
+  &:active {
+    border-bottom: 2px solid $color-secondary;
+  }
+}

@@ -1,0 +1,36 @@
+.btn {
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 0 5px rgba($color: #000000, $alpha: 0.4);
+  padding: 0.6rem 1.25rem;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  display: inline-block;
+  border: none;
+  transition: all 0.25s ease 0s;
+}
+
+.btn-green {
+  background-color: darken($color-primary, 10);
+  &:hover {
+    background-color: darken($color-primary, 5);
+  }
+}
+
+.btn-red {
+  background-color: lighten(red, 10);
+  &:hover {
+    background-color: lighten(red, 15);
+  }
+}
+
+.btn-large {
+  padding: 1.25rem;
+  font-size: 1.125rem;
+}
+
+.btn-long {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}

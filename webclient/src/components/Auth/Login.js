@@ -5,7 +5,7 @@ import InputWithErrors from "../UI/InputWithErrors/InputWithErrors";
 import "./Auth.scss";
 
 const login = props => (
-  <div className="LoginForm AuthForm">
+  <div className="LoginForm AuthForm mb-4">
     <h5>Login</h5>
     <form id="login" onSubmit={props.submitHandler}>
       <InputWithErrors
