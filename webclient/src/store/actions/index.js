@@ -20,6 +20,7 @@ export {
   addList,
   changeListTitle,
   changeCardText,
+  changeCardDescription,
   changeCardList,
   getBoard,
   moveCard,

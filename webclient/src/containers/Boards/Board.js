@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from "react";
+import React, { PureComponent, Fragment, lazy } from "react";
 import List from "../../components/UI/Board/List/List";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
@@ -9,13 +9,17 @@ import { withRouter } from "react-router-dom";
 
 import "./Board.scss";
 
+const AsyncCardModal = lazy(() => import("../../components/UI/Board/CardModal/CardModal"));
+
 export const itemTypes = {
   CARD: "card"
 };
 
 class Board extends PureComponent {
   componentDidMount() {
-    this.props.getBoard(this.props.match.params.boardId, this.props.history);
+    if (!this.props.board._id) {
+      this.props.getBoard(this.props.match.params.boardId, this.props.history);
+    }
   }
 
   render() {
@@ -26,7 +30,7 @@ class Board extends PureComponent {
       return <Loader />;
     }
     document.title = this.props.board.title + " | Productivity Platform";
-
+    const hasCard = this.props.match.params.cardId !== undefined
     return (
       <Fragment>
         <div className="Board scrollbar-horizontal">
@@ -56,6 +60,15 @@ class Board extends PureComponent {
             Add a List
           </button>
         </div>
+        {hasCard ? (
+          <AsyncCardModal
+            show={hasCard}
+            close={() => this.props.history.push(`/boards/${this.props.match.params.boardId}`)}
+            cardId={this.props.match.params.cardId}
+            changeTitle={this.props.changeCardText}
+            changeDescription={this.props.changeCardDescription}
+          />
+        ) : null}
       </Fragment>
     );
   }
@@ -82,6 +95,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actions.changeListTitle(boardId, listId, newTitle)),
   changeCardText: (listId, cardId, text) =>
     dispatch(actions.changeCardText(listId, cardId, text)),
+  changeCardDescription: (listId, cardId, description) =>
+    dispatch(actions.changeCardDescription(listId, cardId, description)),
   changeCardList: (prevList, listToMoveTo, cardId) =>
     dispatch(actions.changeCardList(prevList, listToMoveTo, cardId)),
   getBoard: (board, history) => dispatch(actions.getBoard(board, history))
