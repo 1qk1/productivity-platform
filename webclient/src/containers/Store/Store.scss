@@ -4,7 +4,6 @@
   flex-wrap: wrap;
 
   &-Extension {
-    background-color: #566e88;
     flex: 0 0 220px;
     text-align: center;
     margin: 0 0.5rem;
@@ -17,9 +16,6 @@
       max-width: 300px;
     }
 
-    .card-content {
-      margin-bottom: 4rem;
-    }
     .card-action {
       position: absolute;
       width: 100%;

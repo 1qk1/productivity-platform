@@ -62,7 +62,7 @@ class NewBoard extends Component {
           />
         </div>
         <div style={{ textAlign: "right" }}>
-          <button type="submit" className="btn btn-small">
+          <button type="submit" className="btn btn-green">
             New Board
           </button>
         </div>

@@ -15,6 +15,10 @@ body .App {
   color: $color-white;
 }
 
+a:hover {
+  text-decoration: none !important;
+}
+
 .App {
   overflow: auto;
 }

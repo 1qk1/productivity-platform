@@ -54,7 +54,7 @@ class Board extends PureComponent {
             />
           ))}
           <button
-            className="btn btn-small Add-List-Btn"
+            className="btn btn-green Add-List-Btn"
             onClick={() => this.props.addList(this.props.board._id)}
           >
             Add a List

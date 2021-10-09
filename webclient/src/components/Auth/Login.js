@@ -5,7 +5,7 @@ import InputWithErrors from "../UI/InputWithErrors/InputWithErrors";
 import "./Auth.scss";
 
 const login = props => (
-  <div className="LoginForm AuthForm">
+  <div className="LoginForm AuthForm mb-4">
     <h5>Login</h5>
     <form id="login" onSubmit={props.submitHandler}>
       <InputWithErrors
@@ -28,7 +28,7 @@ const login = props => (
         <button className="btn btn-green" type="submit" name="action">
           Log in
         </button>
-        <a className="d-inline-block ml-4" href="/forgot-password">Forgot Pasword?</a>
+        <a className="d-inline-block ml-4" href="/forgot-password">Forgot Password?</a>
       </div>
     </form>
   </div>
