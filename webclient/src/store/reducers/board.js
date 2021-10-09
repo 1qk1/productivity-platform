@@ -63,8 +63,26 @@ export default (state = initialState, action) => {
       );
       // replace card with the updated card
       newBoard.lists[listIndex].cards[cardIndex] = {
+        ...newBoard.lists[listIndex].cards[cardIndex],
         ...action.updatedCard
       };
+      return { ...state, board: newBoard };
+    }
+    case actionTypes.CHANGE_CARD_DESCRIPTION: {
+      // find list index
+      const listIndex = state.board.lists.findIndex(
+        list => list._id.toString() === action.listId
+      );
+      // find card index
+      const cardIndex = state.board.lists[listIndex].cards.findIndex(
+        card => card._id.toString() === action.cardId
+      );
+      // replace card with the updated card
+      newBoard.lists[listIndex].cards[cardIndex] = {
+        ...newBoard.lists[listIndex].cards[cardIndex],
+        ...action.updatedCard
+      };
+      // console.log(newBoard.lists[listIndex].cards[cardIndex])
       return { ...state, board: newBoard };
     }
     case actionTypes.CHANGE_LIST: {

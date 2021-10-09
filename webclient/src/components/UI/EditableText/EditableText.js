@@ -10,18 +10,21 @@ class EditableText extends Component {
   };
 
   onChangeHandler = (event) => {
-    console.log(event.target.value);
     this.setState({ newText: event.target.value });
   };
 
   toggleEditing = () => {
     this.setState({ editing: !this.state.editing });
-    this.props.onSubmitHandler(this.state.newText);
+    if (this.props.text !== this.state.newText) {
+      this.props.onSubmitHandler(this.state.newText);
+    }
   };
 
   closeEditing = () => {
     this.setState({ editing: false });
-    this.props.onSubmitHandler(this.state.newText);
+    if (this.props.text !== this.state.newText) {
+      this.props.onSubmitHandler(this.state.newText);
+    }
   };
 
   handleClickOutside = () => {
@@ -31,7 +34,9 @@ class EditableText extends Component {
   onSubmitHandler = (event) => {
     event.preventDefault();
     this.setState({ editing: false });
-    this.props.onSubmitHandler(this.state.newText);
+    if (this.props.text !== this.state.newText) {
+      this.props.onSubmitHandler(this.state.newText);
+    }
   };
 
   render() {

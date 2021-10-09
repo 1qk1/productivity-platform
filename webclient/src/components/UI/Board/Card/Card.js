@@ -2,8 +2,8 @@ import React from "react";
 import { findDOMNode } from "react-dom";
 import { DragSource, DropTarget } from "react-dnd";
 import "./Card.scss";
-import EditableText from "../../EditableText/EditableText";
 import Dropdown from "../../Dropdown/Dropdown";
+import { Link } from "react-router-dom";
 
 const cardSource = {
   beginDrag(props) {
@@ -100,20 +100,8 @@ const collect = (connect, monitor) => ({
 const card = (props) => {
   return props.connectDragSource(
     props.connectDropTarget(
-      <div className={`Card ${props.dragging ? "Dragging" : ""}`}>
-        <EditableText
-          textClasses="Card-Text"
-          textClassesEditing="Card-Text-Edit"
-          onSubmitHandler={(newText) =>
-            props.changeCardText(
-              props.card.listId,
-              props.card._id.toString(),
-              newText
-            )
-          }
-          text={props.card.text}
-          inputType="textarea"
-        />
+      <div className={`Card link-trans ${props.dragging ? "Dragging" : ""}`}>
+        <Link className="Card-Text py-1 pl-1" to={`/boards/${props.card.boardId}/${props.card._id}/`}>{props.card.text}</Link>
         <Dropdown
           dropdownClasses="Card-Controls Board-Controls"
           buttonClasses="btn-invisible Card-Controls--Button"
