@@ -43,7 +43,7 @@ class Dropdown extends Component {
       >
         <button
           onClick={this.toggleHandler}
-          className={"Dropdown--Button " + (this.props.buttonClasses || "")}
+          className={"Dropdown--Button h-100 " + (this.props.buttonClasses || "")}
         >
           {this.props.title ? this.props.title : null}
           {this.props.iconClasses ? (

@@ -1,4 +1,6 @@
 @import "./scss/variables";
+@import "./scss/overrides";
+@import "./scss/typography";
 
 body {
   background: rgb(52, 73, 94);
@@ -68,11 +70,28 @@ p.Error-Message {
   color: #cc0000;
 }
 
-.mb-5 {
-  margin-bottom: 2rem;
+// colors:
+// bg #34495e,
+// green #2ecc71,
+// dark green #27ae60,
+// white #ecf0f1,
+// mid gray #bdc3c7,
+// dark gray #95a5a6
+
+.link-trans {
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+  }
 }
 
-ul:not(.browser-default) {
-  padding-left: 0;
-  list-style-type: none;
+.input-trans {
+  border: none;
+  outline: none;
+  &:hover,
+  &:focus {
+    border-bottom: 1px solid #000;
+  }
 }

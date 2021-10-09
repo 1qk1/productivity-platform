@@ -28,7 +28,7 @@ const extensionMap = {
     component: <AsyncBoards />,
     iconClasses: "fab fa-trello",
     description: "Trello without going on trello.",
-    childRoutes: { "boards/:boardId": { component: <AsyncBoard /> } },
+    childRoutes: { "boards/:boardId/:cardId": { component: <AsyncBoard /> }, "boards/:boardId": { component: <AsyncBoard /> } },
   },
 };
 

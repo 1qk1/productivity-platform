@@ -1,0 +1,40 @@
+.Backdrop {
+  background-color: rgba(#34495e, 0.75);
+}
+
+.Modal {
+  height: 80vh;
+  width: 1000px;
+  background-color: #eee;
+}
+
+div.RTEWrapper {
+  border: none;
+
+}
+
+div.Editor {
+  font-size: 15px !important;
+  font-family: "Roboto";
+  // padding: 1rem 1.5rem;
+  & > div > div > div {
+    padding: 1.5rem 1.25rem !important;
+    min-height: 20vh;
+  }
+
+}
+
+div.Toolbar {
+  border-bottom: none;
+  background: linear-gradient(180deg,#fdfdfd 0,#f6f7f8);
+  margin: 0;
+  padding: 10px 10px 5px;
+  button, span {
+    // background: none !important;
+    border: none !important;
+  }
+  button {
+    // background: none;
+
+  }
+}
