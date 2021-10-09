@@ -17,7 +17,7 @@ const hero = ({ toggleForms }) => (
           projects that take more time than they should, there are tons of
           different things that waste our time every day.
         </p>
-        <button className="Hero--CTA btn-large btn-long" onClick={toggleForms}>
+        <button className="Hero--CTA btn btn-green btn-large btn-long" onClick={toggleForms}>
           Sign up. For Free.
         </button>
       </div>

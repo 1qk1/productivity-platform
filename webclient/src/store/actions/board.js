@@ -120,6 +120,27 @@ export const changeCardText = (listId, cardId, newText) => {
   };
 };
 
+export const changeCardDescription = (listId, cardId, newText) => {
+  return dispatch => {
+    axios
+      .put("/boards/card", {
+        cardId,
+        description: newText
+      })
+      .then(res => {
+        dispatch({
+          type: actionTypes.CHANGE_CARD_DESCRIPTION,
+          listId,
+          cardId,
+          updatedCard: res.data.updatedCard
+        });
+      })
+      .catch(error => {
+        toast.error(error.response.data.error.message);
+      });
+  };
+};
+
 export const addCard = (boardId, listId, text) => {
   return dispatch => {
     if (!validateBoards(text)) {

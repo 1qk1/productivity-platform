@@ -7,10 +7,10 @@
   .Add-List-Btn {
     background-color: rgba($color: #27ae60, $alpha: 0.8);
     white-space: nowrap;
+    height: 38px;
   }
   &-Controls {
     border-radius: 3px;
-    height: 100%;
 
     .Dropdown--Button {
       padding: 0.25rem 0.75rem;

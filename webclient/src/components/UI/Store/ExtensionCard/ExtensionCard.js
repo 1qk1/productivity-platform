@@ -14,14 +14,14 @@ const extensionCard = props => {
         {!props.userHasExtension ? (
           <button
             onClick={() => props.addExtension(props.extension)}
-            className="btn btn-small"
+            className="btn btn-green"
           >
             Add
           </button>
         ) : (
           <button
             onClick={() => props.removeExtension(props.extension)}
-            className="btn btn-small red"
+            className="btn btn-red"
           >
             Remove
           </button>

@@ -13,7 +13,7 @@ import userReducer from "./store/reducers/user";
 import boardReducer from "./store/reducers/board";
 
 import "./index.scss";
-import "./vendors/materialize/sass/materialize.scss";
+// import "./vendors/materialize/sass/materialize.scss";
 import "./scss/_index.scss";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "typeface-montserrat";

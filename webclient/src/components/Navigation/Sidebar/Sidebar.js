@@ -11,7 +11,7 @@ const sidebar = ({ logout, extensions, location }) => (
   <div className="Sidebar">
     {/* icons with nav links */}
     <ul className="Sidebar-Links">
-      {extensions.map((extension) => {
+      {extensions.map((extension, i) => {
         const ret = (
           <SideButton
             key={`${extension}-sideButton`}
@@ -21,7 +21,7 @@ const sidebar = ({ logout, extensions, location }) => (
         );
         if (location.pathname.startsWith(`/${extension}`)) {
           return (
-            <Fragment>
+            <Fragment key={`${i}-frag`}>
               {ret}
               {Object.keys(extensionMap[extension].childRoutes).map((key) => {
                 if (extensionMap[extension].childRoutes[key].sidebar) {

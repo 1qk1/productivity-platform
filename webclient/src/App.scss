@@ -1,4 +1,6 @@
 @import "./scss/variables";
+@import "./scss/overrides";
+@import "./scss/typography";
 
 body {
   background: rgb(52, 73, 94);
@@ -11,6 +13,10 @@ body {
 
 body .App {
   color: $color-white;
+}
+
+a:hover {
+  text-decoration: none !important;
 }
 
 .App {
@@ -72,6 +78,20 @@ p.Error-Message {
 // mid gray #bdc3c7,
 // dark gray #95a5a6
 
-.mb-5 {
-  margin-bottom: 2rem;
+.link-trans {
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+.input-trans {
+  border: none;
+  outline: none;
+  &:hover,
+  &:focus {
+    border-bottom: 1px solid #000;
+  }
 }

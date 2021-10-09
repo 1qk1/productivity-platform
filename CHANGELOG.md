@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.0] - 2021-10-09
+
+### Added
+
+- This PR adds custom description to cards in the form of a popup. Very handy feature that allows users to add more info about an issue.
+
+## [1.8.2] - 2021-01-03
+
+### Changed
+
+- Completely replace materialize with bootstrap. At the moment the project loads only what it needs and not the whole library. This will make it easier to develop since way more people use bootstrap than materialize and will be more contributor-friendly too.
+
+## [1.8.1] - 2021-01-02
+
+### Changed
+
+- Replace moment with Day.js in the backend
+- Updated packages in the backend
+
+## [1.8.0] - 2020-11-29
+
+### Added
+
+- Add forgot/reset password functionality
+
+## [1.7.1] - 2020-11-29
+
+### Changed
+
+- Fix bug in timesheets that messed up the days in the bar chart because in JavaScript day 0 is Sunday instead of Monday
+- Optimize lodash imports in Front-End
+
 ## [1.7.0] - 2020-08-13
 
 After a lot of inactivity, today we're introducing a new update with 2 kinda big features, quality improvements of the project and bug fixes. There are also changes that we never released a changelog for, so every change since the last changelog is documented here.

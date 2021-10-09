@@ -1,0 +1,26 @@
+.card {
+  // bgc
+  // flex
+  // display: flex;
+  position: relative;
+  margin: 0.5rem 0 1rem 0;
+  padding: 1.5rem;
+  transition: box-shadow 0.25s;
+  border-radius: 2px;
+  background-color: $color-tertiary-lighter;
+  &-content {
+    margin-bottom: 4rem;
+    .card-title {
+      display: block;
+      line-height: 32px;
+      margin-bottom: 8px;
+    }
+  }
+  &-action {
+    padding: 1rem 1.5rem;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+  }
+}

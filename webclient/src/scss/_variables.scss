@@ -1,12 +1,23 @@
 // mostly for reference
+// colors:
+// bg #34495e,
+// green #2ecc71,
+// dark green #27ae60,
+// white #ecf0f1,
+// mid gray #bdc3c7,
+// dark gray #95a5a6
 
 $color-transition: color, background-color 0.1s ease-in;
-$color-main: #2ecc71;
+$color-primary: #2ecc71;
 $color-secondary: #27ae60;
 $color-tertiary: #34495e;
+
+$color-tertiary-lighter: #546e7a;
+$color-tertiary-lighter2: #566e88;
 
 $color-white: #ecf0f1;
 $color-light-gray: #bdc3c7;
 $color-dark-gray: #95a5a6;
 
 $color-text: #333;
+$enable-responsive-font-sizes: true;
