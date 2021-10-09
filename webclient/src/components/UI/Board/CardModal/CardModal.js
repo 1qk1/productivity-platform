@@ -41,7 +41,7 @@ const CardModal = ({ show, close, cardId, changeTitle, changeDescription }) => {
         setDescriptionData(RichTextEditor.createValueFromString(res.data.card.description, 'html'))
       }
     })
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const onDescChange = value => {
     // console.log(cardData)
