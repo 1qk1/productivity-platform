@@ -45,8 +45,11 @@ const CardModal = ({ show, close, cardId, changeTitle, changeDescription }) => {
 
   const onDescChange = value => {
     // console.log(cardData)
-    setDescriptionData(value)
-    changeDescription(cardData.listId, cardId, value.toString('html'))
+    const desc = value.toString('html')
+    if (desc !== descriptionData.toString('html')) {
+      setDescriptionData(value)
+      changeDescription(cardData.listId, cardId, desc)
+    }
   }
   const onTitleChange = event => {
     const value = event.target.value;
@@ -69,7 +72,7 @@ const CardModal = ({ show, close, cardId, changeTitle, changeDescription }) => {
           maxRows="50"
           minRows="1"
           autoFocus
-          className="input-trans py-2 montserrat-semibold mb-3 h5"
+          className="input-trans py-2 montserrat-semibold mb-3 h5 w-100"
           style={{ resize: 'none', overflow: 'hidden' }}
         />
         <RichTextEditor

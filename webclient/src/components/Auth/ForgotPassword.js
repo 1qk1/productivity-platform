@@ -40,7 +40,7 @@ const ForgotPassword = (props) => {
       .post(`/auth/forgot-password`, data)
       .then((res) => {
         toast.success(
-          "Success! You have been send an email to reset your password."
+          "Success! You have been sent an email to reset your password."
         );
       })
       .catch((error) => {
