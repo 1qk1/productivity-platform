@@ -46,8 +46,8 @@ const CardModal = ({ show, close, cardId, changeTitle, changeDescription }) => {
   const onDescChange = value => {
     // console.log(cardData)
     const desc = value.toString('html')
+    setDescriptionData(value)
     if (desc !== descriptionData.toString('html')) {
-      setDescriptionData(value)
       changeDescription(cardData.listId, cardId, desc)
     }
   }
