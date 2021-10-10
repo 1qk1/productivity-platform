@@ -17,7 +17,7 @@ export const itemTypes = {
 
 class Board extends PureComponent {
   componentDidMount() {
-    if (!this.props.board._id) {
+    if (!this.props.board._id || this.props.board._id !== this.props.match.params.boardId) {
       this.props.getBoard(this.props.match.params.boardId, this.props.history);
     }
   }

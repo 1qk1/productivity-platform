@@ -107,7 +107,7 @@ const card = (props) => {
           buttonClasses="btn-invisible Card-Controls--Button"
           iconClasses="fas fa-ellipsis-h"
         >
-          <ul className="Card-Controls--Menu">
+          <ul className="Card-Controls--Menu list-unstyled">
             <li className="Board-Controls--Item">
               <button
                 className="Board-Controls--Action btn-invisible"

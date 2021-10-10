@@ -5,7 +5,7 @@ const footer = () => {
   return (
     <section className="Landing-Footer">
       <div className="Container">
-        <ul className="Footer-Links">
+        <ul className="Footer-Links list-unstyled">
           <li>
             <a
               href="https://twitter.com/qktweets"

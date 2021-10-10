@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.1] - 2021-10-10
+
+### Changed
+
+- Fix bug that allowed users to create multiple users with the same email
+- Fix bug that after the removal of Materialize returned lists and some inputs to the default styles
+- Fix bug that made boards not load when you switched from one board to another
+- Optimizations for unecessary reloads in the text editor on the card modal
+
 ## [1.9.0] - 2021-10-09
 
 ### Added

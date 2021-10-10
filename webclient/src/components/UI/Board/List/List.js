@@ -102,7 +102,7 @@ class List extends PureComponent {
             buttonClasses="btn-invisible List-Controls--Button"
             iconClasses="fas fa-ellipsis-h"
           >
-            <ul className="List-Controls--Menu">
+            <ul className="List-Controls--Menu list-unstyled">
               <li className="Board-Controls--Item">
                 <button
                   className="Board-Controls--Action btn-invisible"
