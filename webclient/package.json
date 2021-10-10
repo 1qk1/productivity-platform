@@ -17,7 +17,7 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-rte": "https://github.com/machineghost/react-rte/",
-    "react-scripts": "^3.4.1",
+    "react-scripts": "^4.0.0",
     "react-switch": "^5.0.1",
     "react-textarea-autosize": "^8.2.0",
     "react-toastify": "^6.0.4",
