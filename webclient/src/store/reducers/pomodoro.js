@@ -12,7 +12,7 @@ const initialState = {
   windowFocused: true
 };
 
-export default (state = initialState, action) => {
+const pomodoroReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.START_TIMER:
       let date = new Date();
@@ -80,3 +80,5 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+export default pomodoroReducer

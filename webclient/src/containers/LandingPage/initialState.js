@@ -1,4 +1,4 @@
-export default {
+const initialState = {
   formData: {
     error: "",
     login: {
@@ -60,3 +60,5 @@ export default {
   },
   showForms: false
 };
+
+export default initialState
