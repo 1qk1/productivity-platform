@@ -1,6 +1,6 @@
 {
   "name": "productivity-platform",
-  "version": "1.9.2",
+  "version": "1.9.3",
   "description": "A productivity platform to help you be more focused, productive and manage your time better.",
   "keywords": [
     "productivity",
@@ -34,9 +34,9 @@
   },
   "homepage": "https://github.com/1qk1/productivity-platform#readme",
   "devDependencies": {
-    "concurrently": "^5.2.0"
+    "concurrently": "^6.3.0"
   },
   "engines": {
-    "node": "10.17.0"
+    "node": "14.18.0"
   }
 }

@@ -8,7 +8,7 @@ const initialState = {
   }
 };
 
-export default (state = initialState, action) => {
+const boardReducer = (state = initialState, action) => {
   let newBoard = _.cloneDeep(state.board);
   switch (action.type) {
     case actionTypes.SET_BOARD:
@@ -146,3 +146,5 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+export default boardReducer
