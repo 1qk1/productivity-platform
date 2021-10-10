@@ -90,6 +90,7 @@ p.Error-Message {
 .input-trans {
   border: none;
   outline: none;
+  background-color: transparent;
   &:hover,
   &:focus {
     border-bottom: 1px solid #000;

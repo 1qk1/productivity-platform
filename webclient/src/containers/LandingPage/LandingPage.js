@@ -12,6 +12,7 @@ import AuthForms from "../../components/Auth/Auth";
 import { every, cloneDeep, isString, forEach } from "lodash";
 import initialState from "./initialState";
 import { validate } from "../../shared/utilities";
+import { toast } from "react-toastify";
 
 import "./LandingPage.scss";
 
@@ -58,7 +59,7 @@ class LandingPage extends Component {
           newFormData.error = errors;
           this.setState({ formData: newFormData });
           // else (array)
-        } else {
+        } else if (errors !== undefined) {
           // set each field's error based on each error in the array
           forEach(newFormData[type], (field) => (field.errors = []));
           errors.forEach((err) =>
@@ -66,6 +67,8 @@ class LandingPage extends Component {
           );
           // update state with the errors
           this.setState({ formData: newFormData });
+        } else {
+          toast.error("Unknown error has occured.")
         }
       });
   };

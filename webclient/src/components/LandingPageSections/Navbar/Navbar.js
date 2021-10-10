@@ -10,7 +10,7 @@ const navbar = ({ toggleForms }) => {
         {/* <a href="#" class="brand-logo">
           Logo
         </a> */}
-        <ul id="nav-mobile" className="d-flex justify-content-end">
+        <ul id="nav-mobile" className="d-flex justify-content-end list-unstyled">
           <li>
             <NavLink to="/" className="px-3 py-2 d-inline-block text-white">FAQ</NavLink>
           </li>
