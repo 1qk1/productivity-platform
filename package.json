@@ -34,9 +34,9 @@
   },
   "homepage": "https://github.com/1qk1/productivity-platform#readme",
   "devDependencies": {
-    "concurrently": "^6.3.0"
+    "concurrently": "^7.4.0"
   },
   "engines": {
-    "node": "14.18.0"
+    "node": "16.x"
   }
 }
