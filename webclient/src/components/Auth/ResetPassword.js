@@ -12,12 +12,14 @@ import "./PasswordForms.scss";
 
 const ResetPassword = (props) => {
   const resetToken = props.match.params.resetToken
-  const { register, handleSubmit, watch, errors, setError } = useForm();
+  const { register, handleSubmit, watch, formState: { errors }, setError } = useForm({
+    mode: "onSubmit",
+    reValidateMode: "onSubmit"
+  });
   // check if reset token is valid
   // if it's not
   // display a message and redirect to the main page after 5 seconds
   const [resetTokenValid, setResetTokenValid] = useState(null)
-  console.log(errors)
   useEffect(() => {
     axios.get('/auth/reset-password/' + resetToken).then(res => {
       if (res.data.success === true) {
@@ -27,9 +29,10 @@ const ResetPassword = (props) => {
       toast.error(error.response.data.error.message)
       setResetTokenValid(false)
     })
-  })
+  }, [resetToken])
 
   const onSubmit = (data) => {
+    console.log('submit')
     axios
       .post(`/auth/reset-password/${resetToken}`, data)
       .then((res) => {
@@ -38,13 +41,10 @@ const ResetPassword = (props) => {
         redirectIn5()
       })
       .catch((error) => {
-        const errors = error.response.data.error.message
-        
-        errors.forEach(err => {
-          setError('password', {
-            type: "manual",
-            message: err.msg
-          })
+        const errorMessage = error.response.data.error.message
+        setError('password', {
+          type: "manual",
+          message: errorMessage
         })
       });
   };
@@ -65,19 +65,19 @@ const ResetPassword = (props) => {
           <InputWithErrors
             label="New Password"
             type="password"
-            name="password"
-            refxd={register({ required: true, minLength: {value: 5, message: "Password should be longer than 5 characters."} })}
+            register={register("password", { required: true, minLength: { value: 5, message: "Password should be longer than 5 characters." } })}
             error={errors.password}
+
           />
           <InputWithErrors
             label="Confirm New Password"
             type="password"
-            name="confirmPassword"
-            refxd={register({ required: true, minLength: {value: 5, message: "Password should be longer than 5 characters."}, validate: (value) => value === watch('password') || "Passwords don't match." })}
+            register={register("confirmPassword", { required: true, minLength: { value: 5, message: "Password should be longer than 5 characters." }, validate: (value) => value === watch('password') || "Passwords don't match." })}
             error={errors.confirmPassword}
+
           />
           <div className="text-center">
-            <button className="btn btn-green" type="submit" name="action">
+            <button className="btn btn-green" type="submit">
               Reset Password
             </button>
           </div>

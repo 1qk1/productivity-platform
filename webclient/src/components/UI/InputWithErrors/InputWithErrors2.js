@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const InputWithErrors = ({ label, type, name, refxd, error = {} }) => {
+const InputWithErrors = ({ label, type, name, register, error = {} }) => {
   return (
     <label>
       {label}
@@ -9,18 +9,18 @@ const InputWithErrors = ({ label, type, name, refxd, error = {} }) => {
         className={error.message ? "Input-Invalid" : ""}
         type={type}
         name={name}
-        ref={refxd}
+        {...register}
       />
       {
-      error.message && 
-      <p
+        error.message &&
+        <p
           className="Error-Message Error-red"
         >
           {error.message}
         </p>
-    }
+      }
     </label>
-    
+
   );
 };
 
