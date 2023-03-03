@@ -1,7 +1,7 @@
 import React, { Component, lazy, Suspense, Fragment } from "react";
 import { connect } from "react-redux";
 import * as actions from "./store/actions/user";
-import { Routes, redirect, Route, BrowserRouter, Navigate } from "react-router-dom";
+import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Loader from "./components/UI/Loader/Loader";
 import "react-toastify/dist/ReactToastify.min.css";
