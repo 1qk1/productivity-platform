@@ -83,6 +83,7 @@ class LandingPage extends Component {
     // clone the form data
     const newFormData = cloneDeep(this.state.formData);
     // change the value
+    newFormData["error"] = "";
     newFormData[actionType][fieldName].value = value;
     newFormData[actionType][fieldName].touched = true;
 

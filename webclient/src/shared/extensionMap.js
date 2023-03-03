@@ -44,7 +44,7 @@ export const extensionsToRoutes = (extensions) =>
       <Route
         key={`${extension}-route`}
         path={`/${extension}`}
-        component={() => extensionMap[extension].component}
+        element={extensionMap[extension].component}
       />,
     ];
   }, []);
@@ -54,6 +54,6 @@ const childExtensions = (extension) =>
     <Route
       key={`${child}-route`}
       path={`/${child}`}
-      component={() => extensionMap[extension].childRoutes[child].component}
+      element={extensionMap[extension].childRoutes[child].component}
     />
   ));

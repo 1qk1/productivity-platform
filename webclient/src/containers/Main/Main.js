@@ -1,11 +1,13 @@
 import React, { Component, Fragment } from "react";
-import { withRouter, Switch, Route, Redirect } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import { extensionsToRoutes } from "../../shared/extensionMap";
 import Store from "../Store/Store";
 import Sidebar from "../../components/Navigation/Sidebar/Sidebar";
 import "./Main.scss";
+import withRouter from '../../shared/withRouter';
+import NotFound from "../../components/NotFound/NotFound";
 
 class Main extends Component {
   render() {
@@ -19,12 +21,12 @@ class Main extends Component {
           />
           {/* Routes */}
           <div className="Extension">
-            <Switch>
-              {/* map user's extensions to routes */}
+            <Routes>
               {extensionsToRoutes(this.props.extensions)}
-              <Route path="/store" component={Store} />
-              <Redirect to={`${this.props.extensions[0] || "/store"}`} />
-            </Switch>
+
+              <Route path="/store" exact element={<Store />} />
+              <Route path="*" element={<NotFound navigate={() => this.props.navigate(`${this.props.extensions[0] || "/store"}`)} />} />
+            </Routes>
           </div>
         </div>
       </Fragment>

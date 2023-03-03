@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.10.0] - 2023-03-03
+
+### Changed
+
+- 🎉🥳 Completely replace react-dnd for react-beautiful-dnd. This reduces complexity dramatically, since react-dnd is really hard to use. After their migration to react hooks, it became even worse. Updating to a newer version of react without updating react-dnd was impossible. react-beautiful-dnd was literally a breeze to install and use in the project, and doesn't require any custom logic for the animations when moving the task from one list to another, only the logic when the drag ends, which was already implemented. For this change, this release is a minor version and not a patch version. 🎉🥳
+- Update packages in Front-End and Back-End
+
 ## [1.9.3] - 2021-10-10
 
 ### Changed

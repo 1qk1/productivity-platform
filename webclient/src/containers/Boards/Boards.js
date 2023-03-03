@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import withRouter from '../../shared/withRouter'
 import axios from "../../axios";
 import NewBoard from "../../components/UI/Board/NewBoard/NewBoard";
 import "./Boards.scss";
@@ -25,7 +25,7 @@ class Boards extends Component {
       })
       .catch((error) => {
         toast.error(error);
-        this.props.history.push("/");
+        this.props.navigate("/");
       });
   };
 
