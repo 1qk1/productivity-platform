@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import { extensionsToRoutes } from "../../shared/extensionMap";
@@ -7,7 +7,6 @@ import Store from "../Store/Store";
 import Sidebar from "../../components/Navigation/Sidebar/Sidebar";
 import "./Main.scss";
 import withRouter from '../../shared/withRouter';
-import NotFound from "../../components/NotFound/NotFound";
 
 class Main extends Component {
   render() {
@@ -25,7 +24,7 @@ class Main extends Component {
               {extensionsToRoutes(this.props.extensions)}
 
               <Route path="/store" exact element={<Store />} />
-              <Route path="*" element={<NotFound navigate={() => this.props.navigate(`${this.props.extensions[0] || "/store"}`)} />} />
+              <Route path="/*" element={<Navigate to={this.props.extensions[0] || "/store"} />} />
             </Routes>
           </div>
         </div>
