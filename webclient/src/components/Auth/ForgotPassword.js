@@ -39,7 +39,7 @@ const ForgotPassword = (props) => {
     axios
       .post(`/auth/forgot-password`, data)
       .then((res) => {
-        if (res.status !== 200) {
+        if (res.status === 200) {
           return toast.success(
             "Success! You have been sent an email to reset your password."
           );
