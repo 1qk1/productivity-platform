@@ -20,16 +20,14 @@ export const moveCard = (boardId, cardId, toIndex, fromList, toList) => {
   return {
     queue: actionTypes.MOVE_CARD,
     callback: (next, dispatch, getState) => {
+      dispatch({
+        type: actionTypes.MOVE_CARD, boardId, cardId, toIndex, fromList, toList
+      });
       axios
         .put("/boards/card/moveCard", {
           boardId, cardId, toIndex, fromList, toList
         })
-        .then(() => {
-          dispatch({
-            type: actionTypes.MOVE_CARD, boardId, cardId, toIndex, fromList, toList
-          });
-          next();
-        })
+        .then(next)
         .catch(error => {
           dispatch({
             type: actionTypes.MOVE_CARD,
