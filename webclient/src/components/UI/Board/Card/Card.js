@@ -1,5 +1,4 @@
-import React, { useRef } from "react";
-import { findDOMNode } from "react-dom";
+import React from "react";
 import "./Card.scss";
 import Dropdown from "../../Dropdown/Dropdown";
 import { Link } from "react-router-dom";

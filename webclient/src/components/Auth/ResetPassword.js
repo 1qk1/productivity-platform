@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import InputWithErrors from "../UI/InputWithErrors/InputWithErrors2";
 import axios from "../../axios";
 import { toast } from "react-toastify";
-import { withRouter } from 'react-router-dom'
+import withRouter from '../../shared/withRouter'
 import Loader from './../UI/Loader/Loader';
 import { useForm } from "react-hook-form";
 
@@ -11,7 +11,7 @@ import "./Auth.scss";
 import "./PasswordForms.scss";
 
 const ResetPassword = (props) => {
-  const resetToken = props.match.params.resetToken
+  const resetToken = props.params.resetToken
   const { register, handleSubmit, watch, formState: { errors }, setError } = useForm({
     mode: "onSubmit",
     reValidateMode: "onSubmit"
@@ -49,9 +49,8 @@ const ResetPassword = (props) => {
       });
   };
   const redirectIn5 = () => {
-    console.log('redirect')
     setTimeout(() => {
-      props.history.push('/')
+      props.navigate('/')
     }, 5000);
   }
 

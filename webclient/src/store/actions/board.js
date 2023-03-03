@@ -2,6 +2,7 @@ import * as actionTypes from "./actionTypes";
 import axios from "../../axios";
 import { toast } from "react-toastify";
 import { validateBoards } from "../../shared/utilities";
+import { redirect } from 'react-router-dom'
 
 export const addList = boardId => {
   return dispatch => {
@@ -51,7 +52,7 @@ export const getBoard = (boardId, history) => {
         dispatch({ type: actionTypes.SET_BOARD, board: res.data.board });
       })
       .catch(error => {
-        history.push("/boards");
+        redirect("/boards");
         toast.error(error.response.data.error.message);
       });
   };

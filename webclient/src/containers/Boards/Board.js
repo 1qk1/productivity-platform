@@ -1,9 +1,9 @@
-import React, { PureComponent, lazy, Fragment } from "react";
+import React, { PureComponent, lazy } from "react";
 import List from "../../components/UI/Board/List/List";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import Loader from "../../components/UI/Loader/Loader";
-import { withRouter } from "react-router-dom";
+import withRouter from '../../shared/withRouter'
 import { DragDropContext } from "react-beautiful-dnd";
 
 import "./Board.scss";
@@ -16,8 +16,8 @@ export const itemTypes = {
 
 class Board extends PureComponent {
   componentDidMount() {
-    if (!this.props.board._id || this.props.board._id !== this.props.match.params.boardId) {
-      this.props.getBoard(this.props.match.params.boardId, this.props.history);
+    if (!this.props.board._id || this.props.board._id !== this.props.params.boardId) {
+      this.props.getBoard(this.props.params.boardId, this.props.history);
     }
   }
 
@@ -29,12 +29,12 @@ class Board extends PureComponent {
   render() {
     if (
       this.props.board.lists === null ||
-      this.props.board._id !== this.props.match.params.boardId
+      this.props.board._id !== this.props.params.boardId
     ) {
       return <Loader />;
     }
     document.title = this.props.board.title + " | Productivity Platform";
-    const hasCard = this.props.match.params.cardId !== undefined
+    const hasCard = this.props.params.cardId !== undefined
     return (
       <DragDropContext
         // onDragStart={ }
@@ -68,8 +68,8 @@ class Board extends PureComponent {
         {hasCard ? (
           <AsyncCardModal
             show={hasCard}
-            close={() => this.props.history.push(`/boards/${this.props.match.params.boardId}`)}
-            cardId={this.props.match.params.cardId}
+            close={() => this.props.navigate(`/boards/${this.props.params.boardId}`)}
+            cardId={this.props.params.cardId}
             changeTitle={this.props.changeCardText}
             changeDescription={this.props.changeCardDescription}
           />

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
-import { withRouter } from "react-router-dom";
+import withRouter from '../../shared/withRouter';
 import PropTypes from "prop-types";
 import { secondsToTime } from "../../shared/utilities";
 import "./Pomodoro.scss";
@@ -20,9 +20,8 @@ class Pomodoro extends Component {
   componentDidUpdate() {
     const time = secondsToTime(this.props.timer);
     if (this.props.intervalId !== null) {
-      document.title = `${
-        this.props.isPomodoro ? "Running" : "Break"
-      }: ${time} left`;
+      document.title = `${this.props.isPomodoro ? "Running" : "Break"
+        }: ${time} left`;
     }
   }
 
