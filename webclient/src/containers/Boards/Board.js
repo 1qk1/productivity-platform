@@ -1,11 +1,10 @@
-import React, { PureComponent, Fragment, lazy } from "react";
+import React, { PureComponent, lazy, Fragment } from "react";
 import List from "../../components/UI/Board/List/List";
-import { DragDropContext } from "react-dnd";
-import HTML5Backend from "react-dnd-html5-backend";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import Loader from "../../components/UI/Loader/Loader";
 import { withRouter } from "react-router-dom";
+import { DragDropContext } from "react-beautiful-dnd";
 
 import "./Board.scss";
 
@@ -22,6 +21,11 @@ class Board extends PureComponent {
     }
   }
 
+  onDragEnd = (result) => {
+    // boardId, cardId, toIndex, fromList, toList
+    this.props.moveCard(this.props.board._id, result.draggableId, result.destination.index, result.source.droppableId, result.destination.droppableId);
+  }
+
   render() {
     if (
       this.props.board.lists === null ||
@@ -32,7 +36,10 @@ class Board extends PureComponent {
     document.title = this.props.board.title + " | Productivity Platform";
     const hasCard = this.props.match.params.cardId !== undefined
     return (
-      <Fragment>
+      <DragDropContext
+        // onDragStart={ }
+        // onDragUpdate={ }
+        onDragEnd={this.onDragEnd}>
         <div className="Board scrollbar-horizontal">
           {/* render board */}
           {this.props.board.lists.map((list, index) => (
@@ -45,8 +52,6 @@ class Board extends PureComponent {
               deleteList={() =>
                 this.props.deleteList(list._id, this.props.board._id)
               }
-              moveCard={this.props.moveCard}
-              dropCard={this.props.dropCard}
               key={"list-" + list._id}
               list={list}
               index={index}
@@ -69,7 +74,7 @@ class Board extends PureComponent {
             changeDescription={this.props.changeCardDescription}
           />
         ) : null}
-      </Fragment>
+      </DragDropContext>
     );
   }
 }
@@ -85,12 +90,10 @@ const mapDispatchToProps = dispatch => ({
   deleteList: (listId, boardId) =>
     dispatch(actions.deleteList(listId, boardId)),
   addList: boardId => dispatch(actions.addList(boardId)),
-  moveCard: (dragIndex, hoverIndex, dragListIndex, hoverListIndex) =>
+  moveCard: (boardId, cardId, toIndex, fromList, toList) =>
     dispatch(
-      actions.moveCard(dragIndex, hoverIndex, dragListIndex, hoverListIndex)
+      actions.moveCard(boardId, cardId, toIndex, fromList, toList)
     ),
-  dropCard: (boardId, cardId, index, listId, newListId) =>
-    dispatch(actions.dropCard(boardId, cardId, index, listId, newListId)),
   changeListTitle: (boardId, listId, newTitle) =>
     dispatch(actions.changeListTitle(boardId, listId, newTitle)),
   changeCardText: (listId, cardId, text) =>
@@ -102,6 +105,4 @@ const mapDispatchToProps = dispatch => ({
   getBoard: (board, history) => dispatch(actions.getBoard(board, history))
 });
 
-export default DragDropContext(HTML5Backend)(
-  withRouter(connect(mapStateToProps, mapDispatchToProps)(Board))
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Board));

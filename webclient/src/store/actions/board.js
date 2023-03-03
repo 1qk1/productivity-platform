@@ -16,43 +16,28 @@ export const addList = boardId => {
   };
 };
 
-export const moveCard = (
-  dragIndex,
-  hoverIndex,
-  dragListIndex,
-  hoverListIndex
-) => {
-  return dispatch => {
-    dispatch({
-      type: actionTypes.MOVE_CARD,
-      dragIndex,
-      hoverIndex,
-      dragListIndex,
-      hoverListIndex
-    });
-  };
-};
-
-export const dropCard = (boardId, cardId, toIndex, fromList, toList) => {
+export const moveCard = (boardId, cardId, toIndex, fromList, toList) => {
   return {
     queue: actionTypes.MOVE_CARD,
     callback: (next, dispatch, getState) => {
       axios
         .put("/boards/card/moveCard", {
-          boardId,
-          cardId,
-          toIndex,
-          fromList,
-          toList
+          boardId, cardId, toIndex, fromList, toList
         })
-        .then(next)
+        .then(() => {
+          dispatch({
+            type: actionTypes.MOVE_CARD, boardId, cardId, toIndex, fromList, toList
+          });
+          next();
+        })
         .catch(error => {
           dispatch({
-            type: actionTypes.DROP_FAIL,
+            type: actionTypes.MOVE_CARD,
+            boardId,
             cardId,
             toIndex,
-            fromList,
-            toList
+            toList,
+            fromList
           });
           toast.error(error.response.data.error.message);
         });
