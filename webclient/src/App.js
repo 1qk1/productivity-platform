@@ -1,7 +1,7 @@
 import React, { Component, lazy, Suspense, Fragment } from "react";
 import { connect } from "react-redux";
 import * as actions from "./store/actions/user";
-import { Routes, redirect, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Loader from "./components/UI/Loader/Loader";
 import "react-toastify/dist/ReactToastify.min.css";
@@ -37,21 +37,15 @@ class App extends Component {
           <Routes>
             <Route
               path="/forgot-password"
-              exact
-
-            >
-              <AsyncForgotPassword />
-            </Route>
+              exact element={<AsyncForgotPassword />}
+            />
             <Route
               path="/reset-password/:resetToken"
               exact
-            >
-              <AsyncResetPassword />
-            </Route>
-            <Route path="/"  >
-              <AsyncLandingPage />
-            </Route>
-            <Route path="/" render={() => redirect('/')} />
+              element={<AsyncResetPassword />}
+            />
+            <Route path="/" element={<AsyncLandingPage />} />
+            <Route path="/*" element={<Navigate to="/" />} />
           </Routes>
         </Suspense>
       );
