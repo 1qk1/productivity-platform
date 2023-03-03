@@ -4,50 +4,38 @@ import Classes from './CardModal.module.scss'
 import TextareaAutosize from "react-textarea-autosize";
 import Loader from '../../Loader/Loader'
 import axios from '../../../../axios'
-import RichTextEditor from 'react-rte';
 import './Editor.scss'
 
-const toolbarConfig = {
-  // Optionally specify the groups to display (displayed in the order listed).
-  display: ['BLOCK_TYPE_DROPDOWN', 'INLINE_STYLE_BUTTONS', 'BLOCK_TYPE_BUTTONS', 'LINK_BUTTONS', 'HISTORY_BUTTONS'],
-  INLINE_STYLE_BUTTONS: [
-    { label: 'Bold', style: 'BOLD', className: 'font-weight-bold' },
-    { label: 'Italic', style: 'ITALIC' },
-    { label: 'Underline', style: 'UNDERLINE' },
-    { label: 'Strikethrough', style: 'STRIKETHROUGH' }
-  ],
-  BLOCK_TYPE_DROPDOWN: [
-    { label: 'Normal', style: 'unstyled' },
-    { label: 'Heading 1', style: 'header-one' },
-    { label: 'Heading 2', style: 'header-two' },
-    { label: 'Heading 3', style: 'header-three' },
-    { label: 'Heading 4', style: 'header-four' },
-    { label: 'Heading 5', style: 'header-five' },
-    { label: 'Heading 6', style: 'header-six' }
-  ],
-  BLOCK_TYPE_BUTTONS: [
-    { label: 'UL', style: 'unordered-list-item' },
-    { label: 'OL', style: 'ordered-list-item' }
-  ]
-};
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
+var toolbarOptions = [
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+
+  [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+  [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+  ['link', 'image']
+
+];
 
 const CardModal = ({ show, close, cardId, changeTitle, changeDescription }) => {
   const [cardData, setCardData] = useState(null)
-  const [descriptionData, setDescriptionData] = useState(RichTextEditor.createEmptyValue())
+  const [descriptionData, setDescriptionData] = useState("")
   useEffect(() => {
     axios.get(`/boards/card/${cardId}`).then(res => {
       setCardData(res.data.card)
       if (res.data.card.description) {
-        setDescriptionData(RichTextEditor.createValueFromString(res.data.card.description, 'html'))
+        setDescriptionData(res.data.card.description)
       }
     })
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const onDescChange = value => {
-    // console.log(cardData)
-    const desc = value.toString('html')
+    const desc = value
     setDescriptionData(value)
-    if (desc !== descriptionData.toString('html')) {
+    if (desc !== descriptionData) {
       changeDescription(cardData.listId, cardId, desc)
     }
   }
@@ -75,14 +63,17 @@ const CardModal = ({ show, close, cardId, changeTitle, changeDescription }) => {
           className="input-trans py-2 montserrat-semibold mb-3 h5 w-100"
           style={{ resize: 'none', overflow: 'hidden' }}
         />
-        <RichTextEditor
+        <div className={Classes.QuillWrapper}>
+          <ReactQuill theme="snow" value={descriptionData} onChange={onDescChange} modules={{ toolbar: toolbarOptions }} />
+        </div>
+        {/* <RichTextEditor
           value={descriptionData}
           onChange={onDescChange}
           toolbarConfig={toolbarConfig}
           className={`${Classes.RTEWrapper} montserrat-regular`}
           editorClassName={Classes.Editor}
           toolbarClassName={Classes.Toolbar}
-        />
+        /> */}
       </Fragment>
     )
   }

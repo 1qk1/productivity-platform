@@ -1,3 +1,17 @@
-.RichTextEditor__editor___1QqIU .RichTextEditor__paragraph___3NTf9, .RichTextEditor__editor___1QqIU pre {
-  margin: -5px 0 !important;
+.quill {
+  display: flex;
+  flex-direction: column;
+
+  .ql-toolbar.ql-snow,
+  .ql-container.ql-snow {
+    border: none;
+  }
+
+  .ql-toolbar.ql-snow {
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .ql-editor {
+    min-height: 200px;
+  }
 }

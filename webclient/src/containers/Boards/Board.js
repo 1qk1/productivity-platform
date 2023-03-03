@@ -6,9 +6,9 @@ import Loader from "../../components/UI/Loader/Loader";
 import withRouter from '../../shared/withRouter'
 import { DragDropContext } from "react-beautiful-dnd";
 
-import "./Board.scss";
+import CardModal from "../../components/UI/Board/CardModal/CardModal";
 
-const AsyncCardModal = lazy(() => import("../../components/UI/Board/CardModal/CardModal"));
+import "./Board.scss";
 
 export const itemTypes = {
   CARD: "card"
@@ -66,7 +66,7 @@ class Board extends PureComponent {
           </button>
         </div>
         {hasCard ? (
-          <AsyncCardModal
+          <CardModal
             show={hasCard}
             close={() => this.props.navigate(`/boards/${this.props.params.boardId}`)}
             cardId={this.props.params.cardId}
