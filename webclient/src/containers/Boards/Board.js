@@ -1,4 +1,4 @@
-import React, { PureComponent, lazy } from "react";
+import React, { PureComponent } from "react";
 import List from "../../components/UI/Board/List/List";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
