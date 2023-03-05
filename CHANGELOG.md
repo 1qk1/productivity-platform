@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.10.1] - 2023-03-05
 
+### Added
+
+- Add sentry for error tracking/
+
 ### Changed
 
 - Play pomodoro completion sound in pomodoros with Howler.js. Hopefully with this change the pomodoro sounds will still play when the prodapp tab is in the background for a long time and has been hilbernated by chrome.
