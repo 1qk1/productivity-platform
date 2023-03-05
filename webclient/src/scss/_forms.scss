@@ -11,11 +11,12 @@ input {
   outline: none;
   height: 3rem;
   width: 100%;
-  font-size: 16px !important;
+  font-size: 16px;
   margin: 0 0 8px 0 !important;
   padding: 0;
   box-shadow: none;
   transition: all 0.3s, border 0.3s;
+
   &:focus,
   &:active {
     border-bottom: 2px solid $color-secondary;
