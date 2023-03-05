@@ -16,7 +16,7 @@ var toolbarOptions = [
 
   [{ 'list': 'ordered' }, { 'list': 'bullet' }],
   [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
-  ['link', 'image']
+  ['link']
 
 ];
 

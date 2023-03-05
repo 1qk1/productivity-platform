@@ -3,6 +3,7 @@ import axios from "../../axios";
 import { toast } from "react-toastify";
 import PomodoroSound from "../../assets/notifications/pomodoro.mp3";
 import BreakSound from "../../assets/notifications/break.mp3";
+import { Howl } from 'howler';
 
 export const startPomodoro = () => {
   return (dispatch) => {
@@ -50,7 +51,11 @@ export const submitPomodoro = () => {
 export const pomodoroCompleted = (isPomodoro) => {
   return (dispatch) => {
     const soundFile = isPomodoro ? PomodoroSound : BreakSound;
-    const sound = new Audio(soundFile);
+
+    var sound = new Howl({
+      src: [soundFile]
+    });
+
     sound.play();
     if (isPomodoro) {
       dispatch(submitPomodoro());
