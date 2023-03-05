@@ -12,11 +12,25 @@ import pomodoroReducer from "./store/reducers/pomodoro";
 import userReducer from "./store/reducers/user";
 import boardReducer from "./store/reducers/board";
 
+import * as Sentry from "@sentry/react";
+import { BrowserTracing } from "@sentry/tracing";
+
 import "./index.scss";
 // import "./vendors/materialize/sass/materialize.scss";
 import "./scss/_index.scss";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "typeface-montserrat";
+
+Sentry.init({
+  dsn: process.env.REACT_APP_SENTRY_DSN,
+  integrations: [new BrowserTracing()],
+  environment: process.env.NODE_ENV,
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -26,9 +40,13 @@ const rootReducer = combineReducers({
   board: boardReducer,
 });
 
+const sentryReduxEnhancer = Sentry.createReduxEnhancer({
+  // Optionally pass options listed below
+});
+
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk, ReduxAsyncQueue))
+  composeEnhancers(applyMiddleware(thunk, ReduxAsyncQueue), sentryReduxEnhancer),
 );
 
 const app = (
