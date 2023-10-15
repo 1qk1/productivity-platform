@@ -9,7 +9,7 @@ import User from "./User";
 import Pomodoro from "./Pomodoro";
 
 const Settings = ({ extensions, user }) => {
-  const { register, handleSubmit, formState: { errors }, setError } = useForm({
+  const { register, handleSubmit } = useForm({
     mode: "onSubmit",
     reValidateMode: "onSubmit",
     defaultValues: {
