@@ -6,6 +6,7 @@
     flex: 0 0 300px;
     color: #333;
     height: fit-content;
+
     // max-height: 80vh;
     &-Header {
       display: flex;
@@ -13,6 +14,7 @@
       align-items: center;
       overflow: hidden;
       padding: 0.25rem;
+
       .List-Controls--Button {
         color: #777;
         padding: 0.7rem 0.75rem;
@@ -23,14 +25,17 @@
         background-color: #ccc;
         border-radius: 2px;
       }
+
       form {
         width: 100%;
       }
+
       input[type="text"] {
         height: 2rem;
         font-size: 14px;
       }
     }
+
     &-Title {
       margin: 0;
       word-wrap: break-word;
@@ -39,10 +44,11 @@
       font-weight: 500;
       color: rgb(46, 49, 68);
     }
+
     &-Cards {
       padding: 0 0.5rem;
       height: 100%;
-      max-height: 70vh;
+      max-height: 90vh;
       overflow-y: auto;
     }
   }
@@ -54,6 +60,7 @@
     border: none;
     border-radius: 4px;
     padding: 0.5rem 0.75rem;
+
     &:hover {
       background-color: rgba($color: #000000, $alpha: 0.2);
     }

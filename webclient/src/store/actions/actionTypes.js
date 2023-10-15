@@ -1,6 +1,7 @@
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
+export const SET_TIMER = "SET_TIMER";
 export const START_TIMER = "START_TIMER";
 export const START_BREAK = "START_BREAK";
 export const DEC_TIMER = "DEC_TIMER";
@@ -15,7 +16,6 @@ export const NEW_BOARD = "NEW_BOARD";
 export const ADD_LIST = "ADD_LIST";
 export const ADD_CARD = "ADD_CARD";
 export const MOVE_CARD = "MOVE_CARD";
-export const DROP_FAIL = "DROP_FAIL";
 export const DELETE_CARD = "DELETE_CARD";
 export const DELETE_LIST = "DELETE_LIST";
 export const CHANGE_LIST = "CHANGE_LIST";

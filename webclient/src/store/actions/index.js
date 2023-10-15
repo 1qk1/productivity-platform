@@ -11,7 +11,8 @@ export {
   startPomodoro,
   stopTimer,
   end5Seconds,
-  updateTimer
+  updateTimer,
+  setTimer
 } from "./pomodoro";
 export {
   addCard,
@@ -24,5 +25,4 @@ export {
   changeCardList,
   getBoard,
   moveCard,
-  dropCard
 } from "./board";

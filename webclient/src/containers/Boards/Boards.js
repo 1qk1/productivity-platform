@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import withRouter from '../../shared/withRouter'
 import axios from "../../axios";
 import NewBoard from "../../components/UI/Board/NewBoard/NewBoard";
 import "./Boards.scss";
@@ -25,7 +25,7 @@ class Boards extends Component {
       })
       .catch((error) => {
         toast.error(error);
-        this.props.history.push("/");
+        this.props.navigate("/");
       });
   };
 
@@ -100,9 +100,9 @@ class Boards extends Component {
     document.title = "Boards | Productivity Platform";
 
     return (
-      <div className="Container--Wide Boards scrollbar-horizontal">
+      <div className="Container--Wide Boards scrollbar-horizontal mt-4">
         {/* render list */}
-        <h5>Your boards</h5>
+        <h1 className="h3">Your boards</h1>
         <div className="Boards--Preview">
           {this.state.boards.map((board, index) => (
             <BoardPreview

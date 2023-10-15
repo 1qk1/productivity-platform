@@ -39,17 +39,21 @@ const ForgotPassword = (props) => {
     axios
       .post(`/auth/forgot-password`, data)
       .then((res) => {
-        toast.success(
-          "Success! You have been send an email to reset your password."
-        );
+        if (res.status === 200) {
+          return toast.success(
+            "Success! You have been sent an email to reset your password."
+          );
+        }
+        throw new Error("Something went wrong");
       })
       .catch((error) => {
         if (error.response === undefined) return;
         const errors = error.response.data.error.message;
         const newInputData = cloneDeep(inputData);
         if (typeof errors === "string") {
-          newInputData.error = errors;
+          newInputData.errors = [errors];
           setInputData(newInputData);
+          console.log(newInputData)
         } else {
           newInputData.errors = [];
           errors.forEach((err) => newInputData.errors.push(err.msg));

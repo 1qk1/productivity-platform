@@ -10,7 +10,7 @@ const initialState = {
   error: null
 };
 
-export default (state = initialState, action) => {
+const userReducer = (state = initialState, action) => {
   let newState = _.cloneDeep(state);
   switch (action.type) {
     case actionTypes.AUTH_SUCCESS:
@@ -37,3 +37,5 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+export default userReducer

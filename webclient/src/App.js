@@ -1,7 +1,7 @@
 import React, { Component, lazy, Suspense, Fragment } from "react";
 import { connect } from "react-redux";
 import * as actions from "./store/actions/user";
-import { Switch, Redirect, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Loader from "./components/UI/Loader/Loader";
 import "react-toastify/dist/ReactToastify.min.css";
@@ -34,20 +34,19 @@ class App extends Component {
       // show the website
       content = (
         <Suspense fallback={<Loader />}>
-          <Switch>
+          <Routes>
             <Route
               path="/forgot-password"
-              exact
-              component={() => <AsyncForgotPassword />}
+              exact element={<AsyncForgotPassword />}
             />
             <Route
               path="/reset-password/:resetToken"
               exact
-              component={() => <AsyncResetPassword />}
+              element={<AsyncResetPassword />}
             />
-            <Route path="/" exact component={() => <AsyncLandingPage />} />
-            <Redirect to="/" />
-          </Switch>
+            <Route path="/" element={<AsyncLandingPage />} />
+            <Route path="/*" element={<Navigate to="/" />} />
+          </Routes>
         </Suspense>
       );
     } else if (token !== undefined) {

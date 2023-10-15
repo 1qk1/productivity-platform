@@ -9,24 +9,38 @@ const initialState = {
   // false = break running
   isPomodoro: true,
   completedSessions: 0,
-  windowFocused: true
+  windowFocused: true,
+  settings: {
+    time: 25,
+    break: 5,
+    longBreak: 15,
+    longBreakInterval: 4
+  }
 };
 
-export default (state = initialState, action) => {
+const pomodoroReducer = (state = initialState, action) => {
+  console.log(action, state)
   switch (action.type) {
-    case actionTypes.START_TIMER:
-      let date = new Date();
-      date.setMinutes(date.getMinutes() + 25);
+    case actionTypes.SET_TIMER: {
+      console.log(action.settings, 'lol')
       return {
         ...state,
-        timer: 1500,
+        timer: action.settings.time * 60,
+        settings: action.settings
+      };
+    }
+    case actionTypes.START_TIMER:
+      let date = new Date();
+      date.setMinutes(date.getMinutes() + state.timer / 60);
+      return {
+        ...state,
         intervalId: action.intervalId ? action.intervalId : state.intervalId,
         isPomodoro: true,
         timerEnd: date
       };
     case actionTypes.START_BREAK:
       // if it's the 4th pomodoro, start a 10 minute break
-      const breakTime = (state.completedSessions + 1) % 4 !== 0 ? 5 : 10;
+      const breakTime = (state.completedSessions + 1) % state.settings.longBreakInterval !== 0 ? state.settings.break : state.settings.longBreak;
       let breakEnd = new Date();
       breakEnd.setMinutes(breakEnd.getMinutes() + breakTime);
       return {
@@ -62,7 +76,7 @@ export default (state = initialState, action) => {
         intervalId: null,
         completedSessions: 0,
         isPomodoro: true,
-        timer: 1500,
+        timer: state.settings.time * 60,
         timerEnd: null
       };
     case actionTypes.POMODORO_COMPLETED:
@@ -80,3 +94,5 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+export default pomodoroReducer

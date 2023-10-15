@@ -3,38 +3,19 @@
 }
 
 .Modal {
-  height: 80vh;
+  height: 80vh !important;
   width: 1000px;
   background-color: #eee;
-}
+  display: flex;
+  flex-direction: column;
 
-div.RTEWrapper {
-  border: none;
+  .QuillWrapper {
+    background-color: #fff;
+    overflow-y: auto;
+    border: none;
 
-}
-
-div.Editor {
-  font-size: 15px !important;
-  font-family: "Roboto";
-  // padding: 1rem 1.5rem;
-  & > div > div > div {
-    padding: 1.5rem 1.25rem !important;
-    min-height: 20vh;
-  }
-
-}
-
-div.Toolbar {
-  border-bottom: none;
-  background: linear-gradient(180deg,#fdfdfd 0,#f6f7f8);
-  margin: 0;
-  padding: 10px 10px 5px;
-  button, span {
-    // background: none !important;
-    border: none !important;
-  }
-  button {
-    // background: none;
-
+    [role="textbox"] {
+      min-height: 100%;
+    }
   }
 }
