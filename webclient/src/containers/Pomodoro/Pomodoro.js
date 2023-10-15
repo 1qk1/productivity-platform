@@ -38,8 +38,8 @@ class Pomodoro extends Component {
     }
     const running = this.props.intervalId !== null;
     // every 4 sessions the break will be 10 minutes instead of 5
-    const breakTime = this.props.completedSessions % 4 !== 0 ? 300 : 600;
-    const fullTime = this.props.isPomodoro ? 1500 : breakTime;
+    const breakTime = this.props.completedSessions % this.props.pomodoroSettings.longBreakInterval !== 0 ? this.props.pomodoroSettings.break * 60 : this.props.pomodoroSettings.longBreak * 60;
+    const fullTime = this.props.isPomodoro ? this.props.pomodoroSettings.time * 60 : breakTime;
     const percentageDone = ((fullTime - this.props.timer) / fullTime) * 100;
     const innerColor = this.props.isPomodoro ? "#2ecc71" : "#3498db";
     const style = {
@@ -80,7 +80,8 @@ const mapStateToProps = state => ({
   completedSessions: state.pomodoro.completedSessions,
   intervalId: state.pomodoro.intervalId,
   isPomodoro: state.pomodoro.isPomodoro,
-  userId: state.user.user.id
+  userId: state.user.user.id,
+  pomodoroSettings: state.user.user.extensionSettings.pomodoro
 });
 
 const mapDispatchToProps = dispatch => ({

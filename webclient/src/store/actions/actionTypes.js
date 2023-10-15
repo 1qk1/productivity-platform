@@ -1,6 +1,7 @@
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
+export const SET_TIMER = "SET_TIMER";
 export const START_TIMER = "START_TIMER";
 export const START_BREAK = "START_BREAK";
 export const DEC_TIMER = "DEC_TIMER";
