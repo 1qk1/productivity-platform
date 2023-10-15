@@ -41,3 +41,9 @@ export const weekDayMap = [
   { name: "Saturday", short: "Sat" },
   { name: "Sunday", short: "Sun" },
 ];
+
+
+export const capitalizeWord = (text) => {
+  if (!text || typeof text !== 'string') return text;
+  return text[0].toUpperCase() + text.slice(1);
+}

@@ -100,9 +100,9 @@ class Boards extends Component {
     document.title = "Boards | Productivity Platform";
 
     return (
-      <div className="Container--Wide Boards scrollbar-horizontal">
+      <div className="Container--Wide Boards scrollbar-horizontal mt-4">
         {/* render list */}
-        <h5>Your boards</h5>
+        <h1 className="h3">Your boards</h1>
         <div className="Boards--Preview">
           {this.state.boards.map((board, index) => (
             <BoardPreview
