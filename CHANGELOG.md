@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add settings page for changing username, email and extension settings (only pomodoro currently).
+
+## [1.10.1] - 2023-03-05
+
+### Added
+
 - Add sentry for error tracking.
 
 ### Changed
