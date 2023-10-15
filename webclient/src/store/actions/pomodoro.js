@@ -21,6 +21,12 @@ export const updateTimer = () => {
   };
 };
 
+export const setTimer = (settings) => {
+  return (dispatch) => {
+    dispatch({ type: actionTypes.SET_TIMER, settings });
+  };
+};
+
 export const stopTimer = () => {
   return (dispatch) => {
     dispatch({ type: actionTypes.STOP_TIMER });

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import { extensionsToRoutes } from "../../shared/extensionMap";
 import Store from "../Store/Store";
+import Settings from "../Settings/Settings";
 import Sidebar from "../../components/Navigation/Sidebar/Sidebar";
 import "./Main.scss";
 import withRouter from '../../shared/withRouter';
@@ -24,6 +25,7 @@ class Main extends Component {
               {extensionsToRoutes(this.props.extensions)}
 
               <Route path="/store" exact element={<Store />} />
+              <Route path="/settings" exact element={<Settings />} />
               <Route path="/*" element={<Navigate to={this.props.extensions[0] || "/store"} />} />
             </Routes>
           </div>

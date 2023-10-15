@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios";
+import { setTimer } from "./pomodoro";
 
 export const checkAuth = () => {
   return dispatch => {
@@ -13,6 +14,7 @@ export const checkAuth = () => {
         .get("/auth/getUser")
         .then(response => {
           // dispatch AUTH_SUCCESS
+          dispatch(setTimer(response.data.user.extensionSettings.pomodoro))
           dispatch({
             type: actionTypes.AUTH_SUCCESS,
             token,
